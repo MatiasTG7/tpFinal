@@ -19,17 +19,17 @@ public class EntidadData {
     }
     
     public void guardarCliente(Entidad cliente){
-        String sql= "INSERT INTO cliente (dni, nombreCliente, telefonoCliente,edad, afecciones, estadoCliente) " +
-            "VALUES (?,?,?,?,?,?)";
+        String sql= "INSERT INTO cliente (dni, nombreCliente, apellidoCliente, telefonoCliente,edad, afecciones, estadoCliente)" 
+                + "VALUES (?,?,?,?,?,?,?)";
             try{
                 PreparedStatement ps= con.prepareStatement(sql);
                 ps.setInt(1, cliente.getDni());
                 ps.setString(2, cliente.getNombre());
                 ps.setInt(3, cliente.getTelefono());
                 ps.setInt(4, cliente.getEdad()); 
-                ps.setString(5, cliente.getAfecciones());
+                ps.setBoolean(5, cliente.getAfecciones());
                 ps.setBoolean(6,cliente.isEstado());
-        
+                
                 int registros = ps.executeUpdate();
                 System.out.println("Alumno cargado correctamente. Registros insertados: " + registros);
                 

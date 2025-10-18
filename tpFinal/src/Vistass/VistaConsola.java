@@ -25,16 +25,19 @@ public class VistaConsola {
             System.out.print("Ingrese nombre: ");
             String nombre = sc.nextLine();
             
-            System.out.println("Ingrese numero de telefono");
+            System.out.println("Ingrese su apellido:");
+            String apellido= sc.nextLine();
+            
+            System.out.println("Ingrese numero de telefono:");
             int telefono = sc.nextInt();
             sc.nextLine();
             
-            System.out.println("Ingrese su edad");
+            System.out.println("Ingrese su edad:");
             int edad = sc.nextInt();
             sc.nextLine();
             
             System.out.println("Usted tiene afecciones?");
-            String afecciones= sc.nextLine();
+            boolean afecciones= sc.nextBoolean();
             
             System.out.print("¿Está activo? (true/false): ");
             boolean estado = sc.nextBoolean();

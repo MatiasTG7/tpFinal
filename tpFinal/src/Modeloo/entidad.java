@@ -1,7 +1,6 @@
 
 package Modeloo;
 
-
 public class Entidad {
     private int codCli; //codigo-cliente
     private int dni;
@@ -9,13 +8,13 @@ public class Entidad {
     private String apellido;
     private int telefono;
     private int edad;
-    private String afecciones; //enfermedad o cosa que afecte al cliente
+    private boolean afecciones; //enfermedad o cosa que afecte al cliente
     private boolean estado;
 
     public Entidad() {
     }
 
-    public Entidad(int dni, String nombre, String apellido, int telefono, int edad, String afecciones, boolean estado) {
+    public Entidad(int dni, String nombre, String apellido, int telefono, int edad, boolean afecciones, boolean estado) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -25,7 +24,7 @@ public class Entidad {
         this.estado = estado;
     }
 
-    public Entidad(int codCli, int dni, String nombre, String apellido, int telefono, int edad, String afecciones, boolean estado) {
+    public Entidad(int codCli, int dni, String nombre, String apellido, int telefono, int edad, boolean afecciones, boolean estado) {
         this.codCli = codCli;
         this.dni = dni;
         this.nombre = nombre;
@@ -84,14 +83,14 @@ public class Entidad {
         this.edad = edad;
     }
 
-    public String getAfecciones() {
+    public boolean getAfecciones() {
         return afecciones;
     }
 
-    public void setAfecciones(String afecciones) {
+    public void setAfecciones(boolean afecciones) {
         this.afecciones = afecciones;
     }
-
+    
     public boolean isEstado() {
         return estado;
     }
