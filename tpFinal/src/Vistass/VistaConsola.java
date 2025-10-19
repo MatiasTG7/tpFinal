@@ -44,11 +44,12 @@ public class VistaConsola {
 //            Entidad cliente1=new Entidad(dni,nombre,apellido,telefono,edad,afecciones,estado);
 //            ent.guardarCliente(cliente1);
 //            BUSQUEDA DE CLIENTE POR DNI
-              System.out.println("Ingrese el dni del cliente a buscar:");
-              int dniBuscado = sc.nextInt();
-              sc.nextLine();
-              Entidad cliente2=ent.buscarCliente(dniBuscado);
-              System.out.println(cliente2);
+//              System.out.println("Ingrese el dni del cliente a buscar:");
+//              int dniBuscado = sc.nextInt();
+//              sc.nextLine();
+//              Entidad cliente2=ent.buscarCliente(dniBuscado);
+//              System.out.println(cliente2);
+              
         }else{
             System.out.println("No se pudo establecer la conexion con la BD");
         }
