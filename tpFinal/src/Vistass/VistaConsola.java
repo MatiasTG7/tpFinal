@@ -2,8 +2,8 @@
 package Vistass;
 
 import Modeloo.Conexion;
-import Modeloo.Entidad;
-import Persistencia.EntidadData;
+import Modeloo.Cliente;
+import Persistencia.ClienteData;
 import java.util.Scanner;
 import org.mariadb.jdbc.Connection;
 
@@ -15,7 +15,7 @@ public class VistaConsola {
         
         if (con != null) {
             System.out.println("Conexion establecida con la base de datos.");
-            EntidadData ent= new EntidadData(con);
+            ClienteData ent= new ClienteData(con);
             Scanner sc = new Scanner(System.in);
 
 //            System.out.print("Ingrese DNI: ");
