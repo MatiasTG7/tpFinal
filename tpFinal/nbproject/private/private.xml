@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/tpFinal/tpFinal/src/Modeloo/Instalacion.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/tpFinal/tpFinal/src/Persistencia/SesionData.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/tpFinal/tpFinal/src/Modeloo/Sesion.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/tpFinal/tpFinal/src/Modeloo/Cliente.java</file>
+            <file>file:/C:/Users/Usuario/Documents/GitHub/tpFinal/tpFinal/src/Persistencia/MasajeData.java</file>
+            <file>file:/C:/Users/Usuario/Documents/GitHub/tpFinal/tpFinal/src/Persistencia/ClienteData.java</file>
+            <file>file:/C:/Users/Usuario/Documents/GitHub/tpFinal/tpFinal/src/Modeloo/Masaje.java</file>
         </group>
     </open-files>
 </project-private>

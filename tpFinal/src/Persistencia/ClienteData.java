@@ -105,7 +105,7 @@ public class ClienteData {
             JOptionPane.showMessageDialog(null, "Error al eliminar el cliente. " + ex.getMessage());
         }
     }
-    public void actualizarAlumno(Cliente cliente) {
+    public void actualizarCliente(Cliente cliente) {
         String sql = "UPDATE cliente SET dni = ?, nombreCliente = ?, telefonoCliente = ?, edad = ?, afecciones = ?, estadoCliente = ? WHERE codCli = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, cliente.getDni());
