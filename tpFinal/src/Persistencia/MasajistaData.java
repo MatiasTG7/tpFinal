@@ -3,6 +3,7 @@ package Persistencia;
 
 import Modeloo.EspecialidadMasajista;
 import Modeloo.Masajista;
+import Modeloo.TipoMasaje;
 import java.security.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class MasajistaData {
 
     public MasajistaData() {
     }
-    
+   
     // Dentro de MasajistaData.java (o SesionData para verificar disponibilidad)
 
 public List<Masajista> listarDisponibles(LocalDateTime inicio, LocalDateTime fin, EspecialidadMasajista especialidad) {
@@ -52,5 +53,21 @@ public List<Masajista> listarDisponibles(LocalDateTime inicio, LocalDateTime fin
         JOptionPane.showMessageDialog(null, "Error al buscar disponibilidad de masajistas. " + ex.getMessage());
     }
     return masajistasDisponibles;
+    }
+    //----------------------------------------------
+    //NO VAYAN A BORRARLO o les pego :/ ali estas de testigo que dijiste que esta bien, a las 00:50hrs
+    //----------------------------------------------
+ private Masajista mapeoResultset(ResultSet rs) throws SQLException{
+    Masajista m = new Masajista();
+    m.setCodMasajista(rs.getInt("codMasajista"));
+          m.setMatricula(rs.getString("matricula"));
+          m.setNombreMasajista(rs.getString("nombreMasajista"));
+         m.setTelfonoMasajista(rs.getString("telefonoMasajista"));
+         String especialidadMasajista = rs.getString("especialidad").toUpperCase();
+         m.setEspecialidad(EspecialidadMasajista.valueOf(especialidadMasajista));
+      return m;
+     //----------------------------------------------
+    //NO VAYAN A BORRARLO o les pego :/
+    //----------------------------------------------
     }
 }
