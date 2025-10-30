@@ -5,51 +5,34 @@ import java.time.LocalDate;
 
 
 public class Masaje {
-    private int codSesion;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
     private int codTratamiento;
-    private int codMasajista;
-    private int codPack;
-    private int codInstal;
-    private boolean estadoInstalacion;
+    private String nombreTratamiento;
+    private String detalleTratamiento;
+    private int duracionTratamiento;
+    private double costoTratamiento;
+    private boolean activo;
+    private TipoMasaje tipo;
 
-         public Masaje() {
+    public Masaje() {
     }
-         
-    public Masaje(int codSesion, LocalDate fechaInicio, LocalDate fechaFin, int codTratamiento, int codMasajista, int codPack, int codInstal, boolean estadoInstalacion) {
-        this.codSesion = codSesion;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+
+    public Masaje(String nombreTratamiento, String detalleTratamiento, int duracionTratamiento, double costoTratamiento, boolean activo, TipoMasaje tipo) {
+        this.nombreTratamiento = nombreTratamiento;
+        this.detalleTratamiento = detalleTratamiento;
+        this.duracionTratamiento = duracionTratamiento;
+        this.costoTratamiento = costoTratamiento;
+        this.activo = activo;
+        this.tipo = tipo;
+    }
+
+    public Masaje(int codTratamiento, String nombreTratamiento, String detalleTratamiento, int duracionTratamiento, double costoTratamiento, boolean activo, TipoMasaje tipo) {
         this.codTratamiento = codTratamiento;
-        this.codMasajista = codMasajista;
-        this.codPack = codPack;
-        this.codInstal = codInstal;
-        this.estadoInstalacion = estadoInstalacion;
-    }
-
-    public int getCodSesion() {
-        return codSesion;
-    }
-
-    public void setCodSesion(int codSesion) {
-        this.codSesion = codSesion;
-    }
-
-    public LocalDate getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(LocalDate fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public LocalDate getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(LocalDate fechaFin) {
-        this.fechaFin = fechaFin;
+        this.nombreTratamiento = nombreTratamiento;
+        this.detalleTratamiento = detalleTratamiento;
+        this.duracionTratamiento = duracionTratamiento;
+        this.costoTratamiento = costoTratamiento;
+        this.activo = activo;
+        this.tipo = tipo;
     }
 
     public int getCodTratamiento() {
@@ -60,50 +43,56 @@ public class Masaje {
         this.codTratamiento = codTratamiento;
     }
 
-    public int getCodMasajista() {
-        return codMasajista;
+    public String getNombreTratamiento() {
+        return nombreTratamiento;
     }
 
-    public void setCodMasajista(int codMasajista) {
-        this.codMasajista = codMasajista;
+    public void setNombreTratamiento(String nombreTratamiento) {
+        this.nombreTratamiento = nombreTratamiento;
     }
 
-    public int getCodPack() {
-        return codPack;
+    public String getDetalleTratamiento() {
+        return detalleTratamiento;
     }
 
-    public void setCodPack(int codPack) {
-        this.codPack = codPack;
+    public void setDetalleTratamiento(String detalleTratamiento) {
+        this.detalleTratamiento = detalleTratamiento;
     }
 
-    public int getCodInstal() {
-        return codInstal;
+    public int getDuracionTratamiento() {
+        return duracionTratamiento;
     }
 
-    public void setCodInstal(int codInstal) {
-        this.codInstal = codInstal;
+    public void setDuracionTratamiento(int duracionTratamiento) {
+        this.duracionTratamiento = duracionTratamiento;
     }
 
-    public boolean isEstadoInstalacion() {
-        return estadoInstalacion;
+    public double getCostoTratamiento() {
+        return costoTratamiento;
     }
 
-    public void setEstadoInstalacion(boolean estadoInstalacion) {
-        this.estadoInstalacion = estadoInstalacion;
+    public void setCostoTratamiento(double costoTratamiento) {
+        this.costoTratamiento = costoTratamiento;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public TipoMasaje getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoMasaje tipo) {
+        this.tipo = tipo;
     }
 
     @Override
     public String toString() {
-        return "sesion{"+
-                "codSesion=" + codSesion
-                +", fechaInicio" + fechaInicio
-                +", fechafin" + fechaFin
-                +", codTratamiento" + codTratamiento
-                +", codMasajista" + codMasajista
-                +", codPack" + codPack
-                +", codInstal" + codInstal
-                +", EstadoInstalacion" + estadoInstalacion +
-                "}";
-        
+        return "Masaje{" + "codTratamiento=" + codTratamiento + ", nombreTratamiento=" + nombreTratamiento + ", detalleTratamiento=" + detalleTratamiento + ", duracionTratamiento=" + duracionTratamiento + ", costoTratamiento=" + costoTratamiento + ", activo=" + activo + ", tipo=" + tipo + '}';
     }
 }

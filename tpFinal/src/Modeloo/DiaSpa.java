@@ -1,13 +1,13 @@
 
 package Modeloo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public class DiaSpa {
     
     private int codPack;
-    private LocalDate FechaYHora;
+    private LocalDateTime FechaYHora;
     private String preferencias;
     private Cliente codCliente;
     private double monto;
@@ -16,7 +16,7 @@ public class DiaSpa {
     public DiaSpa() {
     }
 
-    public DiaSpa(LocalDate FechaYHora, String preferencias, Cliente codCliente, double monto, boolean estadoDia) {
+    public DiaSpa(LocalDateTime FechaYHora, String preferencias, Cliente codCliente, double monto, boolean estadoDia) {
         this.FechaYHora = FechaYHora;
         this.preferencias = preferencias;
         this.codCliente = codCliente;
@@ -24,7 +24,7 @@ public class DiaSpa {
         this.estadoDia = estadoDia;
     }
 
-    public DiaSpa(int codPack, LocalDate FechaYHora, String preferencias, Cliente codCliente, double monto, boolean estadoDia) {
+    public DiaSpa(int codPack, LocalDateTime FechaYHora, String preferencias, Cliente codCliente, double monto, boolean estadoDia) {
         this.codPack = codPack;
         this.FechaYHora = FechaYHora;
         this.preferencias = preferencias;
@@ -41,11 +41,11 @@ public class DiaSpa {
         this.codPack = codPack;
     }
 
-    public LocalDate getFechaYHora() {
+    public LocalDateTime getFechaYHora() {
         return FechaYHora;
     }
 
-    public void setFechaYHora(LocalDate FechaYHora) {
+    public void setFechaYHora(LocalDateTime FechaYHora) {
         this.FechaYHora = FechaYHora;
     }
 
