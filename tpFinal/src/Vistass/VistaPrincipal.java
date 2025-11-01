@@ -15,6 +15,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
      */
     public VistaPrincipal() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -26,21 +27,295 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        escritorio = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jmClientes = new javax.swing.JMenu();
+        jmiAgregarCliente = new javax.swing.JMenuItem();
+        jmiInfoCliente = new javax.swing.JMenuItem();
+        jmiListarClientes = new javax.swing.JMenuItem();
+        jmSesiones = new javax.swing.JMenu();
+        jmiAgregarSesion = new javax.swing.JMenuItem();
+        jmiInfoSesion = new javax.swing.JMenuItem();
+        jmiListarSesiones = new javax.swing.JMenuItem();
+        jmMasajes = new javax.swing.JMenu();
+        jmiAgregarMasaje = new javax.swing.JMenuItem();
+        jmiListarMasajes = new javax.swing.JMenuItem();
+        jmMasajistas = new javax.swing.JMenu();
+        jmiAgregarMasajista = new javax.swing.JMenuItem();
+        jmiListarMasajistasDispo = new javax.swing.JMenuItem();
+        jmInstalaciones = new javax.swing.JMenu();
+        jmiAgregarInstalacion = new javax.swing.JMenuItem();
+        jmiListarInstalaciones = new javax.swing.JMenuItem();
+        jmReportes = new javax.swing.JMenu();
+        jmiReporteDiaSpa = new javax.swing.JMenuItem();
+        jmiReporteSolicitados = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenu1.setText("jMenu1");
+
+        jMenu2.setText("File");
+        jMenuBar2.add(jMenu2);
+
+        jMenu3.setText("Edit");
+        jMenuBar2.add(jMenu3);
+
+        jMenu5.setText("jMenu5");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 702, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 623, Short.MAX_VALUE)
+        );
+
+        jmClientes.setText("Clientes");
+
+        jmiAgregarCliente.setText("Gestion Clientes");
+        jmiAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgregarClienteActionPerformed(evt);
+            }
+        });
+        jmClientes.add(jmiAgregarCliente);
+
+        jmiInfoCliente.setText("Info Cliente");
+        jmiInfoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiInfoClienteActionPerformed(evt);
+            }
+        });
+        jmClientes.add(jmiInfoCliente);
+
+        jmiListarClientes.setText("Listar Clientes");
+        jmiListarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListarClientesActionPerformed(evt);
+            }
+        });
+        jmClientes.add(jmiListarClientes);
+
+        jMenuBar1.add(jmClientes);
+
+        jmSesiones.setText("Sesiones");
+
+        jmiAgregarSesion.setText("Gestion Sesiones");
+        jmiAgregarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgregarSesionActionPerformed(evt);
+            }
+        });
+        jmSesiones.add(jmiAgregarSesion);
+
+        jmiInfoSesion.setText("Info Sesion");
+        jmiInfoSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiInfoSesionActionPerformed(evt);
+            }
+        });
+        jmSesiones.add(jmiInfoSesion);
+
+        jmiListarSesiones.setText("Listar Sesiones");
+        jmiListarSesiones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListarSesionesActionPerformed(evt);
+            }
+        });
+        jmSesiones.add(jmiListarSesiones);
+
+        jMenuBar1.add(jmSesiones);
+
+        jmMasajes.setText("Masajes");
+
+        jmiAgregarMasaje.setText("Gestion Masajes");
+        jmiAgregarMasaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgregarMasajeActionPerformed(evt);
+            }
+        });
+        jmMasajes.add(jmiAgregarMasaje);
+
+        jmiListarMasajes.setText("Listar Masajes");
+        jmiListarMasajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListarMasajesActionPerformed(evt);
+            }
+        });
+        jmMasajes.add(jmiListarMasajes);
+
+        jMenuBar1.add(jmMasajes);
+
+        jmMasajistas.setText("Masajistas");
+
+        jmiAgregarMasajista.setText("Gestion Masajistas");
+        jmiAgregarMasajista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgregarMasajistaActionPerformed(evt);
+            }
+        });
+        jmMasajistas.add(jmiAgregarMasajista);
+
+        jmiListarMasajistasDispo.setText("Listar Masajistas Dispo");
+        jmiListarMasajistasDispo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListarMasajistasDispoActionPerformed(evt);
+            }
+        });
+        jmMasajistas.add(jmiListarMasajistasDispo);
+
+        jMenuBar1.add(jmMasajistas);
+
+        jmInstalaciones.setText("Instalaciones");
+
+        jmiAgregarInstalacion.setText("Gestion Instalaciones");
+        jmiAgregarInstalacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgregarInstalacionActionPerformed(evt);
+            }
+        });
+        jmInstalaciones.add(jmiAgregarInstalacion);
+
+        jmiListarInstalaciones.setText("Listar Instalaciones");
+        jmiListarInstalaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListarInstalacionesActionPerformed(evt);
+            }
+        });
+        jmInstalaciones.add(jmiListarInstalaciones);
+
+        jMenuBar1.add(jmInstalaciones);
+
+        jmReportes.setText("Reportes");
+
+        jmiReporteDiaSpa.setText("Reporte Dia de Spa");
+        jmiReporteDiaSpa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiReporteDiaSpaActionPerformed(evt);
+            }
+        });
+        jmReportes.add(jmiReporteDiaSpa);
+
+        jmiReporteSolicitados.setText("Reporte Solicitados");
+        jmiReporteSolicitados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiReporteSolicitadosActionPerformed(evt);
+            }
+        });
+        jmReportes.add(jmiReporteSolicitados);
+
+        jMenuBar1.add(jmReportes);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmiInfoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInfoClienteActionPerformed
+        InfoCliente infocliente = new InfoCliente();
+        escritorio.add(infocliente);
+        infocliente.setVisible(true);
+    }//GEN-LAST:event_jmiInfoClienteActionPerformed
+
+    private void jmiAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarClienteActionPerformed
+        AgregarCliente cliente = new AgregarCliente();
+        escritorio.add(cliente);
+        cliente.setVisible(true);
+    }//GEN-LAST:event_jmiAgregarClienteActionPerformed
+
+    private void jmiListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarClientesActionPerformed
+        ListarClientes listaclientes = new ListarClientes();
+        escritorio.add(listaclientes);
+        listaclientes.setVisible(true);
+    }//GEN-LAST:event_jmiListarClientesActionPerformed
+
+    private void jmiAgregarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarSesionActionPerformed
+        AgregarSesion sesion = new AgregarSesion();
+        escritorio.add(sesion);
+        sesion.setVisible(true);
+    }//GEN-LAST:event_jmiAgregarSesionActionPerformed
+
+    private void jmiAgregarMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarMasajeActionPerformed
+        AgregarMasaje masaje = new AgregarMasaje();
+        escritorio.add(masaje);
+        masaje.setVisible(true);
+    }//GEN-LAST:event_jmiAgregarMasajeActionPerformed
+
+    private void jmiAgregarMasajistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarMasajistaActionPerformed
+        AgregarMasajista masajista = new AgregarMasajista();
+        escritorio.add(masajista);
+        masajista.setVisible(true);
+    }//GEN-LAST:event_jmiAgregarMasajistaActionPerformed
+
+    private void jmiAgregarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarInstalacionActionPerformed
+        AgregarInstalacion instalacion = new AgregarInstalacion();
+        escritorio.add(instalacion);
+        instalacion.setVisible(true);
+    }//GEN-LAST:event_jmiAgregarInstalacionActionPerformed
+
+    private void jmiInfoSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInfoSesionActionPerformed
+        InfoSesion infosesion = new InfoSesion();
+        escritorio.add(infosesion);
+        infosesion.setVisible(true);
+    }//GEN-LAST:event_jmiInfoSesionActionPerformed
+
+    private void jmiListarSesionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarSesionesActionPerformed
+        ListarSesiones listasesiones = new ListarSesiones();
+        escritorio.add(listasesiones);
+        listasesiones.setVisible(true);
+    }//GEN-LAST:event_jmiListarSesionesActionPerformed
+
+    private void jmiListarMasajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarMasajesActionPerformed
+        ListarMasajes listamasajes = new ListarMasajes();
+        escritorio.add(listamasajes);
+        listamasajes.setVisible(true);
+    }//GEN-LAST:event_jmiListarMasajesActionPerformed
+
+    private void jmiListarMasajistasDispoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarMasajistasDispoActionPerformed
+        ListarMasajistasDispo masajistasdispo= new ListarMasajistasDispo();
+        escritorio.add(masajistasdispo);
+        masajistasdispo.setVisible(true);
+    }//GEN-LAST:event_jmiListarMasajistasDispoActionPerformed
+
+    private void jmiListarInstalacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarInstalacionesActionPerformed
+        ListarInstalaciones listainstalaciones = new ListarInstalaciones();
+        escritorio.add(listainstalaciones);
+        listainstalaciones.setVisible(true);
+    }//GEN-LAST:event_jmiListarInstalacionesActionPerformed
+
+    private void jmiReporteDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReporteDiaSpaActionPerformed
+        ReporteDiaSpa reportespa = new ReporteDiaSpa();
+        escritorio.add(reportespa);
+        reportespa.setVisible(true);
+    }//GEN-LAST:event_jmiReporteDiaSpaActionPerformed
+
+    private void jmiReporteSolicitadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReporteSolicitadosActionPerformed
+        ReporteSolicitados reportesolicitados = new ReporteSolicitados();
+        escritorio.add(reportesolicitados);
+        reportesolicitados.setVisible(true);
+    }//GEN-LAST:event_jmiReporteSolicitadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +353,33 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jmClientes;
+    private javax.swing.JMenu jmInstalaciones;
+    private javax.swing.JMenu jmMasajes;
+    private javax.swing.JMenu jmMasajistas;
+    private javax.swing.JMenu jmReportes;
+    private javax.swing.JMenu jmSesiones;
+    private javax.swing.JMenuItem jmiAgregarCliente;
+    private javax.swing.JMenuItem jmiAgregarInstalacion;
+    private javax.swing.JMenuItem jmiAgregarMasaje;
+    private javax.swing.JMenuItem jmiAgregarMasajista;
+    private javax.swing.JMenuItem jmiAgregarSesion;
+    private javax.swing.JMenuItem jmiInfoCliente;
+    private javax.swing.JMenuItem jmiInfoSesion;
+    private javax.swing.JMenuItem jmiListarClientes;
+    private javax.swing.JMenuItem jmiListarInstalaciones;
+    private javax.swing.JMenuItem jmiListarMasajes;
+    private javax.swing.JMenuItem jmiListarMasajistasDispo;
+    private javax.swing.JMenuItem jmiListarSesiones;
+    private javax.swing.JMenuItem jmiReporteDiaSpa;
+    private javax.swing.JMenuItem jmiReporteSolicitados;
     // End of variables declaration//GEN-END:variables
 }

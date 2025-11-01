@@ -26,21 +26,200 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jtfDetalleMasaje = new javax.swing.JTextField();
+        jcbTipoDeMasaje = new javax.swing.JComboBox<>();
+        jcbEstadoMasaje = new javax.swing.JComboBox<>();
+        jbBuscarMasaje = new javax.swing.JButton();
+        jtfDuracionMasaje = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jtfCostoMasaje = new javax.swing.JTextField();
+        jlTitulo = new javax.swing.JLabel();
+        jbGuardarMasaje = new javax.swing.JButton();
+        jlNombreMasaje = new javax.swing.JLabel();
+        jbActualizarMasaje = new javax.swing.JButton();
+        jlDetalleMasaje = new javax.swing.JLabel();
+        jbEliminarMasaje = new javax.swing.JButton();
+        jlGestionMasajes = new javax.swing.JLabel();
+        jbCambiarEstadoMasaje = new javax.swing.JButton();
+        jlDuracionMasaje = new javax.swing.JLabel();
+        jlTipoDeMasaje = new javax.swing.JLabel();
+        jlCostoMasaje = new javax.swing.JLabel();
+        jtfNombreMasaje = new javax.swing.JTextField();
+        jlEstadoMasaje = new javax.swing.JLabel();
+
+        jcbTipoDeMasaje.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Facial", "Corporal", "Relajacion", "Estetico" }));
+
+        jcbEstadoMasaje.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+
+        jbBuscarMasaje.setText("Buscar");
+
+        jtfDuracionMasaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfDuracionMasajeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 42, Short.MAX_VALUE)
+        );
+
+        jlTitulo.setFont(new java.awt.Font("Cambria", 0, 36)); // NOI18N
+        jlTitulo.setText("Spa Entre Dedos");
+
+        jbGuardarMasaje.setText("Guardar");
+        jbGuardarMasaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarMasajeActionPerformed(evt);
+            }
+        });
+
+        jlNombreMasaje.setText("Nombre:");
+
+        jbActualizarMasaje.setText("Actualizar");
+
+        jlDetalleMasaje.setText("Detalles:");
+
+        jbEliminarMasaje.setText("Eliminar");
+
+        jlGestionMasajes.setFont(new java.awt.Font("Maiandra GD", 0, 14)); // NOI18N
+        jlGestionMasajes.setText("Gestion Masajes");
+
+        jbCambiarEstadoMasaje.setText("Cambiar Estado");
+
+        jlDuracionMasaje.setText("Duracion:");
+
+        jlTipoDeMasaje.setText("Tipo:");
+
+        jlCostoMasaje.setText("Costo:");
+
+        jlEstadoMasaje.setText("Estado:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlTitulo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 38, Short.MAX_VALUE)
+                        .addComponent(jbGuardarMasaje)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbActualizarMasaje)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbEliminarMasaje)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbCambiarEstadoMasaje)))
+                .addGap(30, 30, 30))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlGestionMasajes)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jlDetalleMasaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                        .addComponent(jtfDetalleMasaje)
+                        .addComponent(jtfNombreMasaje)
+                        .addComponent(jtfDuracionMasaje)
+                        .addComponent(jlCostoMasaje)
+                        .addComponent(jtfCostoMasaje, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jlDuracionMasaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlTipoDeMasaje)
+                        .addComponent(jlEstadoMasaje)
+                        .addComponent(jcbTipoDeMasaje, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jcbEstadoMasaje, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlNombreMasaje)))
+                .addGap(49, 49, 49)
+                .addComponent(jbBuscarMasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlTitulo)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlGestionMasajes)
+                .addGap(32, 32, 32)
+                .addComponent(jlNombreMasaje)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfNombreMasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarMasaje))
+                .addGap(27, 27, 27)
+                .addComponent(jlDetalleMasaje)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfDetalleMasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlDuracionMasaje)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfDuracionMasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlCostoMasaje)
+                .addGap(10, 10, 10)
+                .addComponent(jtfCostoMasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlTipoDeMasaje)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcbTipoDeMasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlEstadoMasaje)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcbEstadoMasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbGuardarMasaje)
+                    .addComponent(jbEliminarMasaje)
+                    .addComponent(jbActualizarMasaje)
+                    .addComponent(jbCambiarEstadoMasaje))
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtfDuracionMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDuracionMasajeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfDuracionMasajeActionPerformed
+
+    private void jbGuardarMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarMasajeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbGuardarMasajeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbActualizarMasaje;
+    private javax.swing.JButton jbBuscarMasaje;
+    private javax.swing.JButton jbCambiarEstadoMasaje;
+    private javax.swing.JButton jbEliminarMasaje;
+    private javax.swing.JButton jbGuardarMasaje;
+    private javax.swing.JComboBox<String> jcbEstadoMasaje;
+    private javax.swing.JComboBox<String> jcbTipoDeMasaje;
+    private javax.swing.JLabel jlCostoMasaje;
+    private javax.swing.JLabel jlDetalleMasaje;
+    private javax.swing.JLabel jlDuracionMasaje;
+    private javax.swing.JLabel jlEstadoMasaje;
+    private javax.swing.JLabel jlGestionMasajes;
+    private javax.swing.JLabel jlNombreMasaje;
+    private javax.swing.JLabel jlTipoDeMasaje;
+    private javax.swing.JLabel jlTitulo;
+    private javax.swing.JTextField jtfCostoMasaje;
+    private javax.swing.JTextField jtfDetalleMasaje;
+    private javax.swing.JTextField jtfDuracionMasaje;
+    private javax.swing.JTextField jtfNombreMasaje;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,21 +26,225 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jtfFechaFin = new javax.swing.JTextField();
+        jbBuscarInstalacion = new javax.swing.JButton();
+        jtfCodTratamiento = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jtfCodMasajista = new javax.swing.JTextField();
+        jlTitulo = new javax.swing.JLabel();
+        jbGuardarInstalacion = new javax.swing.JButton();
+        jlFechaInicio = new javax.swing.JLabel();
+        jbActualizarInstalacion = new javax.swing.JButton();
+        jlFechaFin = new javax.swing.JLabel();
+        jbEliminarInstalacion = new javax.swing.JButton();
+        jlGestionClientes = new javax.swing.JLabel();
+        jbCambiarEstadoInstalacion = new javax.swing.JButton();
+        jlCodTratamiento = new javax.swing.JLabel();
+        jlCodMasajista = new javax.swing.JLabel();
+        jtfFechaInicio = new javax.swing.JTextField();
+        jtfCodDiaSpa = new javax.swing.JTextField();
+        jlCodDiaSpa = new javax.swing.JLabel();
+        jtfCodInstalacion = new javax.swing.JTextField();
+        jlCodInstalacion = new javax.swing.JLabel();
+        jlEstadoInstalacion = new javax.swing.JLabel();
+        jcbEstadoInstalacion = new javax.swing.JComboBox<>();
+
+        jbBuscarInstalacion.setText("Buscar");
+
+        jtfCodTratamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCodTratamientoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 42, Short.MAX_VALUE)
+        );
+
+        jlTitulo.setFont(new java.awt.Font("Cambria", 0, 36)); // NOI18N
+        jlTitulo.setText("Spa Entre Dedos");
+
+        jbGuardarInstalacion.setText("Guardar");
+        jbGuardarInstalacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarInstalacionActionPerformed(evt);
+            }
+        });
+
+        jlFechaInicio.setText("Fecha de incio:");
+
+        jbActualizarInstalacion.setText("Actualizar");
+
+        jlFechaFin.setText("Fecha de finalizacion:");
+
+        jbEliminarInstalacion.setText("Eliminar");
+
+        jlGestionClientes.setFont(new java.awt.Font("Maiandra GD", 0, 14)); // NOI18N
+        jlGestionClientes.setText("Gestion Sesiones");
+
+        jbCambiarEstadoInstalacion.setText("Cambiar Estado");
+
+        jlCodTratamiento.setText("Codigo tratamiento:");
+
+        jlCodMasajista.setText("Codigo Masajista:");
+
+        jtfCodDiaSpa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCodDiaSpaActionPerformed(evt);
+            }
+        });
+
+        jlCodDiaSpa.setText("Codigo Dia de Spa:");
+
+        jlCodInstalacion.setText("Codigo Instalacion:");
+
+        jlEstadoInstalacion.setText("Estado:");
+
+        jcbEstadoInstalacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jlGestionClientes))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlEstadoInstalacion)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlFechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                    .addComponent(jtfFechaFin, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfFechaInicio, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfCodTratamiento, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlCodMasajista, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfCodMasajista)
+                                    .addComponent(jlCodTratamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlFechaInicio, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfCodDiaSpa, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlCodDiaSpa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtfCodInstalacion)
+                                    .addComponent(jlCodInstalacion, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(49, 49, 49)
+                                .addComponent(jbBuscarInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlTitulo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 62, Short.MAX_VALUE)
+                        .addComponent(jbGuardarInstalacion)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbActualizarInstalacion)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbEliminarInstalacion)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbCambiarEstadoInstalacion)))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlTitulo)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addComponent(jlGestionClientes)
+                .addGap(37, 37, 37)
+                .addComponent(jlFechaInicio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarInstalacion))
+                .addGap(27, 27, 27)
+                .addComponent(jlFechaFin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlCodTratamiento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfCodTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlCodMasajista)
+                .addGap(10, 10, 10)
+                .addComponent(jtfCodMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlCodDiaSpa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfCodDiaSpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlCodInstalacion)
+                .addGap(10, 10, 10)
+                .addComponent(jtfCodInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlEstadoInstalacion)
+                .addGap(18, 18, 18)
+                .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbGuardarInstalacion)
+                    .addComponent(jbEliminarInstalacion)
+                    .addComponent(jbActualizarInstalacion)
+                    .addComponent(jbCambiarEstadoInstalacion))
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtfCodTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodTratamientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCodTratamientoActionPerformed
+
+    private void jbGuardarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarInstalacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbGuardarInstalacionActionPerformed
+
+    private void jtfCodDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodDiaSpaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCodDiaSpaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbActualizarInstalacion;
+    private javax.swing.JButton jbBuscarInstalacion;
+    private javax.swing.JButton jbCambiarEstadoInstalacion;
+    private javax.swing.JButton jbEliminarInstalacion;
+    private javax.swing.JButton jbGuardarInstalacion;
+    private javax.swing.JComboBox<String> jcbEstadoInstalacion;
+    private javax.swing.JLabel jlCodDiaSpa;
+    private javax.swing.JLabel jlCodInstalacion;
+    private javax.swing.JLabel jlCodMasajista;
+    private javax.swing.JLabel jlCodTratamiento;
+    private javax.swing.JLabel jlEstadoInstalacion;
+    private javax.swing.JLabel jlFechaFin;
+    private javax.swing.JLabel jlFechaInicio;
+    private javax.swing.JLabel jlGestionClientes;
+    private javax.swing.JLabel jlTitulo;
+    private javax.swing.JTextField jtfCodDiaSpa;
+    private javax.swing.JTextField jtfCodInstalacion;
+    private javax.swing.JTextField jtfCodMasajista;
+    private javax.swing.JTextField jtfCodTratamiento;
+    private javax.swing.JTextField jtfFechaFin;
+    private javax.swing.JTextField jtfFechaInicio;
     // End of variables declaration//GEN-END:variables
 }

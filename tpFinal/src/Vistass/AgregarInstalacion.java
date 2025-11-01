@@ -26,21 +26,191 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jtfDetalleInstalacion = new javax.swing.JTextField();
+        jcbEstadoInstalacion = new javax.swing.JComboBox<>();
+        jbBuscarInstalacion = new javax.swing.JButton();
+        jtfPrecioInstalacion = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jlTitulo = new javax.swing.JLabel();
+        jbGuardarInstalacion = new javax.swing.JButton();
+        jlNombreInstalacion = new javax.swing.JLabel();
+        jbActualizarInstalacion = new javax.swing.JButton();
+        jlDetalleInstalacion = new javax.swing.JLabel();
+        jbEliminarInstalacion = new javax.swing.JButton();
+        jlGestionInstalaciones = new javax.swing.JLabel();
+        jbCambiarEstadoInstalacion = new javax.swing.JButton();
+        jlPrecioInstalacion = new javax.swing.JLabel();
+        jtfNombreInstalacion = new javax.swing.JTextField();
+        jlEstadoInstalacion = new javax.swing.JLabel();
+
+        jcbEstadoInstalacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        jcbEstadoInstalacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoInstalacionActionPerformed(evt);
+            }
+        });
+
+        jbBuscarInstalacion.setText("Buscar");
+
+        jtfPrecioInstalacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfPrecioInstalacionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 42, Short.MAX_VALUE)
+        );
+
+        jlTitulo.setFont(new java.awt.Font("Cambria", 0, 36)); // NOI18N
+        jlTitulo.setText("Spa Entre Dedos");
+
+        jbGuardarInstalacion.setText("Guardar");
+        jbGuardarInstalacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarInstalacionActionPerformed(evt);
+            }
+        });
+
+        jlNombreInstalacion.setText("Nombre:");
+
+        jbActualizarInstalacion.setText("Actualizar");
+
+        jlDetalleInstalacion.setText("Detalle de uso:");
+
+        jbEliminarInstalacion.setText("Eliminar");
+
+        jlGestionInstalaciones.setFont(new java.awt.Font("Maiandra GD", 0, 14)); // NOI18N
+        jlGestionInstalaciones.setText("Gestion Instalaciones");
+
+        jbCambiarEstadoInstalacion.setText("Cambiar Estado");
+
+        jlPrecioInstalacion.setText("Precio x 30 minutos:");
+
+        jlEstadoInstalacion.setText("Estado:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlDetalleInstalacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                            .addComponent(jtfDetalleInstalacion)
+                            .addComponent(jtfNombreInstalacion)
+                            .addComponent(jtfPrecioInstalacion)
+                            .addComponent(jlPrecioInstalacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlNombreInstalacion))
+                        .addGap(49, 49, 49)
+                        .addComponent(jbBuscarInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(jlGestionInstalaciones)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jlEstadoInstalacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(241, 241, 241))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jlTitulo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jbGuardarInstalacion)
+                .addGap(18, 18, 18)
+                .addComponent(jbActualizarInstalacion)
+                .addGap(18, 18, 18)
+                .addComponent(jbEliminarInstalacion)
+                .addGap(18, 18, 18)
+                .addComponent(jbCambiarEstadoInstalacion)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlTitulo)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlGestionInstalaciones)
+                .addGap(32, 32, 32)
+                .addComponent(jlNombreInstalacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfNombreInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarInstalacion))
+                .addGap(27, 27, 27)
+                .addComponent(jlDetalleInstalacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfDetalleInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlPrecioInstalacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfPrecioInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlEstadoInstalacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbGuardarInstalacion)
+                    .addComponent(jbEliminarInstalacion)
+                    .addComponent(jbActualizarInstalacion)
+                    .addComponent(jbCambiarEstadoInstalacion))
+                .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtfPrecioInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPrecioInstalacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfPrecioInstalacionActionPerformed
+
+    private void jbGuardarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarInstalacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbGuardarInstalacionActionPerformed
+
+    private void jcbEstadoInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoInstalacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbEstadoInstalacionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbActualizarInstalacion;
+    private javax.swing.JButton jbBuscarInstalacion;
+    private javax.swing.JButton jbCambiarEstadoInstalacion;
+    private javax.swing.JButton jbEliminarInstalacion;
+    private javax.swing.JButton jbGuardarInstalacion;
+    private javax.swing.JComboBox<String> jcbEstadoInstalacion;
+    private javax.swing.JLabel jlDetalleInstalacion;
+    private javax.swing.JLabel jlEstadoInstalacion;
+    private javax.swing.JLabel jlGestionInstalaciones;
+    private javax.swing.JLabel jlNombreInstalacion;
+    private javax.swing.JLabel jlPrecioInstalacion;
+    private javax.swing.JLabel jlTitulo;
+    private javax.swing.JTextField jtfDetalleInstalacion;
+    private javax.swing.JTextField jtfNombreInstalacion;
+    private javax.swing.JTextField jtfPrecioInstalacion;
     // End of variables declaration//GEN-END:variables
 }
