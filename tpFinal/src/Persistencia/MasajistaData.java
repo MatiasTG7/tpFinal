@@ -70,4 +70,6 @@ public List<Masajista> listarDisponibles(LocalDateTime inicio, LocalDateTime fin
     //NO VAYAN A BORRARLO o les pego :/
     //----------------------------------------------
     }
+
+ /// no se que mierda hiciste pero faltan metodos asi q los voy a agregar 
 }

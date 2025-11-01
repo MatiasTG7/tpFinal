@@ -26,7 +26,7 @@ public class ClienteData {
                 + "VALUES (?,?,?,?,?,?,?)";
             try{
                 PreparedStatement ps= con.prepareStatement(sql);
-                ps.setInt(1, cliente.getDni());
+                ps.setString(1, cliente.getDni());
                 ps.setString(2, cliente.getNombreCliente());
                 ps.setString(4, cliente.getTelefonoCliente());
                 ps.setInt(5, cliente.getEdad()); 
@@ -52,7 +52,7 @@ public class ClienteData {
             
             if (resultado.next()){
                 cliente = new Cliente();
-                cliente.setDni(resultado.getInt("dni"));
+                cliente.setDni(resultado.getString("dni"));
                 cliente.setNombreCliente(resultado.getString("nombreCliente"));
                 cliente.setTelefonoCliente(resultado.getString("telefonoCliente"));
                 cliente.setEdad(resultado.getInt("edad"));
@@ -79,7 +79,7 @@ public class ClienteData {
             if (resultado.next()){
                 cliente = new Cliente();
                 cliente.setCodCli(resultado.getInt("codCli"));
-                cliente.setDni(resultado.getInt("dni"));
+                cliente.setDni(resultado.getString("dni"));
                 cliente.setNombreCliente(resultado.getString("nombreCliente"));
                 cliente.setEdad(resultado.getInt("edad"));
                 cliente.setAfecciones(resultado.getBoolean("afecciones"));
@@ -110,7 +110,7 @@ public class ClienteData {
     public void actualizarCliente(Cliente cliente) {
         String sql = "UPDATE cliente SET dni = ?, nombreCliente = ?, telefonoCliente = ?, edad = ?, afecciones = ?, estadoCliente = ? WHERE codCli = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, cliente.getDni());
+            ps.setString(1, cliente.getDni());
             ps.setString(2, cliente.getNombreCliente());
             ps.setString(3, cliente.getTelefonoCliente());
             ps.setInt(4, cliente.getEdad());
@@ -135,7 +135,7 @@ public class ClienteData {
             while (rs.next()) {
                 Cliente c = new Cliente();
                 c.setCodCli(rs.getInt("codCliente"));
-                c.setDni(rs.getInt("dni"));
+                c.setDni(rs.getString("dni"));
                 c.setNombreCliente(rs.getString("nombreCliente"));
                 c.setTelefonoCliente(rs.getString("telefonoCliente"));
                 c.setAfecciones(rs.getBoolean("afecciones"));

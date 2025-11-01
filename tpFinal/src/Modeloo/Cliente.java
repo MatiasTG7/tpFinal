@@ -3,7 +3,7 @@ package Modeloo;
 
 public class Cliente {
     private int codCli; //codigo-cliente
-    private int dni;
+    private String dni;
     private String nombreCliente;
     private String telefonoCliente;
     private int edad;
@@ -13,7 +13,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int dni, String nombreCliente, String telefonoCliente, int edad, boolean afecciones, boolean estadoCliente) {
+    public Cliente(String dni, String nombreCliente, String telefonoCliente, int edad, boolean afecciones, boolean estadoCliente) {
         this.dni = dni;
         this.nombreCliente = nombreCliente;
         this.telefonoCliente = telefonoCliente;
@@ -22,7 +22,7 @@ public class Cliente {
         this.estadoCliente = estadoCliente;
     }
 
-    public Cliente(int codCli, int dni, String nombreCliente, String telefonoCliente, int edad, boolean afecciones, boolean estadoCliente) {
+    public Cliente(int codCli, String dni, String nombreCliente, String telefonoCliente, int edad, boolean afecciones, boolean estadoCliente) {
         this.codCli = codCli;
         this.dni = dni;
         this.nombreCliente = nombreCliente;
@@ -40,11 +40,11 @@ public class Cliente {
         this.codCli = codCli;
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -63,7 +63,6 @@ public class Cliente {
     public void setTelefonoCliente(String telefonoCliente) {
         this.telefonoCliente = telefonoCliente;
     }
-
 
     public int getEdad() {
         return edad;
