@@ -1,26 +1,39 @@
 package Modeloo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Sesion {
     private int codSesion;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
+    private LocalDateTime fechaInicio;
+    private LocalDateTime fechaFin;
     private int codTratamiento;
     private int codMasajista;
     private int codPack;
+    private int codInstal;
     private boolean estadoInstalacion;
 
     public Sesion() {
+        
     }
 
-    public Sesion(int codSesion, LocalDate fechaInicio, LocalDate fechaFin, int codTratamiento, int codMasajista, int codPack, boolean estadoInstalacion) {
+    public Sesion(LocalDateTime fechaInicio, LocalDateTime fechaFin, int codTratamiento, int codMasajista, int codPack, int codInstal, boolean estadoInstalacion) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.codTratamiento = codTratamiento;
+        this.codMasajista = codMasajista;
+        this.codPack = codPack;
+        this.codInstal = codInstal;
+        this.estadoInstalacion = estadoInstalacion;
+    }
+
+    public Sesion(int codSesion, LocalDateTime fechaInicio, LocalDateTime fechaFin, int codTratamiento, int codMasajista, int codPack, int codInstal, boolean estadoInstalacion) {
         this.codSesion = codSesion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.codTratamiento = codTratamiento;
         this.codMasajista = codMasajista;
         this.codPack = codPack;
+        this.codInstal = codInstal;
         this.estadoInstalacion = estadoInstalacion;
     }
 
@@ -32,19 +45,19 @@ public class Sesion {
         this.codSesion = codSesion;
     }
 
-    public LocalDate getFechaInicio() {
+    public LocalDateTime getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(LocalDate fechaInicio) {
+    public void setFechaInicio(LocalDateTime fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public LocalDate getFechaFin() {
+    public LocalDateTime getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(LocalDate fechaFin) {
+    public void setFechaFin(LocalDateTime fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -72,6 +85,14 @@ public class Sesion {
         this.codPack = codPack;
     }
 
+    public int getCodInstal() {
+        return codInstal;
+    }
+
+    public void setCodInstal(int codInstal) {
+        this.codInstal = codInstal;
+    }
+
     public boolean isEstadoInstalacion() {
         return estadoInstalacion;
     }
@@ -82,10 +103,7 @@ public class Sesion {
 
     @Override
     public String toString() {
-        return "Sesion{" + "codSesion=" + codSesion + ", fechaInicio=" + fechaInicio + ", fechaFin" + fechaFin + ", codTratamiento" + codTratamiento + ", codMasajista=" + codMasajista + ", codPack=" + codPack + ", estadoInstalacion" + "}";
-        
-        
-        
+        return "Sesion{" + "codSesion=" + codSesion + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", codTratamiento=" + codTratamiento + ", codMasajista=" + codMasajista + ", codPack=" + codPack + ", codInstal=" + codInstal + ", estadoInstalacion=" + estadoInstalacion + '}';
     }
-        
+
 }
