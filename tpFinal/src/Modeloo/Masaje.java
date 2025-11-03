@@ -3,7 +3,6 @@ package Modeloo;
 
 import java.time.LocalDate;
 
-
 public class Masaje {
     private int codTratamiento;
     private String nombreTratamiento;

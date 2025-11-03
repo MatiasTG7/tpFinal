@@ -19,7 +19,7 @@ public class SesionData {
         this.con = con;
     }
 
-    public SesionData() {
+    public SesionData(){
     }
     
   public void insertarSesion(Sesion sesion) {

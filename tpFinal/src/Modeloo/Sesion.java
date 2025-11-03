@@ -13,7 +13,6 @@ public class Sesion {
     private boolean estadoInstalacion;
 
     public Sesion() {
-        
     }
 
     public Sesion(LocalDateTime fechaInicio, LocalDateTime fechaFin, int codTratamiento, int codMasajista, int codPack, int codInstal, boolean estadoInstalacion) {

@@ -23,8 +23,7 @@ public class MasajeData {
         this.con = con;
     }
 
-    public MasajeData() {
-        this.con = con;
+    public MasajeData(){
     }
     
    public void insertarTratamiento(Masaje masaje) {
