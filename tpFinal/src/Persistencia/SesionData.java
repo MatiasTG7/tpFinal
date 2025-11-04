@@ -3,6 +3,7 @@ package Persistencia;
 
 import Modeloo.Cliente;
 import Modeloo.Conexion;
+import Modeloo.Masajista;
 import Modeloo.Sesion;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -14,15 +15,17 @@ import org.mariadb.jdbc.Connection;
 public class SesionData {
     
     private Connection con = null;
+    private MasajistaData masajistaData;
     
     public SesionData(Connection con){
         this.con = con;
+        this.masajistaData= new MasajistaData(con);
     }
 
     public SesionData(){
     }
     
-  public void insertarSesion(Sesion sesion) {
+    public void insertarSesion(Sesion sesion) {
         String sql = "INSERT INTO Sesion (codSesion, fechaInicio, fechaFin, codTratamiento, codMasajista, codPack,"
                 + " estadoInstalacion) " + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try{
@@ -46,7 +49,7 @@ public class SesionData {
 }}
  
 //  public Sesion buscarSesion(int codSesion){
-//  Sesion sesion= null;
+//      Sesion sesion= null;
 //        String sql = "SELECT * FROM sesion WHERE codSesion = ?";
 //        try {
 //          PreparedStatement ps = con.prepareStatement(sql);
@@ -62,17 +65,17 @@ public class SesionData {
 //          sesion.setCodPack(resultado.getInt("codPack"));
 //          sesion.setEstadoInstalacion(resultado.getBoolean("estadoInstalacion"));
 //          
-//          }
-//      } catch (Exception e){ 
+//              }
+//          } catch (Exception e){ 
 //            System.out.println("error con este codigo");
-//      }
+//          }
 //        return sesion;
 //
-//  }
-//  public Sesion buscarSesionXCod(int codSesion){
-//    Sesion sesion = null;
-//    String sql = "SELECT fechaInicio, fechaFin, codTratamiento, codMasajista, codPack, codInstal, estadoInstalacion FROM sesion WHERE codSesion = ? ";
-//    try{
+//      }
+//      public Sesion buscarSesionXCod(int codSesion){
+//      Sesion sesion = null;
+//      String sql = "SELECT fechaInicio, fechaFin, codTratamiento, codMasajista, codPack, codInstal, estadoInstalacion FROM sesion WHERE codSesion = ? ";
+//      try{
 //        PreparedStatement ps = con.prepareStatement(sql);
 //        ps.setInt(1, codSesion);
 //        ResultSet resultado = ps.executeQuery();
@@ -92,7 +95,7 @@ public class SesionData {
 //    } 
 //    return sesion;    
 //}  
-//   public boolean actualizarSesion(Sesion sesion){
+//    public boolean actualizarSesion(Sesion sesion){
 //    
 //    String sql = "UPDATE Sesion SET fechaInicio = ?, fechaFin = ?, codTratamiento = ?, codMasajista = ?, codPack = ?, estadoInstalacion = ? WHERE codSesion = ? ";
 //    try (PreparedStatement ps = con.prepareStatement(sql)){
@@ -125,7 +128,7 @@ public class SesionData {
             JOptionPane.showMessageDialog(null, "Error al eliminar la sesion. " + ex.getMessage());
         }
    }
-   private void BajaAltaLogicaSesion (int codSesion, boolean estadoInstalacion){
+   public void BajaAltaLogicaSesion (int codSesion, boolean estadoInstalacion){
         String sql = "UPDATE sesion SET estadoInstalacion = ? WHERE codSesion = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setBoolean(1, estadoInstalacion);
@@ -142,7 +145,38 @@ public class SesionData {
         }
    }
    
-   private void modificarMasajista(int codSesion, String matricula){
-       
-   }
+   public boolean modificarMasajista(int codSesion, String matricula) {
+        
+        
+        Masajista masajista = masajistaData.buscarMasajistaPorMatricula(matricula);
+        
+        if (masajista == null) {
+            System.err.println("No se pudo modificar la sesión: Masajista con matrícula " + matricula + " no encontrado.");
+            return false;
+        }
+        
+        int nuevoCodMasajista = masajista.getCodMasajista();
+
+        String sql = "UPDATE sesion SET codMasajista = ? WHERE codSesion = ?";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setInt(1, nuevoCodMasajista);
+            ps.setInt(2, codSesion);
+            
+            int filasAfectadas = ps.executeUpdate();
+            
+            if (filasAfectadas > 0) {
+                System.out.println("Masajista de la sesión " + codSesion + " actualizado correctamente.");
+                return true;
+            } else {
+                System.out.println("No se encontró la sesión con ID " + codSesion + ".");
+                return false;
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar el masajista de la sesión: " + e.getMessage());
+            return false;
+        }
+    }
 } 

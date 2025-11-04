@@ -147,7 +147,7 @@ public class ClienteData {
         }
         return clientes;
     }
-    private void BajaAltaLogicaCliente (int codCli, boolean nuevoEstado){
+    public void BajaAltaLogicaCliente (int codCli, boolean nuevoEstado){
         String sql = "UPDATE cliente SET estadoCliente = ? WHERE codCli = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setBoolean(1, nuevoEstado);

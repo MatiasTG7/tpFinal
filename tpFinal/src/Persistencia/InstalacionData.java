@@ -1,7 +1,15 @@
 
 package Persistencia;
 
-import Modeloo.TipoMasaje;
+import Modeloo.Instalacion;
+import Modeloo.TipoMasaje; // Importado en tu captura original
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 
 
@@ -16,18 +24,85 @@ public class InstalacionData {
     public InstalacionData() {
     }
     
-    
-    private void guardarInstalacion(){
+    public int guardarInstalacion(Instalacion instalacion) {
+        String sql = "INSERT INTO instalacion (nombreInstalacion, detalleDeUso, precio30m, estadoInstalacion) VALUES (?, ?, ?, ?)";
         
+        try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            
+            ps.setString(1, instalacion.getNombreInstalacion());
+            ps.setString(2, instalacion.getDetalleDeUso());
+            ps.setDouble(3, instalacion.getPrecio30m());
+            
+            ps.setBoolean(4, instalacion.isEstadoInstalacion());
+            
+            ps.executeUpdate();
+            
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    instalacion.setCodInstal(rs.getInt(1));
+                    System.out.println("Instalación guardada con ID: " + instalacion.getCodInstal());
+                    return instalacion.getCodInstal();
+                }
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error al guardar instalación: " + e.getMessage());
+        }
+        return 0;
     }
     
-    private void modificarInstalacion(){
+    public boolean modificarInstalacion(Instalacion instalacion) {
+        String sql = "UPDATE instalacion SET nombreInstalacion = ?, detalleDeUso = ?, precio30m = ?, estadoInstalacion = ? WHERE codInstal = ?";
         
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, instalacion.getNombreInstalacion());
+            ps.setString(2, instalacion.getDetalleDeUso());
+            ps.setDouble(3, instalacion.getPrecio30m());
+            
+            ps.setBoolean(4, instalacion.isEstadoInstalacion());
+            
+            ps.setInt(5, instalacion.getCodInstal());
+            
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+            
+        } catch (SQLException e) {
+            System.err.println("Error al modificar instalación: " + e.getMessage());
+            return false;
+        }
     }
     
-    private void listarPorTipo(TipoMasaje tipo){
+    public List<Instalacion> listarPorTipo(TipoMasaje tipo) {
+        List<Instalacion> instalaciones = new ArrayList<>();
         
+        String sql = "SELECT DISTINCT i.* FROM instalacion i " +
+                     "JOIN sesion s ON i.codInstal = s.codInstal " +
+                     "JOIN masaje m ON s.codTratamiento = m.codTratamiento " +
+                     "WHERE m.tipo = ?";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, tipo.name()); 
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Instalacion inst = new Instalacion();
+                    inst.setCodInstal(rs.getInt("codInstal"));
+                    inst.setNombreInstalacion(rs.getString("nombreInstalacion"));
+                    inst.setDetalleDeUso(rs.getString("detalleDeUso"));
+                    inst.setPrecio30m(rs.getDouble("precio30m"));
+                    
+                    inst.setEstadoInstalacion(rs.getBoolean("estadoInstalacion"));
+                    
+                    instalaciones.add(inst);
+                }
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error al listar instalaciones por tipo: " + e.getMessage());
+        }
+        return instalaciones;
     }
-    
-    
 }
+    

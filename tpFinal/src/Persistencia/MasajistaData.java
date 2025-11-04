@@ -24,10 +24,8 @@ public class MasajistaData {
 
     public MasajistaData() {
     }
-   
-    // Dentro de MasajistaData.java (o SesionData para verificar disponibilidad)
 
-public List<Masajista> listarDisponibles(LocalDateTime inicio, LocalDateTime fin, EspecialidadMasajista especialidad) {
+    public List<Masajista> listarDisponibles(LocalDateTime inicio, LocalDateTime fin, EspecialidadMasajista especialidad) {
     List<Masajista> masajistasDisponibles = new ArrayList<>();
     
     String sql = "SELECT * FROM masajista "
@@ -57,19 +55,48 @@ public List<Masajista> listarDisponibles(LocalDateTime inicio, LocalDateTime fin
     //----------------------------------------------
     //NO VAYAN A BORRARLO o les pego :/ ali estas de testigo que dijiste que esta bien, a las 00:50hrs
     //----------------------------------------------
- private Masajista mapeoResultset(ResultSet rs) throws SQLException{
+    public Masajista mapeoResultset(ResultSet rs) throws SQLException{
     Masajista m = new Masajista();
     m.setCodMasajista(rs.getInt("codMasajista"));
           m.setMatricula(rs.getString("matricula"));
           m.setNombreMasajista(rs.getString("nombreMasajista"));
-         m.setTelfonoMasajista(rs.getString("telefonoMasajista"));
-         String especialidadMasajista = rs.getString("especialidad").toUpperCase();
-         m.setEspecialidad(EspecialidadMasajista.valueOf(especialidadMasajista));
+          m.setTelefonoMasajista(rs.getString("telefonoMasajista"));
+          String especialidadMasajista = rs.getString("especialidad").toUpperCase();
+          m.setEspecialidad(EspecialidadMasajista.valueOf(especialidadMasajista));
       return m;
      //----------------------------------------------
     //NO VAYAN A BORRARLO o les pego :/
     //----------------------------------------------
     }
+    public Masajista buscarMasajistaPorMatricula(String matricula) {
+    Masajista masajista = null;
+    String sql = "SELECT * FROM masajista WHERE matricula = ?";
+    
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, matricula);
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                masajista = new Masajista();
+                masajista.setCodMasajista(rs.getInt("codMasajista"));
+                masajista.setMatricula(rs.getString("matricula"));
+                masajista.setNombreMasajista(rs.getString("nombreMasajista"));
+                masajista.setTelefonoMasajista(rs.getString("telefonoMasajista"));
+                
+                String especialidadDB = rs.getString("especialidad");
+                masajista.setEspecialidad(EspecialidadMasajista.valueOf(especialidadDB.toUpperCase()));
+                
+                masajista.setEstadoMasajista(rs.getBoolean("estadoMasajista"));
+            }
+        }
+        
+    } catch (SQLException e) {
+        System.err.println("Error al buscar masajista por matrícula: " + e.getMessage());
+    } catch (IllegalArgumentException ie) {
+        System.err.println("Error de ENUM: " + ie.getMessage());
+    }
+    return masajista;
+}
 
  /// no se que mierda hiciste pero faltan metodos asi q los voy a agregar 
 }

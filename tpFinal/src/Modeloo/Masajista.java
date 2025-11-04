@@ -54,11 +54,11 @@ public class Masajista {
         this.nombreMasajista = nombreMasajista;
     }
 
-    public String getTelfonoMasajista() {
+    public String getTelefonoMasajista() {
         return telefonoMasajista;
     }
 
-    public void setTelfonoMasajista(String telfonoMasajista) {
+    public void setTelefonoMasajista(String telfonoMasajista) {
         this.telefonoMasajista = telfonoMasajista;
     }
 

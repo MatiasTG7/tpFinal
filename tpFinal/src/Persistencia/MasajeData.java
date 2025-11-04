@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
-import org.mariadb.jdbc.Statement;
+
 
 public class MasajeData {
 
@@ -26,7 +26,7 @@ public class MasajeData {
     public MasajeData(){
     }
     
-   public void insertarTratamiento(Masaje masaje) {
+    public void insertarTratamiento(Masaje masaje) {
     
        Connection con = (Connection) Conexion.getConexion();
        try {
@@ -56,8 +56,7 @@ public class MasajeData {
   }
     }
 
-
-    private void modificarMasaje(Masaje masaje){
+    public void modificarMasaje(Masaje masaje){
         String sql = "UPDATE masaje SET nombreTratamiento = ?, tipo = ?, detalleTratamiento = ?. costoTratamiento = ?, activo = ? "
                 + "WHERE codTratamiento = ?";
         try{
@@ -108,7 +107,7 @@ public class MasajeData {
         
     }
     
-    private List<Masaje> obtenerMasajeMasPedido (Masaje masaje){
+    public List<Masaje> obtenerMasajeMasPedido (Masaje masaje){
         List<Masaje> masajeOrd = new LinkedList<>();
         String sql = "SELECT masaje.*, COUNT(s.codTratamiento) AS frecuencia" + "FROM masaje masaje" + "JOIN Sesion s ON masaje.codTratamiento = s.codTratamiento +"
                 + "GROUP BY masaje.codTratamiento, masaje.nombreTratamiento, masaje.tipo, masaje.DetalleTratamiento, masaje.duracionTratamiento, masaje.costoTratamiento, masaje.activo"
