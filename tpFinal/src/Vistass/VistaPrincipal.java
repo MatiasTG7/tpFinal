@@ -1,6 +1,9 @@
 
 package Vistass;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 public class VistaPrincipal extends javax.swing.JFrame {
 
     /**
@@ -9,8 +12,30 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public VistaPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
+        ajustarIconosMenu();
     }
 
+           private ImageIcon escalarIcono(String ruta, int ancho, int alto) {
+            ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+            Image img = icono.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+            return new ImageIcon(img);
+}
+        private void ajustarIconosMenu() {
+            jmClientes.setText("");
+            jmSesiones.setText("");
+            jmMasajes.setText("");
+            jmMasajistas.setText("");
+            jmInstalaciones.setText("");
+            jmReportes.setText("");
+
+            jmClientes.setIcon(escalarIcono("/Recursos/clientes.png", 45, 45));
+            jmMasajistas.setIcon(escalarIcono("/Recursos/masajistas.png", 45, 45));
+            jmInstalaciones.setIcon(escalarIcono("/Recursos/instalaciones.png", 45, 45));
+            jmReportes.setIcon(escalarIcono("/Recursos/reportes.png", 45, 45));
+            jmSesiones.setIcon(escalarIcono("/Recursos/sesiones.png", 45, 45));
+            jmMasajes.setIcon(escalarIcono("/Recursos/masajes.png", 55, 55));         
+            
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
