@@ -1,13 +1,22 @@
 
 package Vistass;
 
-public class AgregarCliente extends javax.swing.JInternalFrame {
+import Modeloo.Cliente;
+import Modeloo.Conexion;
+import Persistencia.ClienteData;
+import javax.swing.JOptionPane;
+import org.mariadb.jdbc.Connection;
 
-    /**
-     * Creates new form AgregarCliente
-     */
+public class AgregarCliente extends javax.swing.JInternalFrame {
+    
+    private Connection con;
+    private ClienteData clienteData;
+    private Cliente clienteEncontrado= null;
+    
     public AgregarCliente() {
         initComponents();
+        con = (Connection) Conexion.getConexion();
+        clienteData = new ClienteData (con);
     }
 
     /**
@@ -81,10 +90,25 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         });
 
         jbActualizarCliente.setText("Actualizar");
+        jbActualizarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarClienteActionPerformed(evt);
+            }
+        });
 
         jbEliminarCliente.setText("Eliminar");
+        jbEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarClienteActionPerformed(evt);
+            }
+        });
 
         jbCambiarEstadoCliente.setText("Cambiar Estado");
+        jbCambiarEstadoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCambiarEstadoClienteActionPerformed(evt);
+            }
+        });
 
         jlAfeccionesCliente.setText("Tiene afecciones?");
 
@@ -95,6 +119,11 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         jcbEstadoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
 
         jbBuscarCliente.setText("Buscar");
+        jbBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,8 +223,149 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfTelefonoClienteActionPerformed
 
     private void jbGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarClienteActionPerformed
-        // TODO add your handling code here:
+        //ESTE YA FUNCIONA
+        try{
+            if(jtfDniCliente.getText().isEmpty() || jtfNombreCliente.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Los campos DNI y Nombre no pueden estar vacios");
+                return;
+            }
+            String dni = jtfDniCliente.getText();
+            String nombre = jtfNombreCliente.getText();
+            String telefono = jtfTelefonoCliente.getText();
+            int edad = Integer.parseInt(jtfEdadCliente.getText());
+            
+            boolean afecciones = jcbAfeccionesCliente.getSelectedItem().toString().equals("Si");
+            boolean estado = jcbEstadoCliente.getSelectedItem().toString().equals("Activo");
+            
+            Cliente nuevoCliente = new Cliente(dni,nombre,telefono,edad,afecciones,estado);
+            
+            if (clienteData.guardarCliente(nuevoCliente)){
+                JOptionPane.showMessageDialog(this, "Cliente guardado exitosamente");
+                limpiarCampos();
+            }else{
+                JOptionPane.showMessageDialog(this, "No se pudo guardar cliente", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(this, "El campo 'edad' debe ser un numero ");
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al guardar" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jbGuardarClienteActionPerformed
+
+    private void jbBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarClienteActionPerformed
+        //ESTE TAMBIÉN FUNCIONA
+        try {
+        String dni = jtfDniCliente.getText();
+        
+        if (dni.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo DNI no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        clienteEncontrado = clienteData.buscarClientePorDni(dni);
+
+        if (clienteEncontrado != null) {
+            jtfNombreCliente.setText(clienteEncontrado.getNombreCliente());
+            jtfTelefonoCliente.setText(clienteEncontrado.getTelefonoCliente());
+            jtfEdadCliente.setText(String.valueOf(clienteEncontrado.getEdad()));
+
+            jcbAfeccionesCliente.setSelectedItem(clienteEncontrado.isAfecciones() ? "Si" : "No");
+            
+            jcbEstadoCliente.setSelectedItem(clienteEncontrado.isEstadoCliente() ? "Activo" : "Inactivo");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró ningún cliente con ese DNI.", "Búsqueda fallida", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCamposMenosDni();
+            clienteEncontrado = null;
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al buscar.", "Error", JOptionPane.ERROR_MESSAGE);
+            clienteEncontrado = null;
+        }
+    }//GEN-LAST:event_jbBuscarClienteActionPerformed
+
+    private void jbActualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarClienteActionPerformed
+        //ESTO HAY QUE CORREGIRLO POR QUE TIRA TE DEJA ACTUALIZARLO PERO SALE LOS DOS CARTELES EL DE ACTUALIZADO CORRECTAMENTE Y EL DE NO SE PUDO ACTUALIZAR EL CLIENTE
+        //(AUNQUE SI FUNCIONA Y SI ACTUALIZA EL CLIENTE)
+        if(clienteEncontrado == null){
+            JOptionPane.showMessageDialog(this, "Debe buscar un cliente antes de poder actualizar","Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try{
+            String dni = jtfDniCliente.getText();
+            String nombre = jtfNombreCliente.getText();
+            String telefono = jtfTelefonoCliente.getText();
+            int edad = Integer.parseInt(jtfEdadCliente.getText());
+            boolean afecciones = jcbAfeccionesCliente.getSelectedItem().toString().equals("Si");
+            boolean estado = jcbEstadoCliente.getSelectedItem().toString().equals("Activo");
+            
+            clienteEncontrado.setDni(dni);
+            clienteEncontrado.setNombreCliente(nombre);
+            clienteEncontrado.setTelefonoCliente(telefono);
+            clienteEncontrado.setEdad(edad);
+            clienteEncontrado.setAfecciones(afecciones);
+            clienteEncontrado.setEstadoCliente(estado);
+            
+            if(clienteData.actualizarCliente(clienteEncontrado)){
+                JOptionPane.showMessageDialog(this, "Cliente actualizado exitosamente.","Exito",JOptionPane.INFORMATION_MESSAGE);
+                limpiarCampos();
+            }else{
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+            } 
+            }catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "El campo 'Edad' debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al actualizar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_jbActualizarClienteActionPerformed
+
+    private void jbEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarClienteActionPerformed
+        //ESTE TAMBIÉN FUNCIONA
+        if (clienteEncontrado == null) {
+            JOptionPane.showMessageDialog(this, "Debe buscar un cliente para poder eliminar");
+            return;
+        }
+
+        int confirmacion = JOptionPane.showConfirmDialog(this, 
+            "¿Está seguro de que desea ELIMINAR PERMANENTEMENTE a este cliente?\nEsta acción no se puede deshacer.", 
+            "Confirmar Eliminación", 
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.WARNING_MESSAGE);
+    
+        if (confirmacion == JOptionPane.YES_OPTION) {
+        
+        if (clienteData.eliminarCliente(clienteEncontrado.getCodCli())) {
+            JOptionPane.showMessageDialog(this, "Cliente eliminado permanentemente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar al cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_jbEliminarClienteActionPerformed
+
+    private void jbCambiarEstadoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoClienteActionPerformed
+        //Y ESTE HAY QUE CORREGIRLO POR QUE TE DEJA CAMBIAR EL ESTADO A INACTIVO NOMÁS Y DESPUÉS NO TE DEJA CAMBIARLO DE NUEVO A ACTIVO, AUNQUE TIENE EL MISMO PROBLEMA QUE EL DE ACTUALIZAR
+        //SALEN LOS DOS POP UPS Y LEAN BIEN QUE POP UPS TOMA PARA SABER QUE CORREGIR  (EL CLIENTE FUE DADO DE BAJA CORRECTAMENTE DEL METODO CAMBIARESTADOCLIENTE  DE LA CLASE CLIENTEDATA)
+        //Y EL POP UP DE (NO SE PUDO CAMBIAR EL ESTADO DEL CLIENTE DE ELSE DEL METODO DE ESTE BOTÓN)
+        //CHAU ME VOY A DORMIR NO ROMPAN NADA
+        if (clienteEncontrado == null){
+            JOptionPane.showMessageDialog(this, "Debe buscar un cliente para cambiar su estado.","Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        boolean estadoActual = clienteEncontrado.isEstadoCliente();
+        boolean nuevoEstado = !estadoActual;
+        
+        String nuevoEstadoStr = nuevoEstado ? "Activo" : "Inactivo";
+        
+        if(clienteData.cambiarEstadoCliente(clienteEncontrado.getCodCli(), nuevoEstado)){
+            JOptionPane.showMessageDialog(this, "Estado del cliente cambiado a: "+ nuevoEstadoStr,"Exito",JOptionPane.INFORMATION_MESSAGE);
+            jcbEstadoCliente.setSelectedItem(nuevoEstadoStr);
+            clienteEncontrado.setEstadoCliente(nuevoEstado);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo cambiar el estado del cliente.","Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jbCambiarEstadoClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -220,4 +390,22 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfNombreCliente;
     private javax.swing.JTextField jtfTelefonoCliente;
     // End of variables declaration//GEN-END:variables
+    private void limpiarCamposMenosDni() {
+    jtfNombreCliente.setText("");
+    jtfTelefonoCliente.setText("");
+    jtfEdadCliente.setText("");
+    jcbAfeccionesCliente.setSelectedIndex(0);
+    jcbEstadoCliente.setSelectedIndex(0);
+    clienteEncontrado = null;
+    }
+    
+    private void limpiarCampos() {
+    jtfDniCliente.setText("");
+    jtfNombreCliente.setText("");
+    jtfTelefonoCliente.setText("");
+    jtfEdadCliente.setText("");
+    jcbAfeccionesCliente.setSelectedIndex(0);
+    jcbEstadoCliente.setSelectedIndex(0);
+    clienteEncontrado = null;
+    }
 }

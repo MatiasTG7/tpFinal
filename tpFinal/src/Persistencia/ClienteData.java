@@ -12,46 +12,50 @@ import org.mariadb.jdbc.Connection;
 
 public class ClienteData {
     
+    private Connection con= null;
+    
     public ClienteData() {
     }
-    
-    private Connection con= null;
     
     public ClienteData(Connection con){
         this.con= con;
     }
     
-    public void guardarCliente(Cliente cliente){
+    public boolean guardarCliente(Cliente cliente){
         String sql= "INSERT INTO cliente (dni, nombreCliente, telefonoCliente, edad, afecciones, estadoCliente)" 
-                + "VALUES (?,?,?,?,?,?,?)";
+                + "VALUES (?,?,?,?,?,?)";
             try{
                 PreparedStatement ps= con.prepareStatement(sql);
                 ps.setString(1, cliente.getDni());
                 ps.setString(2, cliente.getNombreCliente());
-                ps.setString(4, cliente.getTelefonoCliente());
-                ps.setInt(5, cliente.getEdad()); 
-                ps.setBoolean(6, cliente.isAfecciones());
-                ps.setBoolean(7,cliente.isEstadoCliente());
+                ps.setString(3, cliente.getTelefonoCliente());
+                ps.setInt(4, cliente.getEdad()); 
+                ps.setBoolean(5, cliente.isAfecciones());
+                ps.setBoolean(6,cliente.isEstadoCliente());
                 
                 int registros = ps.executeUpdate();
                 System.out.println("Cliente cargado correctamente. Registros insertados: " + registros);
                 
+                return registros >0;
+                
             }catch(SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error de conexión: " + ex.getMessage());
         }
+            return false;
     }
-    public Cliente buscarClientePorDni(int dni){
+    public Cliente buscarClientePorDni(String dni){
         Cliente cliente= null;
         String sql = "SELECT * FROM cliente WHERE dni = ?";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, dni);
+            ps.setString(1, dni);
             
             ResultSet resultado = ps.executeQuery();
             
             if (resultado.next()){
                 cliente = new Cliente();
+                cliente.setCodCli(resultado.getInt("codCli"));
                 cliente.setDni(resultado.getString("dni"));
                 cliente.setNombreCliente(resultado.getString("nombreCliente"));
                 cliente.setTelefonoCliente(resultado.getString("telefonoCliente"));
@@ -93,21 +97,23 @@ public class ClienteData {
         }
         return cliente;
     }
-    public void eliminarCliente(int codCli) {
+    public boolean eliminarCliente(int codCli) {
         String sql = "DELETE FROM cliente WHERE codCli = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, codCli);
             int filas = ps.executeUpdate();
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "El cliente fue eliminado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontro este cliente.");
-            }
+            
+            return filas>0;
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar el cliente. " + ex.getMessage());
+//            JOptionPane.showMessageDialog(null, "Error al eliminar el cliente. " + ex.getMessage());
+            System.out.println("----ERROR DE SQL AL ELIMINAR----");
+            ex.printStackTrace();
+            System.err.println("----------------------------------");
+            return false;
         }
     }
-    public void actualizarCliente(Cliente cliente) {
+    public boolean actualizarCliente(Cliente cliente) {
         String sql = "UPDATE cliente SET dni = ?, nombreCliente = ?, telefonoCliente = ?, edad = ?, afecciones = ?, estadoCliente = ? WHERE codCli = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, cliente.getDni());
@@ -116,6 +122,7 @@ public class ClienteData {
             ps.setInt(4, cliente.getEdad());
             ps.setBoolean(5, cliente.isAfecciones());
             ps.setBoolean(6, cliente.isEstadoCliente());
+            ps.setInt(7, cliente.getCodCli());
 
             int filas = ps.executeUpdate();
             if (filas > 0) {
@@ -126,6 +133,7 @@ public class ClienteData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al actualizar el cliente. " + ex.getMessage());
         }
+        return false;
     }
         public List<Cliente> listarClientes() {
         List<Cliente> clientes = new ArrayList<>();
@@ -147,11 +155,12 @@ public class ClienteData {
         }
         return clientes;
     }
-    public void BajaAltaLogicaCliente (int codCli, boolean nuevoEstado){
+    public boolean cambiarEstadoCliente (int codCli, boolean nuevoEstado){
         String sql = "UPDATE cliente SET estadoCliente = ? WHERE codCli = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setBoolean(1, nuevoEstado);
             ps.setInt(2, codCli);
+            
             int filas = ps.executeUpdate();
             if (filas > 0) {
                 String mensaje = nuevoEstado ? "Cliente dado de alta correctamente." : "Cliente dado de baja correctamente.";
@@ -162,5 +171,6 @@ public class ClienteData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al cambiar estado del cliente: " + ex.getMessage());
         }
+        return false;
     }
 }
