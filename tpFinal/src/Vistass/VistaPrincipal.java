@@ -1,6 +1,8 @@
 
 package Vistass;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -11,7 +13,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
      */
     public VistaPrincipal() {
         initComponents();
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
+        this.setSize(600, 640);
         ajustarIconosMenu();
     }
 
@@ -51,7 +54,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        escritorio = new javax.swing.JDesktopPane();
+        ImageIcon fondo = new ImageIcon(getClass().getResource("/Recursos/fondo1.jpg"));
+        Image miImagen = fondo.getImage();
+        escritorio = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen, 0,0,getWidth(),getHeight(),this);
+            }
+        }
+        ;
         jMenuBar1 = new javax.swing.JMenuBar();
         jmClientes = new javax.swing.JMenu();
         jmiAgregarCliente = new javax.swing.JMenuItem();
@@ -61,9 +71,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jmiAgregarSesion = new javax.swing.JMenuItem();
         jmiInfoSesion = new javax.swing.JMenuItem();
         jmiListarSesiones = new javax.swing.JMenuItem();
-        jmMasajes = new javax.swing.JMenu();
-        jmiAgregarMasaje = new javax.swing.JMenuItem();
-        jmiListarMasajes = new javax.swing.JMenuItem();
         jmMasajistas = new javax.swing.JMenu();
         jmiAgregarMasajista = new javax.swing.JMenuItem();
         jmiListarMasajistasDispo = new javax.swing.JMenuItem();
@@ -73,6 +80,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jmReportes = new javax.swing.JMenu();
         jmiReporteDiaSpa = new javax.swing.JMenuItem();
         jmiReporteSolicitados = new javax.swing.JMenuItem();
+        jmMasajes = new javax.swing.JMenu();
+        jmiAgregarMasaje = new javax.swing.JMenuItem();
+        jmiListarMasajes = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -92,14 +102,21 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 702, Short.MAX_VALUE)
+            .addGap(0, 669, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 623, Short.MAX_VALUE)
+            .addGap(0, 541, Short.MAX_VALUE)
         );
 
-        jmClientes.setText("Clientes");
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        jmClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/clientes.png"))); // NOI18N
+        jmClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jmClientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jmClientes.setMaximumSize(new java.awt.Dimension(60, 60));
+        jmClientes.setMinimumSize(new java.awt.Dimension(50, 50));
+        jmClientes.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jmiAgregarCliente.setText("Gestion Clientes");
         jmiAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +144,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmClientes);
 
-        jmSesiones.setText("Sesiones");
+        jmSesiones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/sesiones.png"))); // NOI18N
+        jmSesiones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jmSesiones.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jmSesiones.setMaximumSize(new java.awt.Dimension(60, 60));
+        jmSesiones.setMinimumSize(new java.awt.Dimension(50, 50));
+        jmSesiones.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jmiAgregarSesion.setText("Gestion Sesiones");
         jmiAgregarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -155,27 +177,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmSesiones);
 
-        jmMasajes.setText("Masajes");
-
-        jmiAgregarMasaje.setText("Gestion Masajes");
-        jmiAgregarMasaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiAgregarMasajeActionPerformed(evt);
-            }
-        });
-        jmMasajes.add(jmiAgregarMasaje);
-
-        jmiListarMasajes.setText("Listar Masajes");
-        jmiListarMasajes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiListarMasajesActionPerformed(evt);
-            }
-        });
-        jmMasajes.add(jmiListarMasajes);
-
-        jMenuBar1.add(jmMasajes);
-
-        jmMasajistas.setText("Masajistas");
+        jmMasajistas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/masajistas.png"))); // NOI18N
+        jmMasajistas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jmMasajistas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jmMasajistas.setMaximumSize(new java.awt.Dimension(60, 60));
+        jmMasajistas.setMinimumSize(new java.awt.Dimension(50, 50));
+        jmMasajistas.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jmiAgregarMasajista.setText("Gestion Masajistas");
         jmiAgregarMasajista.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +202,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmMasajistas);
 
-        jmInstalaciones.setText("Instalaciones");
+        jmInstalaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/instalaciones.png"))); // NOI18N
+        jmInstalaciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jmInstalaciones.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jmInstalaciones.setMaximumSize(new java.awt.Dimension(60, 60));
+        jmInstalaciones.setMinimumSize(new java.awt.Dimension(50, 50));
+        jmInstalaciones.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jmiAgregarInstalacion.setText("Gestion Instalaciones");
         jmiAgregarInstalacion.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +227,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmInstalaciones);
 
-        jmReportes.setText("Reportes");
+        jmReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/reportes.png"))); // NOI18N
+        jmReportes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jmReportes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jmReportes.setMaximumSize(new java.awt.Dimension(60, 60));
+        jmReportes.setMinimumSize(new java.awt.Dimension(50, 50));
+        jmReportes.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jmiReporteDiaSpa.setText("Reporte Dia de Spa");
         jmiReporteDiaSpa.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +252,31 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmReportes);
 
+        jmMasajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/masajes.png"))); // NOI18N
+        jmMasajes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jmMasajes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jmMasajes.setMaximumSize(new java.awt.Dimension(60, 60));
+        jmMasajes.setMinimumSize(new java.awt.Dimension(50, 50));
+        jmMasajes.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        jmiAgregarMasaje.setText("Gestion Masajes");
+        jmiAgregarMasaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgregarMasajeActionPerformed(evt);
+            }
+        });
+        jmMasajes.add(jmiAgregarMasaje);
+
+        jmiListarMasajes.setText("Listar Masajes");
+        jmiListarMasajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListarMasajesActionPerformed(evt);
+            }
+        });
+        jmMasajes.add(jmiListarMasajes);
+
+        jMenuBar1.add(jmMasajes);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,94 +287,149 @@ public class VistaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(escritorio)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiInfoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInfoClienteActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         InfoCliente infocliente = new InfoCliente();
-        escritorio.add(infocliente);
         infocliente.setVisible(true);
+        infocliente.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(infocliente);
     }//GEN-LAST:event_jmiInfoClienteActionPerformed
 
     private void jmiAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarClienteActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         AgregarCliente cliente = new AgregarCliente();
-        escritorio.add(cliente);
         cliente.setVisible(true);
+        cliente.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(cliente);
+        
     }//GEN-LAST:event_jmiAgregarClienteActionPerformed
 
     private void jmiListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarClientesActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         ListarClientes listaclientes = new ListarClientes();
-        escritorio.add(listaclientes);
         listaclientes.setVisible(true);
+        listaclientes.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(listaclientes);
+        
     }//GEN-LAST:event_jmiListarClientesActionPerformed
 
     private void jmiAgregarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarSesionActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         AgregarSesion sesion = new AgregarSesion();
-        escritorio.add(sesion);
         sesion.setVisible(true);
+        sesion.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(sesion);
+        
     }//GEN-LAST:event_jmiAgregarSesionActionPerformed
 
     private void jmiAgregarMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarMasajeActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         AgregarMasaje masaje = new AgregarMasaje();
-        escritorio.add(masaje);
         masaje.setVisible(true);
+        masaje.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(masaje);
+        
     }//GEN-LAST:event_jmiAgregarMasajeActionPerformed
 
     private void jmiAgregarMasajistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarMasajistaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         AgregarMasajista masajista = new AgregarMasajista();
-        escritorio.add(masajista);
         masajista.setVisible(true);
+        masajista.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(masajista);
+        
     }//GEN-LAST:event_jmiAgregarMasajistaActionPerformed
 
     private void jmiAgregarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarInstalacionActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         AgregarInstalacion instalacion = new AgregarInstalacion();
-        escritorio.add(instalacion);
         instalacion.setVisible(true);
+        instalacion.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(instalacion);
+        
     }//GEN-LAST:event_jmiAgregarInstalacionActionPerformed
 
     private void jmiInfoSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInfoSesionActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         InfoSesion infosesion = new InfoSesion();
-        escritorio.add(infosesion);
         infosesion.setVisible(true);
+        infosesion.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(infosesion);
+        
     }//GEN-LAST:event_jmiInfoSesionActionPerformed
 
     private void jmiListarSesionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarSesionesActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         ListarSesiones listasesiones = new ListarSesiones();
-        escritorio.add(listasesiones);
         listasesiones.setVisible(true);
+        listasesiones.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(listasesiones);
+        
     }//GEN-LAST:event_jmiListarSesionesActionPerformed
 
     private void jmiListarMasajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarMasajesActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         ListarMasajes listamasajes = new ListarMasajes();
-        escritorio.add(listamasajes);
         listamasajes.setVisible(true);
+        listamasajes.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(listamasajes);
+        
     }//GEN-LAST:event_jmiListarMasajesActionPerformed
 
     private void jmiListarMasajistasDispoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarMasajistasDispoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         ListarMasajistasDispo masajistasdispo= new ListarMasajistasDispo();
-        escritorio.add(masajistasdispo);
         masajistasdispo.setVisible(true);
+        masajistasdispo.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(masajistasdispo);
+        
     }//GEN-LAST:event_jmiListarMasajistasDispoActionPerformed
 
     private void jmiListarInstalacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarInstalacionesActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         ListarInstalaciones listainstalaciones = new ListarInstalaciones();
-        escritorio.add(listainstalaciones);
         listainstalaciones.setVisible(true);
+        listainstalaciones.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(listainstalaciones);
+        
     }//GEN-LAST:event_jmiListarInstalacionesActionPerformed
 
     private void jmiReporteDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReporteDiaSpaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         ReporteDiaSpa reportespa = new ReporteDiaSpa();
-        escritorio.add(reportespa);
         reportespa.setVisible(true);
+        reportespa.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(reportespa);
+        
     }//GEN-LAST:event_jmiReporteDiaSpaActionPerformed
 
     private void jmiReporteSolicitadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReporteSolicitadosActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
         ReporteSolicitados reportesolicitados = new ReporteSolicitados();
-        escritorio.add(reportesolicitados);
         reportesolicitados.setVisible(true);
+        reportesolicitados.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(reportesolicitados);
+        
     }//GEN-LAST:event_jmiReporteSolicitadosActionPerformed
 
     /**
