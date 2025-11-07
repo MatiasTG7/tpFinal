@@ -28,7 +28,6 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jlTitulo = new javax.swing.JLabel();
         jlDniCliente = new javax.swing.JLabel();
         jlNombreCliente = new javax.swing.JLabel();
@@ -51,74 +50,135 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
-        );
-
         jlTitulo.setFont(new java.awt.Font("Cambria", 0, 36)); // NOI18N
+        jlTitulo.setForeground(new java.awt.Color(69, 54, 14));
         jlTitulo.setText("Spa Entre Dedos");
 
+        jlDniCliente.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlDniCliente.setForeground(new java.awt.Color(69, 54, 14));
         jlDniCliente.setText("Dni:");
 
+        jlNombreCliente.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlNombreCliente.setForeground(new java.awt.Color(69, 54, 14));
         jlNombreCliente.setText("Nombre Completo:");
 
-        jlGestionClientes.setFont(new java.awt.Font("Maiandra GD", 0, 14)); // NOI18N
+        jlGestionClientes.setFont(new java.awt.Font("Mongolian Baiti", 0, 14)); // NOI18N
+        jlGestionClientes.setForeground(new java.awt.Color(88, 117, 28));
         jlGestionClientes.setText("Gestion Clientes");
 
+        jlTelefonoCliente.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlTelefonoCliente.setForeground(new java.awt.Color(69, 54, 14));
         jlTelefonoCliente.setText("Telefono:");
 
+        jlEdadCliente.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlEdadCliente.setForeground(new java.awt.Color(69, 54, 14));
         jlEdadCliente.setText("Edad:");
 
+        jtfDniCliente.setBackground(new java.awt.Color(242, 242, 242));
+        jtfDniCliente.setForeground(new java.awt.Color(41, 31, 5));
+        jtfDniCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(138, 186, 40)));
+
+        jtfNombreCliente.setBackground(new java.awt.Color(242, 242, 242));
+        jtfNombreCliente.setForeground(new java.awt.Color(41, 31, 5));
+        jtfNombreCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(138, 186, 40)));
+
+        jtfTelefonoCliente.setBackground(new java.awt.Color(242, 242, 242));
+        jtfTelefonoCliente.setForeground(new java.awt.Color(41, 31, 5));
+        jtfTelefonoCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(138, 186, 40)));
         jtfTelefonoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfTelefonoClienteActionPerformed(evt);
             }
         });
 
+        jtfEdadCliente.setBackground(new java.awt.Color(242, 242, 242));
+        jtfEdadCliente.setForeground(new java.awt.Color(41, 31, 5));
+        jtfEdadCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(138, 186, 40)));
+        jtfEdadCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfEdadClienteActionPerformed(evt);
+            }
+        });
+
+        jbGuardarCliente.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
         jbGuardarCliente.setText("Guardar");
+        jbGuardarCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(138, 186, 40), 2));
+        jbGuardarCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbGuardarCliente.setMaximumSize(new java.awt.Dimension(46, 26));
+        jbGuardarCliente.setMinimumSize(new java.awt.Dimension(40, 20));
+        jbGuardarCliente.setPreferredSize(new java.awt.Dimension(42, 23));
         jbGuardarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarClienteActionPerformed(evt);
             }
         });
 
+        jbActualizarCliente.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
         jbActualizarCliente.setText("Actualizar");
+        jbActualizarCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(138, 186, 40), 2));
+        jbActualizarCliente.setMaximumSize(new java.awt.Dimension(4626, 4626));
+        jbActualizarCliente.setMinimumSize(new java.awt.Dimension(4020, 4020));
+        jbActualizarCliente.setPreferredSize(new java.awt.Dimension(42, 23));
         jbActualizarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbActualizarClienteActionPerformed(evt);
             }
         });
 
+        jbEliminarCliente.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
         jbEliminarCliente.setText("Eliminar");
+        jbEliminarCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(138, 186, 40), 2));
+        jbEliminarCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbEliminarCliente.setMaximumSize(new java.awt.Dimension(46, 26));
+        jbEliminarCliente.setMinimumSize(new java.awt.Dimension(40, 20));
+        jbEliminarCliente.setPreferredSize(new java.awt.Dimension(42, 23));
         jbEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarClienteActionPerformed(evt);
             }
         });
 
+        jbCambiarEstadoCliente.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
         jbCambiarEstadoCliente.setText("Cambiar Estado");
+        jbCambiarEstadoCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(138, 186, 40), 2));
+        jbCambiarEstadoCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbCambiarEstadoCliente.setMaximumSize(new java.awt.Dimension(46, 26));
+        jbCambiarEstadoCliente.setMinimumSize(new java.awt.Dimension(40, 20));
+        jbCambiarEstadoCliente.setPreferredSize(new java.awt.Dimension(42, 23));
         jbCambiarEstadoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCambiarEstadoClienteActionPerformed(evt);
             }
         });
 
+        jlAfeccionesCliente.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlAfeccionesCliente.setForeground(new java.awt.Color(69, 54, 14));
         jlAfeccionesCliente.setText("Tiene afecciones?");
 
+        jlEstadoCliente.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlEstadoCliente.setForeground(new java.awt.Color(69, 54, 14));
         jlEstadoCliente.setText("Estado:");
+        jlEstadoCliente.setToolTipText("");
 
+        jcbAfeccionesCliente.setBackground(new java.awt.Color(242, 242, 242));
+        jcbAfeccionesCliente.setForeground(new java.awt.Color(41, 31, 5));
         jcbAfeccionesCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
+        jcbAfeccionesCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
+        jcbAfeccionesCliente.setPreferredSize(new java.awt.Dimension(72, 23));
 
+        jcbEstadoCliente.setBackground(new java.awt.Color(242, 242, 242));
+        jcbEstadoCliente.setForeground(new java.awt.Color(41, 31, 5));
         jcbEstadoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        jcbEstadoCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(138, 186, 40)));
+        jcbEstadoCliente.setPreferredSize(new java.awt.Dimension(76, 23));
 
+        jbBuscarCliente.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
         jbBuscarCliente.setText("Buscar");
+        jbBuscarCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(138, 186, 40), 2));
+        jbBuscarCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbBuscarCliente.setMargin(null);
+        jbBuscarCliente.setMaximumSize(new java.awt.Dimension(46, 26));
+        jbBuscarCliente.setPreferredSize(new java.awt.Dimension(42, 24));
         jbBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarClienteActionPerformed(evt);
@@ -135,70 +195,64 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                         .addGap(185, 185, 185)
                         .addComponent(jlGestionClientes))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jbGuardarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbActualizarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jlNombreCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                    .addComponent(jtfNombreCliente)
+                                    .addComponent(jtfDniCliente)
+                                    .addComponent(jtfTelefonoCliente)
+                                    .addComponent(jtfEdadCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlTelefonoCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbAfeccionesCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbEstadoCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlEstadoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlAfeccionesCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlEdadCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlDniCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlDniCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlNombreCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                            .addComponent(jtfNombreCliente)
-                            .addComponent(jtfDniCliente)
-                            .addComponent(jtfTelefonoCliente)
-                            .addComponent(jlEdadCliente)
-                            .addComponent(jtfEdadCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jlTelefonoCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlAfeccionesCliente)
-                            .addComponent(jlEstadoCliente)
-                            .addComponent(jcbAfeccionesCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcbEstadoCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(49, 49, 49)
-                        .addComponent(jbBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbCambiarEstadoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                            .addComponent(jbBuscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlTitulo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 38, Short.MAX_VALUE)
-                        .addComponent(jbGuardarCliente)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbActualizarCliente)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbEliminarCliente)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbCambiarEstadoCliente)))
-                .addGap(30, 30, 30))
+                        .addGap(100, 100, 100)
+                        .addComponent(jlTitulo)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlTitulo)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
+                .addGap(24, 24, 24)
+                .addComponent(jlTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlGestionClientes)
                 .addGap(37, 37, 37)
                 .addComponent(jlDniCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfDniCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscarCliente))
-                .addGap(27, 27, 27)
+                    .addComponent(jtfDniCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlNombreCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jlTelefonoCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jtfTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlEdadCliente)
                 .addGap(10, 10, 10)
-                .addComponent(jtfEdadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jtfEdadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlAfeccionesCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jcbAfeccionesCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,13 +260,13 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                 .addComponent(jlEstadoCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jcbEstadoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbGuardarCliente)
-                    .addComponent(jbEliminarCliente)
-                    .addComponent(jbActualizarCliente)
-                    .addComponent(jbCambiarEstadoCliente))
-                .addGap(34, 34, 34))
+                    .addComponent(jbEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbActualizarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbCambiarEstadoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbGuardarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -367,9 +421,12 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbCambiarEstadoClienteActionPerformed
 
+    private void jtfEdadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEdadClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfEdadClienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbActualizarCliente;
     private javax.swing.JButton jbBuscarCliente;
     private javax.swing.JButton jbCambiarEstadoCliente;
