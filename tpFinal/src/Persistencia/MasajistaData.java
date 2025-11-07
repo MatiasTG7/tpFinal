@@ -1,102 +1,163 @@
+package Modeloo;
 
-package Persistencia;
-
-import Modeloo.EspecialidadMasajista;
-import Modeloo.Masajista;
-import Modeloo.TipoMasaje;
-import java.security.Timestamp;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import org.mariadb.jdbc.Connection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+
 
 public class MasajistaData {
 
-    private Connection con = null;
-    
-    public MasajistaData(Connection con) {
-        this.con = con;
-    }
+    private Connection con;
 
     public MasajistaData() {
+        this.con = Conexion.getConexion(); 
     }
 
-    public List<Masajista> listarDisponibles(LocalDateTime inicio, LocalDateTime fin, EspecialidadMasajista especialidad) {
-    List<Masajista> masajistasDisponibles = new ArrayList<>();
-    
-    String sql = "SELECT * FROM masajista "
-               + "WHERE estadoMasajista = 1 " 
-               + "  AND especialidad = ? "    
-               + "  AND matricula NOT IN ("
-               + "    SELECT codMasajista FROM sesion "
-               + "    WHERE fechaInicio < ? AND fechaFin > ? " 
-               + "  )";
-               
-    try (PreparedStatement ps = con.prepareStatement(sql)) { 
-        
-        ps.setString(1, especialidad.toString()); 
-        ps.setTimestamp(2, java.sql.Timestamp.valueOf(fin));
-        ps.setTimestamp(3, java.sql.Timestamp.valueOf(inicio));
-        ResultSet rs = ps.executeQuery();
-        
-        while (rs.next()) {
-            Masajista m = new Masajista();
-            masajistasDisponibles.add(m);
-        }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al buscar disponibilidad de masajistas. " + ex.getMessage());
-    }
-    return masajistasDisponibles;
-    }
-    //----------------------------------------------
-    //NO VAYAN A BORRARLO o les pego :/ ali estas de testigo que dijiste que esta bien, a las 00:50hrs
-    //----------------------------------------------
-    public Masajista mapeoResultset(ResultSet rs) throws SQLException{
-    Masajista m = new Masajista();
-    m.setCodMasajista(rs.getInt("codMasajista"));
-          m.setMatricula(rs.getString("matricula"));
-          m.setNombreMasajista(rs.getString("nombreMasajista"));
-          m.setTelefonoMasajista(rs.getString("telefonoMasajista"));
-          String especialidadMasajista = rs.getString("especialidad").toUpperCase();
-          m.setEspecialidad(EspecialidadMasajista.valueOf(especialidadMasajista));
-      return m;
-     //----------------------------------------------
-    //NO VAYAN A BORRARLO o les pego :/
-    //----------------------------------------------
-    }
-    public Masajista buscarMasajistaPorMatricula(String matricula) {
-    Masajista masajista = null;
-    String sql = "SELECT * FROM masajista WHERE matricula = ?";
-    
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setString(1, matricula);
-        
-        try (ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                masajista = new Masajista();
-                masajista.setCodMasajista(rs.getInt("codMasajista"));
-                masajista.setMatricula(rs.getString("matricula"));
-                masajista.setNombreMasajista(rs.getString("nombreMasajista"));
-                masajista.setTelefonoMasajista(rs.getString("telefonoMasajista"));
-                
-                String especialidadDB = rs.getString("especialidad");
-                masajista.setEspecialidad(EspecialidadMasajista.valueOf(especialidadDB.toUpperCase()));
-                
-                masajista.setEstadoMasajista(rs.getBoolean("estadoMasajista"));
+    public void insertarMasajista(Masajista masajista) {
+        String sql = "INSERT INTO masajista (matricula, nombreMasajista, telefonoMasajista, especialidad, estadoMasajista) "
+                   + "VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, masajista.getMatricula());
+            ps.setString(2, masajista.getNombreMasajista());
+            ps.setString(3, masajista.getTelefonoMasajista());
+            // Conversión de Enum a String (minúsculas, como en el ENUM de MySQL)
+            ps.setString(4, masajista.getEspecialidad().toString().toLowerCase()); 
+            ps.setBoolean(5, masajista.isEstadoMasajista()); 
+
+            int exito = ps.executeUpdate();
+
+            if (exito > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        masajista.setCodMasajista(rs.getInt(1));
+                        JOptionPane.showMessageDialog(null, "Masajista con ID " + masajista.getCodMasajista() + " guardado con éxito.");
+                    }
+                }
             }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Masajista (Guardar): " + ex.getMessage(), "Error SQL", JOptionPane.ERROR_MESSAGE);
         }
-        
-    } catch (SQLException e) {
-        System.err.println("Error al buscar masajista por matrícula: " + e.getMessage());
-    } catch (IllegalArgumentException ie) {
-        System.err.println("Error de ENUM: " + ie.getMessage());
     }
-    return masajista;
-}
 
- /// no se que mierda hiciste pero faltan metodos asi q los voy a agregar 
+   
+    public Masajista buscarMasajistaPorMatricula(String matricula) {
+        Masajista masajista = null;
+        String sql = "SELECT codMasajista, matricula, nombreMasajista, telefonoMasajista, especialidad, estadoMasajista "
+                   + "FROM masajista WHERE matricula = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, matricula);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    masajista = new Masajista();
+                    masajista.setCodMasajista(rs.getInt("codMasajista"));
+                    masajista.setMatricula(rs.getString("matricula"));
+                    masajista.setNombreMasajista(rs.getString("nombreMasajista"));
+                    masajista.setTelefonoMasajista(rs.getString("telefonoMasajista"));
+                    
+                    // Conversión de String de BD a Enum
+                    String especialidadStr = rs.getString("especialidad");
+                    masajista.setEspecialidad(EspecialidadMasajista.valueOf(especialidadStr.toUpperCase())); 
+                    
+                    masajista.setEstadoMasajista(rs.getBoolean("estadoMasajista"));
+                }
+            }
+        } catch (SQLException | IllegalArgumentException ex) {
+             // IllegalArgumentException se captura si el Enum no coincide.
+             JOptionPane.showMessageDialog(null, "Error al buscar Masajista por Matrícula: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return masajista;
+    }
+
+
+   
+    public void actualizarMasajista(Masajista masajista) {
+        // Se actualizan todos los campos excepto el ID (codMasajista) que se usa en el WHERE.
+        String sql = "UPDATE masajista SET matricula = ?, nombreMasajista = ?, telefonoMasajista = ?, especialidad = ?, estadoMasajista = ? "
+                   + "WHERE codMasajista = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, masajista.getMatricula());
+            ps.setString(2, masajista.getNombreMasajista());
+            ps.setString(3, masajista.getTelefonoMasajista());
+            ps.setString(4, masajista.getEspecialidad().toString().toLowerCase());
+            ps.setBoolean(5, masajista.isEstadoMasajista());
+            ps.setInt(6, masajista.getCodMasajista());
+
+            int exito = ps.executeUpdate();
+            if (exito > 0) {
+                JOptionPane.showMessageDialog(null, "Masajista actualizado con éxito.");
+            } else {
+                 JOptionPane.showMessageDialog(null, "No se encontró el Masajista para actualizar.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Masajista (Actualizar): " + ex.getMessage(), "Error SQL", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+   
+    public void borrarMasajista(int id) {
+        String sql = "DELETE FROM masajista WHERE codMasajista = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+            if (exito > 0) {
+                JOptionPane.showMessageDialog(null, "Masajista eliminado con éxito (Baja Física).");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el Masajista para eliminar.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Masajista (Eliminar): " + ex.getMessage(), "Error SQL", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
+    public void cambiarEstadoLogico(int id, boolean nuevoEstado) {
+        String sql = "UPDATE masajista SET estadoMasajista = ? WHERE codMasajista = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setBoolean(1, nuevoEstado);
+            ps.setInt(2, id);
+
+            int exito = ps.executeUpdate();
+            if (exito > 0) {
+                String estado = nuevoEstado ? "Activado" : "Desactivado";
+                JOptionPane.showMessageDialog(null, "Masajista " + estado + " (Cambio de estado lógico).");
+            } else {
+                 JOptionPane.showMessageDialog(null, "No se encontró el Masajista para cambiar el estado.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Masajista (Cambio de Estado): " + ex.getMessage(), "Error SQL", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+  
+    public List<Masajista> obtenerTodosLosMasajistas() {
+        List<Masajista> lista = new ArrayList<>();
+        String sql = "SELECT codMasajista, matricula, nombreMasajista, telefonoMasajista, especialidad, estadoMasajista FROM masajista";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Masajista m = new Masajista();
+                m.setCodMasajista(rs.getInt("codMasajista"));
+                m.setMatricula(rs.getString("matricula"));
+                m.setNombreMasajista(rs.getString("nombreMasajista"));
+                m.setTelefonoMasajista(rs.getString("telefonoMasajista"));
+                m.setEspecialidad(EspecialidadMasajista.valueOf(rs.getString("especialidad").toUpperCase()));
+                m.setEstadoMasajista(rs.getBoolean("estadoMasajista"));
+                lista.add(m);
+            }
+
+        } catch (SQLException | IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener la lista de Masajistas: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return lista;
+    }
 }
