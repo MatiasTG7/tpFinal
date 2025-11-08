@@ -1,5 +1,7 @@
-package Modeloo;
+package Persistencia;
 
+import Modeloo.EspecialidadMasajista;
+import Modeloo.Masajista;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +16,8 @@ public class MasajistaData {
 
     private Connection con;
 
-    public MasajistaData() {
-        this.con = Conexion.getConexion(); 
+    public MasajistaData(Connection con) {
+        this.con = con;
     }
 
     public void insertarMasajista(Masajista masajista) {

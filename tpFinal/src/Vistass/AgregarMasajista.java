@@ -1,22 +1,24 @@
 
 package Vistass;
 
+import Modeloo.Conexion;
 import Modeloo.Masajista;
-import Modeloo.MasajistaData;
 import Modeloo.EspecialidadMasajista;
+import Persistencia.MasajistaData;
 import javax.swing.JOptionPane;
+import org.mariadb.jdbc.Connection;
 
 public class AgregarMasajista extends javax.swing.JInternalFrame {
 
-   
+    private Connection con;
     private MasajistaData masajistaData;
-    
     private int codMasajistaActual = -1; 
     
     
     public AgregarMasajista() {
         initComponents();
-        masajistaData = new MasajistaData();
+        con= (Connection) Conexion.getConexion();
+        masajistaData = new MasajistaData(con);
         llenarComboEspecialidades(); 
     }
     
