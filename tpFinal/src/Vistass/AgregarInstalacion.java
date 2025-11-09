@@ -19,11 +19,11 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        label1 = new java.awt.Label();
         jtfDetalleInstalacion = new javax.swing.JTextField();
         jcbEstadoInstalacion = new javax.swing.JComboBox<>();
         jbBuscarInstalacion = new javax.swing.JButton();
         jtfPrecioInstalacion = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
         jlTitulo = new javax.swing.JLabel();
         jbGuardarInstalacion = new javax.swing.JButton();
         jlNombreInstalacion = new javax.swing.JLabel();
@@ -35,6 +35,8 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
         jlPrecioInstalacion = new javax.swing.JLabel();
         jtfNombreInstalacion = new javax.swing.JTextField();
         jlEstadoInstalacion = new javax.swing.JLabel();
+
+        label1.setText("label1");
 
         jcbEstadoInstalacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         jcbEstadoInstalacion.addActionListener(new java.awt.event.ActionListener() {
@@ -51,17 +53,6 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
-        );
-
         jlTitulo.setFont(new java.awt.Font("Cambria", 0, 36)); // NOI18N
         jlTitulo.setText("Spa Entre Dedos");
 
@@ -72,13 +63,22 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
             }
         });
 
+        jlNombreInstalacion.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlNombreInstalacion.setForeground(new java.awt.Color(69, 54, 14));
         jlNombreInstalacion.setText("Nombre:");
 
         jbActualizarInstalacion.setText("Actualizar");
 
+        jlDetalleInstalacion.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlDetalleInstalacion.setForeground(new java.awt.Color(69, 54, 14));
         jlDetalleInstalacion.setText("Detalle de uso:");
 
         jbEliminarInstalacion.setText("Eliminar");
+        jbEliminarInstalacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarInstalacionActionPerformed(evt);
+            }
+        });
 
         jlGestionInstalaciones.setFont(new java.awt.Font("Maiandra GD", 0, 14)); // NOI18N
         jlGestionInstalaciones.setText("Gestion Instalaciones");
@@ -94,82 +94,79 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlDetalleInstalacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                            .addComponent(jtfDetalleInstalacion)
-                            .addComponent(jtfNombreInstalacion)
-                            .addComponent(jtfPrecioInstalacion)
-                            .addComponent(jlPrecioInstalacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlNombreInstalacion))
-                        .addGap(49, 49, 49)
-                        .addComponent(jbBuscarInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(jlGestionInstalaciones)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jlDetalleInstalacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfDetalleInstalacion)
+                    .addComponent(jtfNombreInstalacion)
+                    .addComponent(jtfPrecioInstalacion)
+                    .addComponent(jlPrecioInstalacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                    .addComponent(jlNombreInstalacion))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jlEstadoInstalacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(241, 241, 241))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jlTitulo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64))
+                        .addGap(86, 86, 86))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jbGuardarInstalacion)
-                .addGap(18, 18, 18)
-                .addComponent(jbActualizarInstalacion)
-                .addGap(18, 18, 18)
-                .addComponent(jbEliminarInstalacion)
-                .addGap(18, 18, 18)
-                .addComponent(jbCambiarEstadoInstalacion)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jbBuscarInstalacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.Alignment.LEADING, 0, 182, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jlTitulo)
+                        .addGap(102, 102, 102))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jlGestionInstalaciones)
+                        .addGap(169, 169, 169))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbGuardarInstalacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbActualizarInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbCambiarEstadoInstalacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbEliminarInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlTitulo)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jlGestionInstalaciones)
-                .addGap(32, 32, 32)
-                .addComponent(jlNombreInstalacion)
+                .addComponent(jlTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNombreInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscarInstalacion))
+                .addComponent(jlGestionInstalaciones)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbBuscarInstalacion)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlNombreInstalacion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfNombreInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
                 .addComponent(jlDetalleInstalacion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfDetalleInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jlPrecioInstalacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfPrecioInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jlEstadoInstalacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtfPrecioInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlEstadoInstalacion)
+                            .addComponent(jlPrecioInstalacion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardarInstalacion)
-                    .addComponent(jbEliminarInstalacion)
+                    .addComponent(jbEliminarInstalacion))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbActualizarInstalacion)
                     .addComponent(jbCambiarEstadoInstalacion))
-                .addGap(30, 30, 30))
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -187,9 +184,12 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbEstadoInstalacionActionPerformed
 
+    private void jbEliminarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarInstalacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbEliminarInstalacionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbActualizarInstalacion;
     private javax.swing.JButton jbBuscarInstalacion;
     private javax.swing.JButton jbCambiarEstadoInstalacion;
@@ -205,5 +205,6 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfDetalleInstalacion;
     private javax.swing.JTextField jtfNombreInstalacion;
     private javax.swing.JTextField jtfPrecioInstalacion;
+    private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
 }
