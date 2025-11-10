@@ -76,6 +76,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         jtfCodMasajista.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 
         jlTitulo.setFont(new java.awt.Font("Cambria", 0, 36)); // NOI18N
+        jlTitulo.setForeground(new java.awt.Color(69, 97, 11));
         jlTitulo.setText("Spa Entre Dedos");
 
         jlFechaInicio.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
@@ -86,7 +87,8 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         jlFechaFin.setForeground(new java.awt.Color(69, 54, 14));
         jlFechaFin.setText("Fecha de finalizacion:");
 
-        jlGestionClientes.setFont(new java.awt.Font("Maiandra GD", 0, 14)); // NOI18N
+        jlGestionClientes.setFont(new java.awt.Font("Mongolian Baiti", 0, 14)); // NOI18N
+        jlGestionClientes.setForeground(new java.awt.Color(69, 97, 11));
         jlGestionClientes.setText("Gestion Sesiones");
 
         jlCodTratamiento.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
@@ -218,7 +220,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jlGestionClientes)
                                 .addGap(74, 74, 74)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,7 +264,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfCodInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEliminarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
