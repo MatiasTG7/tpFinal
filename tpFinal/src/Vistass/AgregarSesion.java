@@ -1,10 +1,6 @@
 
 package Vistass;
 
-import Modeloo.Masajista;
-import Persistencia.MasajistaData;
-import javax.swing.JOptionPane;
-
 public class AgregarSesion extends javax.swing.JInternalFrame {
 
     /**
@@ -222,7 +218,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jlGestionClientes)
                                 .addGap(74, 74, 74)))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +262,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfCodInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEliminarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -293,63 +289,20 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfFechaFinActionPerformed
 
     private void jbGuardarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarSesionActionPerformed
-        if (this.codMasajistaActual != -1) {
-            JOptionPane.showMessageDialog(this, "El Masajista ya existe (ID: " + this.codMasajistaActual + "). Use 'Actualizar'.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
 
-        Masajista nuevo = obtenerDatosDelFormulario();
-
-        if (nuevo != null) {
-            MasajistaData.insertarMasajista(nuevo);
-            limpiarFormulario();
-        }
     }//GEN-LAST:event_jbGuardarSesionActionPerformed
 
     private void jbActualizarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarSesionActionPerformed
-        if (this.codMasajistaActual == -1) {
-            JOptionPane.showMessageDialog(this, "Primero debe buscar y cargar un Masajista para actualizar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
 
-        Masajista modificado = obtenerDatosDelFormulario();
-
-        if (modificado != null) {
-            MasajistaData.actualizarMasajista(modificado);
-            limpiarFormulario();
-        }
     }//GEN-LAST:event_jbActualizarSesionActionPerformed
 
     private void jbEliminarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarSesionActionPerformed
-        if (this.codMasajistaActual == -1) {
-            JOptionPane.showMessageDialog(this, "Primero debe buscar y cargar un Masajista para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
 
-        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar PERMANENTEMENTE el Masajista con ID " + this.codMasajistaActual + "?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-
-        if (confirmacion == JOptionPane.YES_OPTION) {
-            MasajistaData.borrarMasajista(this.codMasajistaActual);
-            limpiarFormulario();
-        }
     }//GEN-LAST:event_jbEliminarSesionActionPerformed
 
     private void jbCambiarEstadoSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoSesionActionPerformed
-        if (this.codMasajistaActual == -1) {
-            JOptionPane.showMessageDialog(this, "Primero debe buscar y cargar un Masajista para cambiar el estado.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
 
-        // Obtiene el estado actual de la interfaz y lo invierte
-        boolean estadoActual = jcbEstadoMasajista.getSelectedItem().equals("Activo");
-        boolean nuevoEstado = !estadoActual;
-
-        MasajistaData.cambiarEstadoLogico(this.codMasajistaActual, nuevoEstado);
-
-        // Actualiza el formulario para reflejar el cambio
-        jcbEstadoMasajista.setSelectedItem(nuevoEstado ? "Activo" : "Inactivo");
     }//GEN-LAST:event_jbCambiarEstadoSesionActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbActualizarSesion;
