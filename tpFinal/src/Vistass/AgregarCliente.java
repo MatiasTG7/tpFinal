@@ -78,15 +78,15 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         jlEdadCliente.setText("Edad:");
 
         jtfDniCliente.setBackground(new java.awt.Color(242, 242, 242));
-        jtfDniCliente.setForeground(new java.awt.Color(41, 31, 5));
+        jtfDniCliente.setForeground(new java.awt.Color(69, 54, 14));
         jtfDniCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 
         jtfNombreCliente.setBackground(new java.awt.Color(242, 242, 242));
-        jtfNombreCliente.setForeground(new java.awt.Color(41, 31, 5));
+        jtfNombreCliente.setForeground(new java.awt.Color(69, 54, 14));
         jtfNombreCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 
         jtfTelefonoCliente.setBackground(new java.awt.Color(242, 242, 242));
-        jtfTelefonoCliente.setForeground(new java.awt.Color(41, 31, 5));
+        jtfTelefonoCliente.setForeground(new java.awt.Color(69, 54, 14));
         jtfTelefonoCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
         jtfTelefonoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +95,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         });
 
         jtfEdadCliente.setBackground(new java.awt.Color(242, 242, 242));
-        jtfEdadCliente.setForeground(new java.awt.Color(41, 31, 5));
+        jtfEdadCliente.setForeground(new java.awt.Color(69, 54, 14));
         jtfEdadCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
         jtfEdadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,13 +168,15 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         jlEstadoCliente.setToolTipText("");
 
         jcbAfeccionesCliente.setBackground(new java.awt.Color(242, 242, 242));
-        jcbAfeccionesCliente.setForeground(new java.awt.Color(41, 31, 5));
+        jcbAfeccionesCliente.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
+        jcbAfeccionesCliente.setForeground(new java.awt.Color(69, 97, 11));
         jcbAfeccionesCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
         jcbAfeccionesCliente.setBorder(null);
         jcbAfeccionesCliente.setPreferredSize(new java.awt.Dimension(72, 23));
 
         jcbEstadoCliente.setBackground(new java.awt.Color(242, 242, 242));
-        jcbEstadoCliente.setForeground(new java.awt.Color(41, 31, 5));
+        jcbEstadoCliente.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
+        jcbEstadoCliente.setForeground(new java.awt.Color(69, 97, 11));
         jcbEstadoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         jcbEstadoCliente.setBorder(null);
         jcbEstadoCliente.setPreferredSize(new java.awt.Dimension(76, 23));

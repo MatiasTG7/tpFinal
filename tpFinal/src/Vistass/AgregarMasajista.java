@@ -41,7 +41,6 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
         jcbEstadoMasajista = new javax.swing.JComboBox<>();
         jbBuscarMasajista = new javax.swing.JButton();
         jtfTelefonoMasajista = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
         jlTitulo = new javax.swing.JLabel();
         jbGuardarMasajista = new javax.swing.JButton();
         jlMatriculaMasajista = new javax.swing.JLabel();
@@ -55,159 +54,188 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
         jtfMatriculaMasajista = new javax.swing.JTextField();
         jlEstadoMasajista = new javax.swing.JLabel();
 
+        jtfNombreMasajista.setEditable(false);
+        jtfNombreMasajista.setForeground(new java.awt.Color(69, 54, 14));
+        jtfNombreMasajista.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
+
+        jcbEspecialidadMasajista.setBackground(new java.awt.Color(242, 242, 242));
+        jcbEspecialidadMasajista.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
+        jcbEspecialidadMasajista.setForeground(new java.awt.Color(69, 97, 11));
         jcbEspecialidadMasajista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Facial", "Corporal", "Relajacion", "Estetico" }));
+        jcbEspecialidadMasajista.setBorder(null);
 
+        jcbEstadoMasajista.setBackground(new java.awt.Color(242, 242, 242));
+        jcbEstadoMasajista.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
+        jcbEstadoMasajista.setForeground(new java.awt.Color(69, 97, 11));
         jcbEstadoMasajista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        jcbEstadoMasajista.setBorder(null);
 
+        jbBuscarMasajista.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
+        jbBuscarMasajista.setForeground(new java.awt.Color(69, 97, 11));
         jbBuscarMasajista.setText("Buscar");
+        jbBuscarMasajista.setBorder(null);
         jbBuscarMasajista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarMasajistaActionPerformed(evt);
             }
         });
 
+        jtfTelefonoMasajista.setEditable(false);
+        jtfTelefonoMasajista.setForeground(new java.awt.Color(69, 54, 14));
+        jtfTelefonoMasajista.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
         jtfTelefonoMasajista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfTelefonoMasajistaActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
-        );
-
         jlTitulo.setFont(new java.awt.Font("Cambria", 0, 36)); // NOI18N
+        jlTitulo.setForeground(new java.awt.Color(69, 97, 11));
         jlTitulo.setText("Spa Entre Dedos");
 
+        jbGuardarMasajista.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
+        jbGuardarMasajista.setForeground(new java.awt.Color(69, 97, 11));
         jbGuardarMasajista.setText("Guardar");
+        jbGuardarMasajista.setBorder(null);
         jbGuardarMasajista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarMasajistaActionPerformed(evt);
             }
         });
 
+        jlMatriculaMasajista.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlMatriculaMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jlMatriculaMasajista.setText("Matricula:");
 
+        jbActualizarMasajista.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
+        jbActualizarMasajista.setForeground(new java.awt.Color(69, 97, 11));
         jbActualizarMasajista.setText("Actualizar");
+        jbActualizarMasajista.setBorder(null);
         jbActualizarMasajista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbActualizarMasajistaActionPerformed(evt);
             }
         });
 
+        jlNombreMasajista.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlNombreMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jlNombreMasajista.setText("Nombre Completo:");
 
+        jbEliminarMasajista.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
+        jbEliminarMasajista.setForeground(new java.awt.Color(69, 97, 11));
         jbEliminarMasajista.setText("Eliminar");
+        jbEliminarMasajista.setBorder(null);
         jbEliminarMasajista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarMasajistaActionPerformed(evt);
             }
         });
 
-        jlGestionMasajista.setFont(new java.awt.Font("Maiandra GD", 0, 14)); // NOI18N
+        jlGestionMasajista.setFont(new java.awt.Font("Mongolian Baiti", 0, 14)); // NOI18N
+        jlGestionMasajista.setForeground(new java.awt.Color(69, 97, 11));
         jlGestionMasajista.setText("Gestion Masajistas");
 
+        jbCambiarEstadoMasajista.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
+        jbCambiarEstadoMasajista.setForeground(new java.awt.Color(69, 97, 11));
         jbCambiarEstadoMasajista.setText("Cambiar Estado");
+        jbCambiarEstadoMasajista.setBorder(null);
         jbCambiarEstadoMasajista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCambiarEstadoMasajistaActionPerformed(evt);
             }
         });
 
+        jlTelefonoMasajista.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlTelefonoMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jlTelefonoMasajista.setText("Telefono:");
 
+        jlEspecialidadMasajista.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlEspecialidadMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jlEspecialidadMasajista.setText("Especialidad:");
 
+        jtfMatriculaMasajista.setEditable(false);
+        jtfMatriculaMasajista.setForeground(new java.awt.Color(69, 54, 14));
+        jtfMatriculaMasajista.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
+
+        jlEstadoMasajista.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlEstadoMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jlEstadoMasajista.setText("Estado:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(115, Short.MAX_VALUE)
+                .addComponent(jlTitulo)
+                .addGap(98, 98, 98))
             .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(jlGestionMasajista))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlNombreMasajista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                            .addComponent(jlNombreMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                             .addComponent(jtfNombreMasajista)
                             .addComponent(jtfMatriculaMasajista)
-                            .addComponent(jtfTelefonoMasajista)
-                            .addComponent(jlTelefonoMasajista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlEspecialidadMasajista)
-                            .addComponent(jlEstadoMasajista)
                             .addComponent(jcbEspecialidadMasajista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlMatriculaMasajista)
+                            .addComponent(jbActualizarMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbGuardarMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlEspecialidadMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbBuscarMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jcbEstadoMasajista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlMatriculaMasajista))
-                        .addGap(49, 49, 49)
-                        .addComponent(jbBuscarMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jtfTelefonoMasajista)
+                            .addComponent(jlTelefonoMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbEliminarMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbCambiarEstadoMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                            .addComponent(jlEstadoMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jlGestionMasajista)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jlTitulo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbGuardarMasajista)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbActualizarMasajista)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbEliminarMasajista)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbCambiarEstadoMasajista)
-                        .addGap(34, 34, 34))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlTitulo)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
+                .addGap(16, 16, 16)
+                .addComponent(jlTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlGestionMasajista)
                 .addGap(37, 37, 37)
                 .addComponent(jlMatriculaMasajista)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfMatriculaMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscarMasajista))
-                .addGap(27, 27, 27)
-                .addComponent(jlNombreMasajista)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfNombreMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbBuscarMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfMatriculaMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlNombreMasajista)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfNombreMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlTelefonoMasajista)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfTelefonoMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jlTelefonoMasajista)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfTelefonoMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jlEspecialidadMasajista)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlEspecialidadMasajista)
+                    .addComponent(jlEstadoMasajista))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcbEspecialidadMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jcbEstadoMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbEspecialidadMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbGuardarMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbEliminarMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jlEstadoMasajista)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcbEstadoMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbGuardarMasajista)
-                    .addComponent(jbEliminarMasajista)
-                    .addComponent(jbActualizarMasajista)
-                    .addComponent(jbCambiarEstadoMasajista))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(jbActualizarMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbCambiarEstadoMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -357,7 +385,6 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbActualizarMasajista;
     private javax.swing.JButton jbBuscarMasajista;
     private javax.swing.JButton jbCambiarEstadoMasajista;

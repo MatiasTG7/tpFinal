@@ -14,7 +14,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public VistaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setSize(600, 640);
+        this.setSize(700, 740);
         ajustarIconosMenu();
     }
 
