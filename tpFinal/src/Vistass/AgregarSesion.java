@@ -1,13 +1,20 @@
 
 package Vistass;
 
+import Modeloo.Conexion;
+import Modeloo.Sesion;
+import Persistencia.SesionData;
+import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
+import org.mariadb.jdbc.Connection;
+
 public class AgregarSesion extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AgregarSesion
-     */
+    private SesionData sd;
+    
     public AgregarSesion() {
         initComponents();
+        sd = new SesionData((Connection) Conexion.getConexion());
     }
 
     /**
@@ -200,8 +207,8 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jlFechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jtfFechaFin, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlFechaInicio, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jtfFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                    .addComponent(jlFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(54, 54, 54)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jlCodTratamiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -224,8 +231,8 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlGestionClientes)
                 .addGap(26, 26, 26)
-                .addComponent(jlFechaInicio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -258,7 +265,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfCodInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEliminarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -286,10 +293,27 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
 
     private void jbGuardarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarSesionActionPerformed
 
+        try {
+        LocalDateTime fechaInicio = LocalDateTime.parse(jtfFechaInicio.getText());
+        LocalDateTime fechaFin = LocalDateTime.parse(jtfFechaFin.getText());
+        int codTratamiento = Integer.parseInt(jtfCodTratamiento.getText());
+        int codMasajista = Integer.parseInt(jtfCodMasajista.getText());
+        int codPack = Integer.parseInt(jtfCodDiaSpa.getText());
+        int codInstal = Integer.parseInt(jtfCodInstalacion.getText());
+        boolean estado = jcbEstadoInstalacion.getSelectedItem().equals("Activo");
+
+        Sesion nuevaSesion = new Sesion(fechaInicio, fechaFin, codTratamiento, codMasajista, codPack, codInstal, estado);
+        sd.insertarSesion(nuevaSesion);
+
+        JOptionPane.showMessageDialog(this, "Sesion agregada correctamente. El codigo es: " + nuevaSesion.getCodSesion());
+        
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar la sesion: " + e.getMessage());
+        }
     }//GEN-LAST:event_jbGuardarSesionActionPerformed
 
     private void jbActualizarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarSesionActionPerformed
-
+        
     }//GEN-LAST:event_jbActualizarSesionActionPerformed
 
     private void jbEliminarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarSesionActionPerformed
@@ -324,4 +348,12 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfFechaInicio;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private boolean validarCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
