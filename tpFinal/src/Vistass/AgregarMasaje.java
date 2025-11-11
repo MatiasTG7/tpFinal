@@ -46,7 +46,6 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
         setBorder(null);
         setClosable(true);
 
-        jtfDetalleMasaje.setEditable(false);
         jtfDetalleMasaje.setForeground(new java.awt.Color(69, 54, 14));
         jtfDetalleMasaje.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 
@@ -67,7 +66,6 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
         jbBuscarMasaje.setText("Buscar");
         jbBuscarMasaje.setBorder(null);
 
-        jtfDuracionMasaje.setEditable(false);
         jtfDuracionMasaje.setForeground(new java.awt.Color(69, 54, 14));
         jtfDuracionMasaje.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
         jtfDuracionMasaje.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +74,6 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
             }
         });
 
-        jtfCostoMasaje.setEditable(false);
         jtfCostoMasaje.setForeground(new java.awt.Color(69, 54, 14));
         jtfCostoMasaje.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 
@@ -108,7 +105,6 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
         jlCostoMasaje.setForeground(new java.awt.Color(69, 54, 14));
         jlCostoMasaje.setText("Costo:");
 
-        jtfNombreMasaje.setEditable(false);
         jtfNombreMasaje.setForeground(new java.awt.Color(69, 54, 14));
         jtfNombreMasaje.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 

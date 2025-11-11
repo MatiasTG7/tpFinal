@@ -155,22 +155,38 @@ public class ClienteData {
         }
         return clientes;
     }
-    public boolean cambiarEstadoCliente (int codCli, boolean nuevoEstado){
+//    public boolean cambiarEstadoCliente (int codCli, boolean nuevoEstado){
+//        String sql = "UPDATE cliente SET estadoCliente = ? WHERE codCli = ?";
+//        try (PreparedStatement ps = con.prepareStatement(sql)) {
+//            ps.setBoolean(1, nuevoEstado);
+//            ps.setInt(2, codCli);
+//            
+//            int filas = ps.executeUpdate();
+//            if (filas > 0) {
+//                String mensaje = nuevoEstado ? "Cliente dado de alta correctamente." : "Cliente dado de baja correctamente.";
+//                JOptionPane.showMessageDialog(null, mensaje);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "No se encontro este cliente.");
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al cambiar estado del cliente: " + ex.getMessage());
+//        }
+//        return false;
+//    }
+        public boolean cambiarEstadoCliente(int codCli, boolean nuevoEstado) {
         String sql = "UPDATE cliente SET estadoCliente = ? WHERE codCli = ?";
+    
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setBoolean(1, nuevoEstado);
-            ps.setInt(2, codCli);
-            
-            int filas = ps.executeUpdate();
-            if (filas > 0) {
-                String mensaje = nuevoEstado ? "Cliente dado de alta correctamente." : "Cliente dado de baja correctamente.";
-                JOptionPane.showMessageDialog(null, mensaje);
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontro este cliente.");
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al cambiar estado del cliente: " + ex.getMessage());
-        }
-        return false;
+        
+        ps.setBoolean(1, nuevoEstado);
+        ps.setInt(2, codCli);
+        
+        int filasAfectadas = ps.executeUpdate();
+        return filasAfectadas > 0;
+        
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cambiar estado: " + ex.getMessage());
+            return false;
     }
+  }
 }

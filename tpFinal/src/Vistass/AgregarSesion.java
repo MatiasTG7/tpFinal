@@ -48,7 +48,6 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         setBorder(null);
         setClosable(true);
 
-        jtfFechaFin.setEditable(false);
         jtfFechaFin.setForeground(new java.awt.Color(69, 54, 14));
         jtfFechaFin.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
         jtfFechaFin.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +61,6 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         jbBuscarSesion.setText("Buscar");
         jbBuscarSesion.setBorder(null);
 
-        jtfCodTratamiento.setEditable(false);
         jtfCodTratamiento.setForeground(new java.awt.Color(69, 54, 14));
         jtfCodTratamiento.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
         jtfCodTratamiento.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +69,6 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
             }
         });
 
-        jtfCodMasajista.setEditable(false);
         jtfCodMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jtfCodMasajista.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 
@@ -99,11 +96,9 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         jlCodMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jlCodMasajista.setText("Codigo Masajista:");
 
-        jtfFechaInicio.setEditable(false);
         jtfFechaInicio.setForeground(new java.awt.Color(69, 54, 14));
         jtfFechaInicio.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 
-        jtfCodDiaSpa.setEditable(false);
         jtfCodDiaSpa.setForeground(new java.awt.Color(69, 54, 14));
         jtfCodDiaSpa.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
         jtfCodDiaSpa.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +111,6 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         jlCodDiaSpa.setForeground(new java.awt.Color(69, 54, 14));
         jlCodDiaSpa.setText("Codigo Dia de Spa:");
 
-        jtfCodInstalacion.setEditable(false);
         jtfCodInstalacion.setForeground(new java.awt.Color(69, 54, 14));
         jtfCodInstalacion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 

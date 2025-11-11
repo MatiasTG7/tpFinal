@@ -54,7 +54,8 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
         jtfMatriculaMasajista = new javax.swing.JTextField();
         jlEstadoMasajista = new javax.swing.JLabel();
 
-        jtfNombreMasajista.setEditable(false);
+        setClosable(true);
+
         jtfNombreMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jtfNombreMasajista.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 
@@ -80,7 +81,6 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
             }
         });
 
-        jtfTelefonoMasajista.setEditable(false);
         jtfTelefonoMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jtfTelefonoMasajista.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
         jtfTelefonoMasajista.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +153,6 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
         jlEspecialidadMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jlEspecialidadMasajista.setText("Especialidad:");
 
-        jtfMatriculaMasajista.setEditable(false);
         jtfMatriculaMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jtfMatriculaMasajista.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
 

@@ -146,7 +146,6 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="jtfDetalleMasaje">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e" green="36" red="45" type="rgb"/>
         </Property>
@@ -227,7 +226,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfDuracionMasaje">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e" green="36" red="45" type="rgb"/>
         </Property>
@@ -245,7 +243,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfCostoMasaje">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e" green="36" red="45" type="rgb"/>
         </Property>
@@ -337,7 +334,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfNombreMasaje">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e" green="36" red="45" type="rgb"/>
         </Property>
