@@ -114,26 +114,26 @@ public class ClienteData {
         }
     }
     public boolean actualizarCliente(Cliente cliente) {
-        String sql = "UPDATE cliente SET dni = ?, nombreCliente = ?, telefonoCliente = ?, edad = ?, afecciones = ?, estadoCliente = ? WHERE codCli = ?";
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, cliente.getDni());
-            ps.setString(2, cliente.getNombreCliente());
-            ps.setString(3, cliente.getTelefonoCliente());
-            ps.setInt(4, cliente.getEdad());
-            ps.setBoolean(5, cliente.isAfecciones());
-            ps.setBoolean(6, cliente.isEstadoCliente());
-            ps.setInt(7, cliente.getCodCli());
+    String sql = "UPDATE cliente SET dni = ?, nombreCliente = ?, telefonoCliente = ?, edad = ?, afecciones = ?, estadoCliente = ? WHERE codCli = ?";
 
-            int filas = ps.executeUpdate();
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "El cliente fue actualizado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontro este cliente.");
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al actualizar el cliente. " + ex.getMessage());
-        }
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setString(1, cliente.getDni());
+        ps.setString(2, cliente.getNombreCliente());
+        ps.setString(3, cliente.getTelefonoCliente());
+        ps.setInt(4, cliente.getEdad());
+        ps.setBoolean(5, cliente.isAfecciones());
+        ps.setBoolean(6, cliente.isEstadoCliente());
+        ps.setInt(7, cliente.getCodCli());
+
+        int filasAfectadas = ps.executeUpdate();
+
+        return filasAfectadas > 0; 
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar en DB: " + e.getMessage());
         return false;
+    }
     }
         public List<Cliente> listarClientes() {
         List<Cliente> clientes = new ArrayList<>();

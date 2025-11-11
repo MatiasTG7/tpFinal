@@ -56,28 +56,32 @@ public class MasajeData {
   }
     }
 
-    public void modificarMasaje(Masaje masaje){
-        String sql = "UPDATE masaje SET nombreTratamiento = ?, tipo = ?, detalleTratamiento = ?. costoTratamiento = ?, activo = ? "
-                + "WHERE codTratamiento = ?";
-        try{
-        PreparedStatement ps = con.prepareStatement(sql);
-         ps.setInt(1, masaje.getCodTratamiento());
-         ps.setString(2, masaje.getTipo().name().toLowerCase());
-         ps.setString(3, masaje.getDetalleTratamiento());
-         ps.setInt(4, masaje.getDuracionTratamiento());
-         ps.setDouble(5, masaje.getCostoTratamiento());
-         ps.setBoolean(6, masaje.isActivo());
-         int err = ps.executeUpdate();
-         
-         if(err == 0){
-             System.out.println("No se encontro un masaje con el codigo " + masaje.getCodTratamiento() + "para actualizar");
-     
-         }else{System.out.println("El masaje fue actualizado correctamente.");}
+    public void modificarMasaje(Masaje masaje) {
+        String sql = "UPDATE masaje SET nombreTratamiento = ?, tipo = ?, detalleTratamiento = ?, duracionTratamiento = ?, costoTratamiento = ?, activo = ? "
+               + "WHERE codTratamiento = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, masaje.getNombreTratamiento());
+            ps.setString(2, masaje.getTipo().name().toLowerCase());
+            ps.setString(3, masaje.getDetalleTratamiento());
+            ps.setInt(4, masaje.getDuracionTratamiento());
+            ps.setDouble(5, masaje.getCostoTratamiento());
+            ps.setBoolean(6, masaje.isActivo());
+            ps.setInt(7, masaje.getCodTratamiento());
         
-        }catch(SQLException ex){
-            System.out.println("Error al intentar modificar el masaje " + ex.getMessage());
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Masaje actualizado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro el masaje a actualizar.");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al modificar el masaje: " + ex.getMessage());
         }
-    }
+}
+
     
     public List<Masaje> obtenerMasajesPorTipo(Masaje tipo) {
         

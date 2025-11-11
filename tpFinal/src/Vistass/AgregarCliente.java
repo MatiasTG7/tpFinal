@@ -55,7 +55,6 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
         jlTitulo.setFont(new java.awt.Font("Cambria", 0, 36)); // NOI18N
         jlTitulo.setForeground(new java.awt.Color(69, 97, 11));
-        jlTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/lotus.png"))); // NOI18N
         jlTitulo.setText("Spa Entre Dedos");
 
         jlDniCliente.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
@@ -213,8 +212,9 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                             .addComponent(jtfNombreCliente)
                             .addComponent(jtfTelefonoCliente)
                             .addComponent(jlTelefonoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbGuardarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbActualizarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jbGuardarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbActualizarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcbEstadoCliente, 0, 145, Short.MAX_VALUE)
@@ -288,7 +288,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfTelefonoClienteActionPerformed
 
     private void jbGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarClienteActionPerformed
-        //ESTE YA FUNCIONA
+
         try{
             if(jtfDniCliente.getText().isEmpty() || jtfNombreCliente.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Los campos DNI y Nombre no pueden estar vacios");
@@ -318,7 +318,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarClienteActionPerformed
 
     private void jbBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarClienteActionPerformed
-        //ESTE TAMBIÉN FUNCIONA
+
         try {
         String dni = jtfDniCliente.getText();
         
@@ -348,8 +348,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarClienteActionPerformed
 
     private void jbActualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarClienteActionPerformed
-        //ESTO HAY QUE CORREGIRLO POR QUE TIRA TE DEJA ACTUALIZARLO PERO SALE LOS DOS CARTELES EL DE ACTUALIZADO CORRECTAMENTE Y EL DE NO SE PUDO ACTUALIZAR EL CLIENTE
-        //(AUNQUE SI FUNCIONA Y SI ACTUALIZA EL CLIENTE)
+
         if(clienteEncontrado == null){
             JOptionPane.showMessageDialog(this, "Debe buscar un cliente antes de poder actualizar","Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -384,7 +383,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbActualizarClienteActionPerformed
 
     private void jbEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarClienteActionPerformed
-        //ESTE TAMBIÉN FUNCIONA
+
         if (clienteEncontrado == null) {
             JOptionPane.showMessageDialog(this, "Debe buscar un cliente para poder eliminar");
             return;
@@ -409,10 +408,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarClienteActionPerformed
 
     private void jbCambiarEstadoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoClienteActionPerformed
-        //Y ESTE HAY QUE CORREGIRLO POR QUE TE DEJA CAMBIAR EL ESTADO A INACTIVO NOMÁS Y DESPUÉS NO TE DEJA CAMBIARLO DE NUEVO A ACTIVO, AUNQUE TIENE EL MISMO PROBLEMA QUE EL DE ACTUALIZAR
-        //SALEN LOS DOS POP UPS Y LEAN BIEN QUE POP UPS TOMA PARA SABER QUE CORREGIR  (EL CLIENTE FUE DADO DE BAJA CORRECTAMENTE DEL METODO CAMBIARESTADOCLIENTE  DE LA CLASE CLIENTEDATA)
-        //Y EL POP UP DE (NO SE PUDO CAMBIAR EL ESTADO DEL CLIENTE DE ELSE DEL METODO DE ESTE BOTÓN)
-        //CHAU ME VOY A DORMIR NO ROMPAN NADA
+
         if (clienteEncontrado == null){
             JOptionPane.showMessageDialog(this, "Debe buscar un cliente para cambiar su estado.","Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -427,6 +423,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Estado del cliente cambiado a: "+ nuevoEstadoStr,"Exito",JOptionPane.INFORMATION_MESSAGE);
             jcbEstadoCliente.setSelectedItem(nuevoEstadoStr);
             clienteEncontrado.setEstadoCliente(nuevoEstado);
+            limpiarCampos();
         }else{
             JOptionPane.showMessageDialog(this, "No se pudo cambiar el estado del cliente.","Error", JOptionPane.INFORMATION_MESSAGE);
         }

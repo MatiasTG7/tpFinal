@@ -111,7 +111,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(60, 60));
 
-        jmClientes.setText("clientes");
+        jmClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/masajes.png"))); // NOI18N
         jmClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jmClientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jmClientes.setMaximumSize(new java.awt.Dimension(60, 60));
@@ -304,10 +304,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jmiAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarClienteActionPerformed
         escritorio.removeAll();
-//      escritorio.repaint();
+        escritorio.repaint();
         AgregarCliente cliente = new AgregarCliente();
         cliente.setVisible(true);
-//        cliente.getContentPane().setBackground(new Color(242,242,242));
+        cliente.getContentPane().setBackground(new Color(242,242,242));
         escritorio.add(cliente);
         
     }//GEN-LAST:event_jmiAgregarClienteActionPerformed

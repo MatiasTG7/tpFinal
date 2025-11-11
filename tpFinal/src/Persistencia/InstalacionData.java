@@ -51,27 +51,32 @@ public class InstalacionData {
         return 0;
     }
     
-    public boolean modificarInstalacion(Instalacion instalacion) {
-        String sql = "UPDATE instalacion SET nombreInstalacion = ?, detalleDeUso = ?, precio30m = ?, estadoInstalacion = ? WHERE codInstal = ?";
-        
+    public boolean modificarInstalacionPorNombre(Instalacion instalacion) {
+        String sql = "UPDATE instalacion SET detalleDeUso = ?, precio30m = ?, estadoInstalacion = ? "
+                   + "WHERE nombreInstalacion = ?";
+    
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            
-            ps.setString(1, instalacion.getNombreInstalacion());
-            ps.setString(2, instalacion.getDetalleDeUso());
-            ps.setDouble(3, instalacion.getPrecio30m());
-            
-            ps.setBoolean(4, instalacion.isEstadoInstalacion());
-            
-            ps.setInt(5, instalacion.getCodInstal());
-            
+        
+            ps.setString(1, instalacion.getDetalleDeUso());
+            ps.setDouble(2, instalacion.getPrecio30m());
+            ps.setBoolean(3, instalacion.isEstadoInstalacion());
+            ps.setString(4, instalacion.getNombreInstalacion());
+        
             int filasAfectadas = ps.executeUpdate();
-            return filasAfectadas > 0;
-            
+        
+            if (filasAfectadas > 0) {
+                System.out.println("la instalacion fue actualizada correctamente: " + instalacion.getNombreInstalacion());
+                return true;
+            } else {
+                System.out.println("No se encontro ninguna instalacion con ese nombre.");
+                return false;
+            }
+        
         } catch (SQLException e) {
-            System.err.println("Error al modificar instalación: " + e.getMessage());
+            System.err.println("Error al actualizar la instalacion: " + e.getMessage());
             return false;
         }
-    }
+}
     
     public List<Instalacion> listarPorTipo(TipoMasaje tipo) {
         List<Instalacion> instalaciones = new ArrayList<>();
@@ -103,6 +108,20 @@ public class InstalacionData {
             System.err.println("Error al listar instalaciones por tipo: " + e.getMessage());
         }
         return instalaciones;
+    }
+    public boolean eliminarInstalacionPorNombre(String nombre) {
+        String sql = "DELETE FROM instalacion WHERE nombreInstalacion = ?";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, nombre);
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+            
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar instalación: " + e.getMessage());
+            return false;
+        }
     }
 }
     

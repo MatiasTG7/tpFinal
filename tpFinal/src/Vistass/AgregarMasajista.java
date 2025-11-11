@@ -54,6 +54,7 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
         jtfMatriculaMasajista = new javax.swing.JTextField();
         jlEstadoMasajista = new javax.swing.JLabel();
 
+        setBorder(null);
         setClosable(true);
 
         jtfNombreMasajista.setForeground(new java.awt.Color(69, 54, 14));
@@ -165,7 +166,7 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
+                .addContainerGap(127, Short.MAX_VALUE)
                 .addComponent(jlTitulo)
                 .addGap(98, 98, 98))
             .addGroup(layout.createSequentialGroup()
@@ -234,7 +235,7 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbActualizarMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCambiarEstadoMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();

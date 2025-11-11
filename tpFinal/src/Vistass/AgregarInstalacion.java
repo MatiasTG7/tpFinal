@@ -1,6 +1,14 @@
 
 package Vistass;
 
+import Modeloo.Conexion;
+import Modeloo.Instalacion;
+import Persistencia.InstalacionData;
+import javax.swing.JOptionPane;
+import org.mariadb.jdbc.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class AgregarInstalacion extends javax.swing.JInternalFrame {
 
     /**
@@ -64,6 +72,11 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
         jbBuscarInstalacion.setForeground(new java.awt.Color(69, 97, 11));
         jbBuscarInstalacion.setText("Buscar");
         jbBuscarInstalacion.setBorder(null);
+        jbBuscarInstalacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarInstalacionActionPerformed(evt);
+            }
+        });
 
         jtfPrecioInstalacion.setBackground(new java.awt.Color(242, 242, 242));
         jtfPrecioInstalacion.setForeground(new java.awt.Color(69, 54, 14));
@@ -98,6 +111,11 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
         jbActualizarInstalacion.setText("Actualizar");
         jbActualizarInstalacion.setBorder(null);
         jbActualizarInstalacion.setPreferredSize(new java.awt.Dimension(42, 23));
+        jbActualizarInstalacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarInstalacionActionPerformed(evt);
+            }
+        });
 
         jlDetalleInstalacion.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jlDetalleInstalacion.setForeground(new java.awt.Color(69, 54, 14));
@@ -229,7 +247,25 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfPrecioInstalacionActionPerformed
 
     private void jbGuardarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarInstalacionActionPerformed
-        // TODO add your handling code here:
+        try {
+        String nombre = jtfNombreInstalacion.getText();
+        String detalle = jtfDetalleInstalacion.getText();
+        double precio = Double.parseDouble(jtfPrecioInstalacion.getText());
+        boolean estado = jcbEstadoInstalacion.getSelectedItem().toString().equals("Activo");
+
+        Instalacion inst = new Instalacion(nombre, detalle, precio, estado);
+        InstalacionData id = new InstalacionData((Connection) Conexion.getConexion());
+
+        int idGenerado = id.guardarInstalacion(inst);
+        if (idGenerado > 0) {
+            JOptionPane.showMessageDialog(this, "Instalacion id:" + idGenerado + " guardada con exito.");
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo guardar la instalacion.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Error en el formato del precio.");
+    }
     }//GEN-LAST:event_jbGuardarInstalacionActionPerformed
 
     private void jcbEstadoInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoInstalacionActionPerformed
@@ -237,12 +273,104 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbEstadoInstalacionActionPerformed
 
     private void jbEliminarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarInstalacionActionPerformed
-        // TODO add your handling code here:
+        try {
+            String nombre = jtfNombreInstalacion.getText().trim();
+
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese el nombre de la instalacion a eliminar.");
+                return;
+            }
+
+            InstalacionData id = new InstalacionData((Connection) Conexion.getConexion());
+
+            int confirmar = JOptionPane.showConfirmDialog(
+                this,
+                "¿Seguro que desea eliminar la instalacion '" + nombre + "'?",
+                "Confirmar eliminacion",
+                JOptionPane.YES_NO_OPTION);
+
+            if (confirmar == JOptionPane.YES_OPTION) {
+                if (id.eliminarInstalacionPorNombre(nombre)) {
+                    JOptionPane.showMessageDialog(this, "Instalacion eliminada correctamente.");
+                    limpiarCampos();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se encontro una instalación con ese nombre.");
+                }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar la instalacion: " + e.getMessage());
+        }
     }//GEN-LAST:event_jbEliminarInstalacionActionPerformed
 
     private void jbCambiarEstadoInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoInstalacionActionPerformed
-        // TODO add your handling code here:
+        String nombre = jtfNombreInstalacion.getText();
+        try {
+            String sql = "UPDATE instalacion SET estadoInstalacion = NOT estadoInstalacion WHERE nombreInstalacion = ?";
+            PreparedStatement ps = Conexion.getConexion().prepareStatement(sql);
+            ps.setString(1, nombre);
+            int filas = ps.executeUpdate();
+
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(this, "Estado cambiado correctamente.");
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontro esta instalación.");
+            }
+        ps.close();
+        
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cambiar estado: " + e.getMessage());
+    }
     }//GEN-LAST:event_jbCambiarEstadoInstalacionActionPerformed
+
+    private void jbBuscarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarInstalacionActionPerformed
+        String nombre = jtfNombreInstalacion.getText();
+        InstalacionData id = new InstalacionData((Connection) Conexion.getConexion());
+    
+    try {
+        String sql = "SELECT * FROM instalacion WHERE nombreInstalacion = ?";
+        PreparedStatement ps = Conexion.getConexion().prepareStatement(sql);
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            jtfDetalleInstalacion.setText(rs.getString("detalleDeUso"));
+            jtfPrecioInstalacion.setText(String.valueOf(rs.getDouble("precio30m")));
+            jcbEstadoInstalacion.setSelectedItem(rs.getBoolean("estadoInstalacion") ? "Activo" : "Inactivo");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontro esta instalacion.");
+        }
+
+        ps.close();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar la instalacion: " + e.getMessage());
+    }
+    }//GEN-LAST:event_jbBuscarInstalacionActionPerformed
+
+    private void jbActualizarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarInstalacionActionPerformed
+        try {
+            String nombre = jtfNombreInstalacion.getText();
+            String detalle = jtfDetalleInstalacion.getText();
+            double precio = Double.parseDouble(jtfPrecioInstalacion.getText());
+            boolean estado = (jcbEstadoInstalacion.getSelectedItem().toString().equals("Activo"));
+        
+            Instalacion inst = new Instalacion(nombre, detalle, precio, estado);
+            InstalacionData id = new InstalacionData((Connection) Conexion.getConexion());
+        
+            if (id.modificarInstalacionPorNombre(inst)) {
+                JOptionPane.showMessageDialog(this, "la instalacion fue actualizada correctamente.");
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontro una instalacion con ese nombre.");
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El precio debe ser un numero valido.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar la instalacion: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jbActualizarInstalacionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -264,4 +392,11 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
     private java.awt.Label label1;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
+  
+    private void limpiarCampos() {
+    jtfNombreInstalacion.setText("");
+    jtfDetalleInstalacion.setText("");
+    jtfPrecioInstalacion.setText("");
+    jcbEstadoInstalacion.setSelectedIndex(0);
+    }
 }
