@@ -1,13 +1,25 @@
 
 package Vistass;
 
+import Modeloo.Conexion;
+import Modeloo.Masaje;
+import Modeloo.TipoMasaje;
+import Persistencia.MasajeData;
+import javax.swing.JOptionPane;
+import org.mariadb.jdbc.Connection;
+
 public class AgregarMasaje extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AgregarTratamiento
-     */
+    private MasajeData masajeData;
+
     public AgregarMasaje() {
         initComponents();
+        masajeData = new MasajeData((Connection) Conexion.getConexion());
+        
+        for (TipoMasaje tipo : TipoMasaje.values()) {
+            jcbTipoDeMasaje.addItem(tipo);
+        }
+
     }
 
     /**
@@ -52,7 +64,6 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
         jcbTipoDeMasaje.setBackground(new java.awt.Color(242, 242, 242));
         jcbTipoDeMasaje.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
         jcbTipoDeMasaje.setForeground(new java.awt.Color(69, 97, 11));
-        jcbTipoDeMasaje.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Facial", "Corporal", "Relajacion", "Estetico" }));
         jcbTipoDeMasaje.setBorder(null);
 
         jcbEstadoMasaje.setBackground(new java.awt.Color(242, 242, 242));
@@ -60,11 +71,21 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
         jcbEstadoMasaje.setForeground(new java.awt.Color(69, 97, 11));
         jcbEstadoMasaje.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         jcbEstadoMasaje.setBorder(null);
+        jcbEstadoMasaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoMasajeActionPerformed(evt);
+            }
+        });
 
         jbBuscarMasaje.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
         jbBuscarMasaje.setForeground(new java.awt.Color(69, 97, 11));
         jbBuscarMasaje.setText("Buscar");
         jbBuscarMasaje.setBorder(null);
+        jbBuscarMasaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarMasajeActionPerformed(evt);
+            }
+        });
 
         jtfDuracionMasaje.setForeground(new java.awt.Color(69, 54, 14));
         jtfDuracionMasaje.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
@@ -138,6 +159,11 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
         jbActualizarMasajes.setText("Actualizar");
         jbActualizarMasajes.setBorder(null);
         jbActualizarMasajes.setPreferredSize(new java.awt.Dimension(42, 23));
+        jbActualizarMasajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarMasajesActionPerformed(evt);
+            }
+        });
 
         jbEliminarMasaje.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
         jbEliminarMasaje.setForeground(new java.awt.Color(69, 97, 11));
@@ -246,16 +272,143 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfDuracionMasajeActionPerformed
 
     private void jbCambiarEstadoMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoMasajeActionPerformed
-        // TODO add your handling code here:
+
+        String nombre = jtfNombreMasaje.getText().trim();
+
+    if (nombre.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese el nombre del masaje.");
+        return;
+    }
+
+    Masaje m = masajeData.buscarMasajePorNombre(nombre);
+    if (m == null) {
+        JOptionPane.showMessageDialog(this, "No se encontro un masaje con ese nombre.");
+        return;
+    }
+
+    boolean nuevoEstado = !m.isActivo();
+    String estadoTexto = nuevoEstado ? "activo" : "inactivo";
+
+    int confirmacion = JOptionPane.showConfirmDialog(this,
+        "¿Desea cambiar el estado del masaje \"" + nombre + "\" a " + estadoTexto + "?",
+        "Confirmar cambio de estado", JOptionPane.YES_NO_OPTION);
+
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        masajeData.cambiarEstadoMasaje(nombre, nuevoEstado);
+        jcbEstadoMasaje.setSelectedIndex(nuevoEstado ? 0 : 1);
+    }
     }//GEN-LAST:event_jbCambiarEstadoMasajeActionPerformed
 
     private void jbGuardarMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarMasajeActionPerformed
-        // TODO add your handling code here:
+
+        String nombre = jtfNombreMasaje.getText().trim();
+        String detalle = jtfDetalleMasaje.getText().trim();
+        String duracionStr = jtfDuracionMasaje.getText().trim();
+        String costoStr = jtfCostoMasaje.getText().trim();
+        TipoMasaje tipo = (TipoMasaje) jcbTipoDeMasaje.getSelectedItem();
+        boolean activo = jcbEstadoMasaje.getSelectedIndex() == 0;
+
+        if (nombre.isEmpty() || detalle.isEmpty() || duracionStr.isEmpty() || costoStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Complete todos los campos antes de guardar.");
+            return;
+        }
+
+    try {
+        int duracion = Integer.parseInt(duracionStr);
+        double costo = Double.parseDouble(costoStr);
+        Masaje m = new Masaje(nombre, detalle, duracion, costo, activo, tipo);
+        masajeData.insertarTratamiento(m);
+        limpiarCampos();
+        
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Ingrese valores numéricos válidos para duración y costo.");
+    }
     }//GEN-LAST:event_jbGuardarMasajeActionPerformed
 
     private void jbEliminarMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarMasajeActionPerformed
-        // TODO add your handling code here:
+        
+    String nombre = jtfNombreMasaje.getText().trim();
+
+    if (nombre.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese el nombre del masaje a eliminar.");
+        return;
+    }
+
+    int confirmacion = JOptionPane.showConfirmDialog(this,
+        "¿Está seguro que desea eliminar el masaje \"" + nombre + "\" permanentemente?",
+        "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        masajeData.eliminarMasajePorNombre(nombre);
+        limpiarCampos();
+    }
     }//GEN-LAST:event_jbEliminarMasajeActionPerformed
+
+    private void jcbEstadoMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoMasajeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbEstadoMasajeActionPerformed
+
+    private void jbBuscarMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarMasajeActionPerformed
+
+        String nombre = jtfNombreMasaje.getText().trim();
+
+        if (nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el nombre del masaje a buscar.");
+            return;
+        }
+
+        Masaje m = masajeData.buscarMasajePorNombre(nombre);
+
+        if (m != null) {
+            jtfDetalleMasaje.setText(m.getDetalleTratamiento());
+            jtfDuracionMasaje.setText(String.valueOf(m.getDuracionTratamiento()));
+            jtfCostoMasaje.setText(String.valueOf(m.getCostoTratamiento()));
+            jcbTipoDeMasaje.setSelectedItem(m.getTipo());
+            jcbEstadoMasaje.setSelectedIndex(m.isActivo() ? 0 : 1);
+            JOptionPane.showMessageDialog(this, "Masaje encontrado correctamente.");
+        } else {
+        
+            limpiarCamposMenosNombre();
+        }
+    }//GEN-LAST:event_jbBuscarMasajeActionPerformed
+
+    private void jbActualizarMasajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarMasajesActionPerformed
+
+        String nombre = jtfNombreMasaje.getText().trim();
+        String detalle = jtfDetalleMasaje.getText().trim();
+        String duracionStr = jtfDuracionMasaje.getText().trim();
+        String costoStr = jtfCostoMasaje.getText().trim();
+        TipoMasaje tipo = (TipoMasaje) jcbTipoDeMasaje.getSelectedItem();
+        boolean activo = jcbEstadoMasaje.getSelectedIndex() == 0;
+
+    if (nombre.isEmpty() || detalle.isEmpty() || duracionStr.isEmpty() || costoStr.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Complete todos los campos antes de modificar.");
+        return;
+    }
+
+    Masaje existente = masajeData.buscarMasajePorNombre(nombre);
+    if (existente == null) {
+        JOptionPane.showMessageDialog(this, "No se encontro un masaje con ese nombre.");
+        return;
+    }
+
+    try {
+        int duracion = Integer.parseInt(duracionStr);
+        double costo = Double.parseDouble(costoStr);
+
+        existente.setDetalleTratamiento(detalle);
+        existente.setDuracionTratamiento(duracion);
+        existente.setCostoTratamiento(costo);
+        existente.setTipo(tipo);
+        existente.setActivo(activo);
+
+        masajeData.modificarMasaje(existente);
+        limpiarCampos();
+        
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Ingrese valores validos.");
+    }
+    }//GEN-LAST:event_jbActualizarMasajesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -266,7 +419,7 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbEliminarMasaje;
     private javax.swing.JButton jbGuardarMasaje;
     private javax.swing.JComboBox<String> jcbEstadoMasaje;
-    private javax.swing.JComboBox<String> jcbTipoDeMasaje;
+    private javax.swing.JComboBox<Object> jcbTipoDeMasaje;
     private javax.swing.JLabel jlCostoMasaje;
     private javax.swing.JLabel jlDetalleMasaje;
     private javax.swing.JLabel jlDuracionMasaje;
@@ -280,4 +433,21 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfDuracionMasaje;
     private javax.swing.JTextField jtfNombreMasaje;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarCamposMenosNombre() {
+        jtfDetalleMasaje.setText("");
+        jtfDuracionMasaje.setText("");
+        jtfCostoMasaje.setText("");
+        jcbEstadoMasaje.setSelectedIndex(0);
+        jcbTipoDeMasaje.setSelectedIndex(0);
+}
+
+    private void limpiarCampos() {
+        jtfNombreMasaje.setText("");
+        jtfDetalleMasaje.setText("");
+        jtfDuracionMasaje.setText("");
+        jtfCostoMasaje.setText("");
+        jcbEstadoMasaje.setSelectedIndex(0);
+        jcbTipoDeMasaje.setSelectedIndex(0);
+    }
 }

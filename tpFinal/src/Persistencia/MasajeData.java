@@ -22,8 +22,9 @@ public class MasajeData {
     public MasajeData(Connection con){
         this.con = con;
     }
-
-    public MasajeData(){
+    
+    public MasajeData() {
+        this.con = (Connection) Conexion.getConexion();
     }
     
     public void insertarTratamiento(Masaje masaje) {
@@ -116,9 +117,10 @@ public class MasajeData {
         String sql = "SELECT masaje.*, COUNT(s.codTratamiento) AS frecuencia" + "FROM masaje masaje" + "JOIN Sesion s ON masaje.codTratamiento = s.codTratamiento +"
                 + "GROUP BY masaje.codTratamiento, masaje.nombreTratamiento, masaje.tipo, masaje.DetalleTratamiento, masaje.duracionTratamiento, masaje.costoTratamiento, masaje.activo"
                 + "ORDER BY frecuencia DESC";
-        try{
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+        
         while (rs.next()){
             Masaje m = new Masaje();
             m.setCodTratamiento(rs.getInt("codTratamiento"));
@@ -129,11 +131,82 @@ public class MasajeData {
             m.setCostoTratamiento(rs.getDouble("costoTratamiento"));
             m.setActivo(rs.getBoolean("activo"));
             masajeOrd.add(m);
+            }
         
-        }
-        
-        }catch(SQLException ex){
+        } catch(SQLException ex){
             System.out.println("Error al obtener masaje mas solicitado " + ex.getMessage());}
-    return masajeOrd;
+            return masajeOrd;
+    }
+    
+    public Masaje buscarMasajePorNombre(String nombre) {
+        
+        String sql = "SELECT * FROM masaje WHERE LOWER(nombreTratamiento) = LOWER(?)";
+        Masaje m = null;
+        
+        try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            m = new Masaje();
+            m.setCodTratamiento(rs.getInt("codTratamiento"));
+            m.setNombreTratamiento(rs.getString("nombreTratamiento"));
+            String tipoString = rs.getString("tipo").toUpperCase();
+            m.setTipo(TipoMasaje.valueOf(tipoString));
+            m.setDetalleTratamiento(rs.getString("detalleTratamiento"));
+            m.setDuracionTratamiento(rs.getInt("duracionTratamiento"));
+            m.setCostoTratamiento(rs.getDouble("costoTratamiento"));
+            m.setActivo(rs.getBoolean("activo"));
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró un masaje con ese nombre.");
+        }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al buscar masaje: " + ex.getMessage());
+    }
+        return m;
+    }
+    
+    public void eliminarMasajePorNombre(String nombre) {
+        String sql = "DELETE FROM masaje WHERE nombreTratamiento = ?";
+    
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+        
+        int filas = ps.executeUpdate();
+        if (filas > 0) {
+            JOptionPane.showMessageDialog(null, "Masaje eliminado permanentemente.");
+               
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontro un masaje con ese nombre.");
+        }
+        ps.close();
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar masaje: " + ex.getMessage());
+        }
+    }
+    
+    public void cambiarEstadoMasaje(String nombre, boolean activo) {
+        String sql = "UPDATE masaje SET activo = ? WHERE nombreTratamiento = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setBoolean(1, activo);
+            ps.setString(2, nombre);
+        
+        int filas = ps.executeUpdate();
+        if (filas > 0) {
+            JOptionPane.showMessageDialog(null, "Estado actualizado correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el masaje con ese nombre.");
+        }
+        ps.close();
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cambiar estado: " + ex.getMessage());
+        }
     }
 }

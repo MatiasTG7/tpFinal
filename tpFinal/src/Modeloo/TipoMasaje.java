@@ -7,3 +7,4 @@ public enum TipoMasaje {
     RELAJACION,
     ESTETICO 
 }
+
