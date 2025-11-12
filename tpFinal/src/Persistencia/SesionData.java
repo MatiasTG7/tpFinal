@@ -23,8 +23,11 @@ public class SesionData {
         this.masajistaData= new MasajistaData(con);
     }
 
-    public SesionData(){
-    }
+    public SesionData() {
+    this.con = (Connection) Conexion.getConexion();
+    this.masajistaData = new MasajistaData(con);
+}
+
     
     public void insertarSesion(Sesion sesion) {
         String sql = "INSERT INTO sesion (fechaInicio, fechaFin, codTratamiento, codMasajista, codPack, codInstal, estadoInstalacion) "
@@ -39,9 +42,8 @@ public class SesionData {
         ps.setInt(6, sesion.getCodInstal());
         ps.setBoolean(7, sesion.isEstadoInstalacion());
         
-        ps.executeUpdate(); // Solo ejecuta
+        ps.executeUpdate();
         
-        // Obten el ID de forma segura
         try (ResultSet rs = ps.getGeneratedKeys()) {
             if (rs.next()) {
                 sesion.setCodSesion(rs.getInt(1));

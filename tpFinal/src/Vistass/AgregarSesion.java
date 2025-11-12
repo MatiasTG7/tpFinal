@@ -4,6 +4,7 @@ package Vistass;
 import Modeloo.Conexion;
 import Modeloo.Sesion;
 import Persistencia.SesionData;
+import java.awt.HeadlessException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -35,7 +36,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         jtfCodTratamiento = new javax.swing.JTextField();
         jtfCodMasajista = new javax.swing.JTextField();
         jlTitulo = new javax.swing.JLabel();
-        jlFechaInicio = new javax.swing.JLabel();
+        jlCodigoSesion = new javax.swing.JLabel();
         jlFechaFin = new javax.swing.JLabel();
         jlGestionClientes = new javax.swing.JLabel();
         jlCodTratamiento = new javax.swing.JLabel();
@@ -51,6 +52,8 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         jbActualizarSesion = new javax.swing.JButton();
         jbEliminarSesion = new javax.swing.JButton();
         jbCambiarEstadoSesion = new javax.swing.JButton();
+        jlFechaInicio1 = new javax.swing.JLabel();
+        jtfCodigoSesion = new javax.swing.JTextField();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -81,9 +84,9 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         jlTitulo.setForeground(new java.awt.Color(69, 97, 11));
         jlTitulo.setText("Spa Entre Dedos");
 
-        jlFechaInicio.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jlFechaInicio.setForeground(new java.awt.Color(69, 54, 14));
-        jlFechaInicio.setText("Fecha de incio:");
+        jlCodigoSesion.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlCodigoSesion.setForeground(new java.awt.Color(69, 54, 14));
+        jlCodigoSesion.setText("Codigo sesion:");
 
         jlFechaFin.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jlFechaFin.setForeground(new java.awt.Color(69, 54, 14));
@@ -168,6 +171,13 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
             }
         });
 
+        jlFechaInicio1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jlFechaInicio1.setForeground(new java.awt.Color(69, 54, 14));
+        jlFechaInicio1.setText("Fecha de incio:");
+
+        jtfCodigoSesion.setForeground(new java.awt.Color(69, 54, 14));
+        jtfCodigoSesion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -175,45 +185,54 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jlCodInstalacion, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                                    .addComponent(jtfCodMasajista, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlCodMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jtfCodInstalacion)
-                                    .addComponent(jbGuardarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jbActualizarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jtfCodDiaSpa, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlCodDiaSpa, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jbCambiarEstadoSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jlEstadoInstalacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.Alignment.LEADING, 0, 159, Short.MAX_VALUE)
-                                            .addComponent(jbEliminarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jlFechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jtfFechaFin, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                                    .addComponent(jlFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jlCodTratamiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jtfCodTratamiento)
-                                    .addComponent(jbBuscarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jlGestionClientes)
-                                .addGap(74, 74, 74)))))
+                                .addGap(74, 74, 74))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jlCodigoSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfCodigoSesion, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(54, 54, 54)
+                                .addComponent(jbBuscarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jlCodInstalacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtfCodInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(54, 54, 54)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jtfCodDiaSpa, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jlCodDiaSpa, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jlEstadoInstalacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfFechaInicio)
+                                    .addComponent(jlFechaInicio1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                    .addComponent(jtfCodTratamiento)
+                                    .addComponent(jlCodTratamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(54, 54, 54)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlFechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtfFechaFin)
+                                    .addComponent(jlCodMasajista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtfCodMasajista)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jbGuardarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbActualizarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(62, 62, 62)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jbCambiarEstadoSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbEliminarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(2, 2, 2)))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -223,42 +242,49 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
                 .addComponent(jlTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlGestionClientes)
-                .addGap(26, 26, 26)
-                .addComponent(jlFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlCodigoSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jtfFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jbBuscarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlFechaFin)
-                    .addComponent(jlCodTratamiento))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfCodTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfCodigoSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlCodDiaSpa)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlFechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(jtfFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlFechaFin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlCodTratamiento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfCodTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlCodDiaSpa)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jtfCodDiaSpa, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlCodInstalacion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtfCodInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlCodMasajista)
                         .addGap(13, 13, 13)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfCodMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfCodDiaSpa, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jtfCodMasajista, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlEstadoInstalacion)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jlCodInstalacion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfCodInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jcbEstadoInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEliminarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -266,7 +292,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbActualizarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCambiarEstadoSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -274,30 +300,37 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
 
     private void jbGuardarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarSesionActionPerformed
 
+        if (!validarCampos()) {
+            return; // si falta algo, no continúa
+        }
+
         try {
-        // Usa el formatter para convertir el String a LocalDateTime
-        LocalDateTime fechaInicio = LocalDateTime.parse(jtfFechaInicio.getText(), formatter);
-        LocalDateTime fechaFin = LocalDateTime.parse(jtfFechaFin.getText(), formatter);
-        
-        int codTratamiento = Integer.parseInt(jtfCodTratamiento.getText());
-        int codMasajista = Integer.parseInt(jtfCodMasajista.getText());
-        int codPack = Integer.parseInt(jtfCodDiaSpa.getText());
-        int codInstal = Integer.parseInt(jtfCodInstalacion.getText());
-        boolean estado = jcbEstadoInstalacion.getSelectedItem().equals("Activo");
+            int codTratamiento = Integer.parseInt(jtfCodTratamiento.getText());
+            int codMasajista = Integer.parseInt(jtfCodMasajista.getText());
+            int codInstalacion = Integer.parseInt(jtfCodInstalacion.getText());
+            int codPack = Integer.parseInt(jtfCodDiaSpa.getText());
+            boolean estado = jcbEstadoInstalacion.getSelectedItem().toString().equalsIgnoreCase("Activo");
 
-        Sesion nuevaSesion = new Sesion(fechaInicio, fechaFin, codTratamiento, codMasajista, codPack, codInstal, estado);
-        
-        // Asumiendo que sd.insertarSesion es 'void' y setea el ID
-        sd.insertarSesion(nuevaSesion); 
+            LocalDateTime fechaInicio = LocalDateTime.parse(jtfFechaInicio.getText(), formatter);
+            LocalDateTime fechaFin = LocalDateTime.parse(jtfFechaFin.getText(), formatter);
 
-        JOptionPane.showMessageDialog(this, "Sesion agregada correctamente. El codigo es: " + nuevaSesion.getCodSesion());
-        limpiarCampos(); // Deberías crear este método
+            Sesion s = new Sesion();
+            s.setCodTratamiento(codTratamiento);
+            s.setCodMasajista(codMasajista);
+            s.setCodInstal(codInstalacion);
+            s.setCodPack(codPack); // tu código de día de spa
+            s.setFechaInicio(fechaInicio);
+            s.setFechaFin(fechaFin);
+            s.setEstadoInstalacion(estado);
 
-        }catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(this, "Error en el formato de fecha. Use dd/MM/yyyy HH:mm", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-        }catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error: todos los campos de código deben ser números.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-        }catch (Exception e) {
+            sd.insertarSesion(s);
+
+            JOptionPane.showMessageDialog(this, "La sesion se guardo correctamente.");
+            limpiarCampos();
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Los codigos tienen que ser numericos.");
+        } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, "Error al guardar la sesion: " + e.getMessage());
         }
     }//GEN-LAST:event_jbGuardarSesionActionPerformed
@@ -329,31 +362,65 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlCodInstalacion;
     private javax.swing.JLabel jlCodMasajista;
     private javax.swing.JLabel jlCodTratamiento;
+    private javax.swing.JLabel jlCodigoSesion;
     private javax.swing.JLabel jlEstadoInstalacion;
     private javax.swing.JLabel jlFechaFin;
-    private javax.swing.JLabel jlFechaInicio;
+    private javax.swing.JLabel jlFechaInicio1;
     private javax.swing.JLabel jlGestionClientes;
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JTextField jtfCodDiaSpa;
     private javax.swing.JTextField jtfCodInstalacion;
     private javax.swing.JTextField jtfCodMasajista;
     private javax.swing.JTextField jtfCodTratamiento;
+    private javax.swing.JTextField jtfCodigoSesion;
     private javax.swing.JTextField jtfFechaFin;
     private javax.swing.JTextField jtfFechaInicio;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCampos() {
-        jtfCodDiaSpa.setText("");
-        jtfCodInstalacion.setText("");
-        jtfCodMasajista.setText("");
-        jtfCodTratamiento.setText("");
-        jtfFechaFin.setText("");
+        jtfCodigoSesion.setText("");
         jtfFechaInicio.setText("");
+        jtfFechaFin.setText("");
+        jtfCodTratamiento.setText("");
+        jtfCodMasajista.setText("");
+        jtfCodInstalacion.setText("");
+        jtfCodDiaSpa.setText("");
         jcbEstadoInstalacion.setSelectedIndex(0);
     }
 
     private boolean validarCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        if (jtfFechaInicio.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa la fecha de inicio (dd/MM/yyyy HH:mm).");
+            jtfFechaInicio.requestFocus();
+            return false;
+        }
+        if (jtfFechaFin.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa la fecha de finalizacion (dd/MM/yyyy HH:mm).");
+            jtfFechaFin.requestFocus();
+            return false;
+        }
+        if (jtfCodTratamiento.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa el codigo del tratamiento.");
+            jtfCodTratamiento.requestFocus();
+            return false;
+        }
+        if (jtfCodMasajista.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa el codigo del masajista.");
+            jtfCodMasajista.requestFocus();
+            return false;
+        }
+        if (jtfCodInstalacion.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa el codigo de la instalacion");
+            jtfCodInstalacion.requestFocus();
+            return false;
+        }
+        if (jtfCodDiaSpa.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa el codigo dia de spa.");
+            jtfCodDiaSpa.requestFocus();
+            return false;
+        }
+        return true;
     }
 }
