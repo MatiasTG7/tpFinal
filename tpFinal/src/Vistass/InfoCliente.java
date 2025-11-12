@@ -127,16 +127,14 @@ public class InfoCliente extends javax.swing.JInternalFrame {
 
     private void jcbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbClienteActionPerformed
         limpiarTabla();
-        // 2. Obtiene el cliente seleccionado del ComboBox
         Cliente clienteSeleccionado = (Cliente) jcbCliente.getSelectedItem();
-        // (Esto puede ser null si el combo está vacío o se está inicializando)
+        
         if (clienteSeleccionado == null) {
             return;
         }
-        // 3. Convierte los datos del cliente a un formato para la tabla
         String afecciones = clienteSeleccionado.isAfecciones() ? "Si" : "No";
         String estado = clienteSeleccionado.isEstadoCliente() ? "Activo" : "Inactivo";
-        // 4. Añade la fila a la tabla
+        
         modeloTabla.addRow(new Object[]{
             clienteSeleccionado.getCodCli(),
             clienteSeleccionado.getDni(),
@@ -167,7 +165,6 @@ public class InfoCliente extends javax.swing.JInternalFrame {
         }
     }
     private void limpiarTabla() {
-        // (Asegúrate de que tu DefaultTableModel se llame modeloTabla)
         modeloTabla.setRowCount(0);
     }
 }

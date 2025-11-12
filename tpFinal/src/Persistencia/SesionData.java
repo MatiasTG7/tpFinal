@@ -115,7 +115,7 @@ public class SesionData {
         
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar la sesion: " + ex.getMessage());
-            return false; // <-- Devuelve false en error
+            return false;
         }
     }
    
@@ -131,7 +131,7 @@ public class SesionData {
         
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al cambiar el estado: " + ex.getMessage());
-            return false; // <-- Devuelve false en error
+            return false;
         }
     }
    

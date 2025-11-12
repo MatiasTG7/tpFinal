@@ -4,7 +4,7 @@ package Vistass;
 import Modeloo.Masajista;
 import Modeloo.Conexion;
 import Persistencia.MasajistaData;
-import java.sql.Connection; // Asegúrate de que sea java.sql.Connection
+import java.sql.Connection;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -130,14 +130,10 @@ public class ListarMasajistasDispo extends javax.swing.JInternalFrame {
                 masajista.getNombreMasajista(),
                 masajista.getTelefonoMasajista(),
                 estado,
-                masajista.getEspecialidad().toString() // Muestra el nombre del ENUM
+                masajista.getEspecialidad().toString()
             });
         }
     }
-    
-    /**
-     * Método de ayuda para borrar todas las filas de la tabla.
-     */
     private void limpiarTabla() {
         modeloTabla.setRowCount(0);
     }
