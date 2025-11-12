@@ -1,7 +1,10 @@
 
 package Vistass;
 
+import Modeloo.Cliente;
+import Modeloo.Conexion;
 import Persistencia.ClienteData;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import org.mariadb.jdbc.Connection;
 
@@ -13,6 +16,10 @@ public class InfoCliente extends javax.swing.JInternalFrame {
     
     public InfoCliente() {
         initComponents();
+        con = (Connection) Conexion.getConexion();
+        clienteData = new ClienteData(con);
+        modeloTabla = (DefaultTableModel) jtCliente.getModel();
+        cargarComboBox();
     }
 
     /**
@@ -46,6 +53,11 @@ public class InfoCliente extends javax.swing.JInternalFrame {
         jcbCliente.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jcbCliente.setForeground(new java.awt.Color(69, 54, 14));
         jcbCliente.setBorder(null);
+        jcbCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbClienteActionPerformed(evt);
+            }
+        });
 
         jtCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,12 +125,49 @@ public class InfoCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbClienteActionPerformed
+        limpiarTabla();
+        // 2. Obtiene el cliente seleccionado del ComboBox
+        Cliente clienteSeleccionado = (Cliente) jcbCliente.getSelectedItem();
+        // (Esto puede ser null si el combo está vacío o se está inicializando)
+        if (clienteSeleccionado == null) {
+            return;
+        }
+        // 3. Convierte los datos del cliente a un formato para la tabla
+        String afecciones = clienteSeleccionado.isAfecciones() ? "Si" : "No";
+        String estado = clienteSeleccionado.isEstadoCliente() ? "Activo" : "Inactivo";
+        // 4. Añade la fila a la tabla
+        modeloTabla.addRow(new Object[]{
+            clienteSeleccionado.getCodCli(),
+            clienteSeleccionado.getDni(),
+            clienteSeleccionado.getNombreCliente(),
+            clienteSeleccionado.getTelefonoCliente(),
+            clienteSeleccionado.getEdad(),
+            afecciones,
+            estado
+        });
+        
+    }//GEN-LAST:event_jcbClienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcbCliente;
+    private javax.swing.JComboBox<Cliente> jcbCliente;
     private javax.swing.JLabel jlInfoClientes;
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JTable jtCliente;
     // End of variables declaration//GEN-END:variables
+    private void cargarComboBox(){
+        List<Cliente> clientes = clienteData.listarClientes();
+        
+        jcbCliente.removeAllItems();
+        
+        for(Cliente cliente : clientes){
+            jcbCliente.addItem(cliente);
+        }
+    }
+    private void limpiarTabla() {
+        // (Asegúrate de que tu DefaultTableModel se llame modeloTabla)
+        modeloTabla.setRowCount(0);
+    }
 }

@@ -109,6 +109,29 @@ public class InstalacionData {
         }
         return instalaciones;
     }
+    public List<Instalacion> listarInstalaciones() {
+        List<Instalacion> instalaciones = new ArrayList<>();
+        String sql = "SELECT * FROM instalacion"; 
+    
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            Instalacion inst = new Instalacion();
+            
+            inst.setCodInstal(rs.getInt("codInstal"));
+            inst.setNombreInstalacion(rs.getString("nombreInstalacion"));
+            inst.setDetalleDeUso(rs.getString("detalleDeUso"));
+            inst.setPrecio30m(rs.getDouble("precio30m"));
+            inst.setEstadoInstalacion(rs.getBoolean("estadoInstalacion"));
+            
+            instalaciones.add(inst);
+            }
+        } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al listar instalaciones: " + ex.getMessage());
+        }
+    return instalaciones;
+    }
     public boolean eliminarInstalacionPorNombre(String nombre) {
         String sql = "DELETE FROM instalacion WHERE nombreInstalacion = ?";
         

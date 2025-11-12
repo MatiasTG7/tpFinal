@@ -1,13 +1,25 @@
 
 package Vistass;
 
+import Modeloo.Conexion;
+import Modeloo.Instalacion;
+import Persistencia.InstalacionData;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.mariadb.jdbc.Connection;
+
 public class ListarInstalaciones extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ListarInstalaciones
-     */
+    private DefaultTableModel modeloTabla;
+    private Connection con;
+    private InstalacionData instalacionData;
+    
     public ListarInstalaciones() {
         initComponents();
+        con = (Connection) Conexion.getConexion();
+        instalacionData = new InstalacionData(con);
+        modeloTabla = (DefaultTableModel) jtListaInstalaciones.getModel();
+        cargarTabla();
     }
 
     /**
@@ -104,4 +116,25 @@ public class ListarInstalaciones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JTable jtListaInstalaciones;
     // End of variables declaration//GEN-END:variables
+    private void cargarTabla() {
+        limpiarTabla();
+        
+        List<Instalacion> instalaciones = instalacionData.listarInstalaciones();
+        
+        for (Instalacion inst : instalaciones) {
+            
+            String estado = inst.isEstadoInstalacion() ? "Activo" : "Inactivo";
+            
+            modeloTabla.addRow(new Object[]{
+                inst.getCodInstal(),
+                inst.getNombreInstalacion(),
+                inst.getDetalleDeUso(),
+                inst.getPrecio30m(),
+                estado
+            });
+        }
+    }
+    private void limpiarTabla() {
+        modeloTabla.setRowCount(0);
+    }
 }

@@ -142,7 +142,7 @@ public class ClienteData {
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setCodCli(rs.getInt("codCliente"));
+                c.setCodCli(rs.getInt("codCli"));
                 c.setDni(rs.getString("dni"));
                 c.setNombreCliente(rs.getString("nombreCliente"));
                 c.setTelefonoCliente(rs.getString("telefonoCliente"));

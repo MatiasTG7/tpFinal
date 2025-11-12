@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -54,7 +55,7 @@ public class MasajeData {
             ps.close(); 
         } catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla masaje. " + ex.getMessage());
-  }
+        }
     }
 
     public void modificarMasaje(Masaje masaje) {
@@ -81,9 +82,37 @@ public class MasajeData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar el masaje: " + ex.getMessage());
         }
-}
+    }
 
+    public List<Masaje> listarMasajes() {
+    List<Masaje> masajes = new ArrayList<>();
+    String sql = "SELECT * FROM masaje"; 
     
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            Masaje masaje = new Masaje();
+            
+            masaje.setCodTratamiento(rs.getInt("codTratamiento"));
+            masaje.setNombreTratamiento(rs.getString("nombreTratamiento"));
+            masaje.setDetalleTratamiento(rs.getString("detalleTratamiento"));
+            masaje.setDuracionTratamiento(rs.getInt("duracionTratamiento"));
+            masaje.setCostoTratamiento(rs.getDouble("costoTratamiento"));
+            masaje.setActivo(rs.getBoolean("activo"));
+            
+            String tipoDB = rs.getString("tipo");
+            masaje.setTipo(TipoMasaje.valueOf(tipoDB.toUpperCase()));
+            
+            masajes.add(masaje);
+        }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar los masajes: " + ex.getMessage());
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "Error de ENUM en Masajes: " + e.getMessage());
+        }
+        return masajes;
+    }
     public List<Masaje> obtenerMasajesPorTipo(Masaje tipo) {
         
         List<Masaje> tratamientos = new LinkedList<>();
