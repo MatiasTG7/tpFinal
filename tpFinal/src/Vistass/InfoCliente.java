@@ -1,18 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package Vistass;
 
-/**
- *
- * @author alybe
- */
+import Persistencia.ClienteData;
+import javax.swing.table.DefaultTableModel;
+import org.mariadb.jdbc.Connection;
+
 public class InfoCliente extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form InfoCliente
-     */
+    private DefaultTableModel modeloTabla;
+    private ClienteData clienteData;
+    private Connection con;
+    
     public InfoCliente() {
         initComponents();
     }

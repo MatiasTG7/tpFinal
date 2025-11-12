@@ -146,8 +146,10 @@ public class ClienteData {
                 c.setDni(rs.getString("dni"));
                 c.setNombreCliente(rs.getString("nombreCliente"));
                 c.setTelefonoCliente(rs.getString("telefonoCliente"));
+                c.setEdad(rs.getInt("edad"));
                 c.setAfecciones(rs.getBoolean("afecciones"));
                 c.setEstadoCliente(rs.getBoolean("estadoCliente"));
+                
                 clientes.add(c);
             }
         } catch (SQLException ex) {

@@ -30,29 +30,27 @@ public class SesionData {
         String sql = "INSERT INTO sesion (fechaInicio, fechaFin, codTratamiento, codMasajista, codPack, codInstal, estadoInstalacion) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setTimestamp(1, Timestamp.valueOf(sesion.getFechaInicio()));
-            ps.setTimestamp(2, Timestamp.valueOf(sesion.getFechaFin()));
-            ps.setInt(3, sesion.getCodTratamiento());
-            ps.setInt(4, sesion.getCodMasajista());
-            ps.setInt(5, sesion.getCodPack());
-            ps.setInt(6, sesion.getCodInstal());
-            ps.setBoolean(7, sesion.isEstadoInstalacion());
-            
-            int registro = ps.executeUpdate();
-            if (registro > 0) {
-                ResultSet rs = ps.getGeneratedKeys();
-                if(rs.next()){
-                    sesion.setCodSesion(rs.getInt(1));
-                }
-                JOptionPane.showMessageDialog(null, "La sesion fue guardada correctamente.");
-            }else{
-                JOptionPane.showMessageDialog(null, "No se pudo insertar la sesion.");
+        try (PreparedStatement ps = con.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) { 
+        ps.setTimestamp(1, Timestamp.valueOf(sesion.getFechaInicio()));
+        ps.setTimestamp(2, Timestamp.valueOf(sesion.getFechaFin()));
+        ps.setInt(3, sesion.getCodTratamiento());
+        ps.setInt(4, sesion.getCodMasajista());
+        ps.setInt(5, sesion.getCodPack());
+        ps.setInt(6, sesion.getCodInstal());
+        ps.setBoolean(7, sesion.isEstadoInstalacion());
+        
+        ps.executeUpdate(); // Solo ejecuta
+        
+        // Obten el ID de forma segura
+        try (ResultSet rs = ps.getGeneratedKeys()) {
+            if (rs.next()) {
+                sesion.setCodSesion(rs.getInt(1));
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al agregar la sesion: " + ex.getMessage());
         }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al agregar la sesion: " + ex.getMessage());
     }
+}
     
     public Sesion buscarSesion(int codSesion){
         
@@ -78,7 +76,7 @@ public class SesionData {
             JOptionPane.showMessageDialog(null, "Error al buscar la sesion: " + ex.getMessage());
         }
         return sesion;
-      }
+    }
     
     public boolean actualizarSesion(Sesion sesion){
     
@@ -96,37 +94,30 @@ public class SesionData {
             
             int filas = ps.executeUpdate();
             
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "La sesion fue actualizada correctamente.");
-                return true;
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontro esta sesion.");
-                return false;
-            }
+            return filas > 0; 
+        
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al actualizar la sesion: " + ex.getMessage());
-            return false;
+        JOptionPane.showMessageDialog(null, "Error al actualizar la sesion: " + ex.getMessage());
+        return false;
         }
-  }
+    }
     
-   public void eliminarSesion(int codSesion){
+   public boolean eliminarSesion(int codSesion){
        String sql = "DELETE FROM sesion WHERE codSesion = ?";
        
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, codSesion);
             int filas = ps.executeUpdate();
             
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "La sesion fue eliminada correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontro una sesion con ese codigo.");
-            }
-        } catch (SQLException ex) {
+            return filas > 0; 
+        
+        }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar la sesion: " + ex.getMessage());
+            return false; // <-- Devuelve false en error
         }
-   }
+    }
    
-   public void BajaAltaLogicaSesion (int codSesion, boolean estadoInstalacion){
+   public boolean BajaAltaLogicaSesion (int codSesion, boolean estadoInstalacion){
         String sql = "UPDATE sesion SET estadoInstalacion = ? WHERE codSesion = ?";
         
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -134,16 +125,13 @@ public class SesionData {
             ps.setInt(2, codSesion);
             int filas = ps.executeUpdate();
             
-            if (filas > 0) {
-                String mensaje = estadoInstalacion ? "La sesion fue dada de alta." : "La sesion fue dada de baja.";
-                JOptionPane.showMessageDialog(null, mensaje);
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontro esta sesion.");
-            }
-        } catch (SQLException ex) {
+            return filas > 0; 
+        
+        }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al cambiar el estado: " + ex.getMessage());
+            return false; // <-- Devuelve false en error
         }
-   }
+    }
    
    public boolean modificarMasajista(int codSesion, String matricula) {
        

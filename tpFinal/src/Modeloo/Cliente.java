@@ -91,6 +91,19 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return dni + " " + nombreCliente;
+        return this.nombreCliente + "(DNI: "+ this.dni + ")";
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Cliente cliente = (Cliente) obj;
+        return this.codCli == cliente.codCli;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(codCli);
     }
 }

@@ -14,7 +14,6 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
     private MasajistaData masajistaData;
     private int codMasajistaActual = -1; 
     
-    
     public AgregarMasajista() {
         initComponents();
         con= (Connection) Conexion.getConexion();
@@ -22,7 +21,6 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
         llenarComboEspecialidades(); 
     }
     
-   
     private void llenarComboEspecialidades() {
         jcbEspecialidadMasajista.removeAllItems();
         for (EspecialidadMasajista esp : EspecialidadMasajista.values()) {
@@ -245,15 +243,12 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
         jtfNombreMasajista.setText(m.getNombreMasajista());
         jtfTelefonoMasajista.setText(m.getTelefonoMasajista());
         
-      
         String especialidadStr = m.getEspecialidad().toString();
         String especialidadCapitalizada = especialidadStr.substring(0, 1).toUpperCase() + especialidadStr.substring(1).toLowerCase();
         jcbEspecialidadMasajista.setSelectedItem(especialidadCapitalizada);
         
-      
         jcbEstadoMasajista.setSelectedItem(m.isEstadoMasajista() ? "Activo" : "Inactivo");
         
-       
         this.codMasajistaActual = m.getCodMasajista();
     }
     
@@ -274,7 +269,6 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
            
             EspecialidadMasajista especialidad = EspecialidadMasajista.valueOf(especialidadStr.toUpperCase());
             
-          
             if (this.codMasajistaActual != -1) {
                
                 return new Masajista(this.codMasajistaActual, matricula, nombre, telefono,  estado,especialidad);
@@ -282,14 +276,12 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
                
                 return new Masajista(matricula, nombre, telefono, estado,especialidad);
             }
-            
         } catch (IllegalArgumentException e) {
              JOptionPane.showMessageDialog(this, "Especialidad seleccionada no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
              return null;
         }
     }
    
-    
     private void limpiarFormulario() {
         jtfMatriculaMasajista.setText("");
         jtfNombreMasajista.setText("");
@@ -323,7 +315,6 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe ingresar una matrícula para buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
         Masajista encontrado = masajistaData.buscarMasajistaPorMatricula(matricula);
         
         if (encontrado != null) {
@@ -342,7 +333,6 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
              JOptionPane.showMessageDialog(this, "Primero debe buscar y cargar un Masajista para actualizar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
              return;
         }
-        
         Masajista modificado = obtenerDatosDelFormulario(); 
         
         if (modificado != null) {
@@ -356,7 +346,6 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
              JOptionPane.showMessageDialog(this, "Primero debe buscar y cargar un Masajista para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
              return;
         }
-        
         int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar PERMANENTEMENTE el Masajista con ID " + this.codMasajistaActual + "?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
         
         if (confirmacion == JOptionPane.YES_OPTION) {

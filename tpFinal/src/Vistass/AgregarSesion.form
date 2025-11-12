@@ -177,9 +177,6 @@
           </Border>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfFechaFinActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbBuscarSesion">
       <Properties>
@@ -194,6 +191,9 @@
           <Border info="null"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBuscarSesionActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfCodTratamiento">
       <Properties>
@@ -208,9 +208,6 @@
           </Border>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfCodTratamientoActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfCodMasajista">
       <Properties>
@@ -319,9 +316,6 @@
           </Border>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfCodDiaSpaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jlCodDiaSpa">
       <Properties>

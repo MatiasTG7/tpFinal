@@ -5,12 +5,15 @@ import Modeloo.Conexion;
 import Modeloo.Sesion;
 import Persistencia.SesionData;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 
 public class AgregarSesion extends javax.swing.JInternalFrame {
 
     private SesionData sd;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     
     public AgregarSesion() {
         initComponents();
@@ -57,24 +60,19 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
 
         jtfFechaFin.setForeground(new java.awt.Color(69, 54, 14));
         jtfFechaFin.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
-        jtfFechaFin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfFechaFinActionPerformed(evt);
-            }
-        });
 
         jbBuscarSesion.setFont(new java.awt.Font("Mongolian Baiti", 0, 12)); // NOI18N
         jbBuscarSesion.setForeground(new java.awt.Color(69, 97, 11));
         jbBuscarSesion.setText("Buscar");
         jbBuscarSesion.setBorder(null);
+        jbBuscarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarSesionActionPerformed(evt);
+            }
+        });
 
         jtfCodTratamiento.setForeground(new java.awt.Color(69, 54, 14));
         jtfCodTratamiento.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
-        jtfCodTratamiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfCodTratamientoActionPerformed(evt);
-            }
-        });
 
         jtfCodMasajista.setForeground(new java.awt.Color(69, 54, 14));
         jtfCodMasajista.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
@@ -108,11 +106,6 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
 
         jtfCodDiaSpa.setForeground(new java.awt.Color(69, 54, 14));
         jtfCodDiaSpa.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(138, 186, 40)));
-        jtfCodDiaSpa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfCodDiaSpaActionPerformed(evt);
-            }
-        });
 
         jlCodDiaSpa.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jlCodDiaSpa.setForeground(new java.awt.Color(69, 54, 14));
@@ -279,23 +272,13 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfCodTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodTratamientoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfCodTratamientoActionPerformed
-
-    private void jtfCodDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodDiaSpaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfCodDiaSpaActionPerformed
-
-    private void jtfFechaFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFechaFinActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfFechaFinActionPerformed
-
     private void jbGuardarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarSesionActionPerformed
 
         try {
-        LocalDateTime fechaInicio = LocalDateTime.parse(jtfFechaInicio.getText());
-        LocalDateTime fechaFin = LocalDateTime.parse(jtfFechaFin.getText());
+        // Usa el formatter para convertir el String a LocalDateTime
+        LocalDateTime fechaInicio = LocalDateTime.parse(jtfFechaInicio.getText(), formatter);
+        LocalDateTime fechaFin = LocalDateTime.parse(jtfFechaFin.getText(), formatter);
+        
         int codTratamiento = Integer.parseInt(jtfCodTratamiento.getText());
         int codMasajista = Integer.parseInt(jtfCodMasajista.getText());
         int codPack = Integer.parseInt(jtfCodDiaSpa.getText());
@@ -303,12 +286,19 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         boolean estado = jcbEstadoInstalacion.getSelectedItem().equals("Activo");
 
         Sesion nuevaSesion = new Sesion(fechaInicio, fechaFin, codTratamiento, codMasajista, codPack, codInstal, estado);
-        sd.insertarSesion(nuevaSesion);
+        
+        // Asumiendo que sd.insertarSesion es 'void' y setea el ID
+        sd.insertarSesion(nuevaSesion); 
 
         JOptionPane.showMessageDialog(this, "Sesion agregada correctamente. El codigo es: " + nuevaSesion.getCodSesion());
-        
-        } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al guardar la sesion: " + e.getMessage());
+        limpiarCampos(); // Deberías crear este método
+
+        }catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Error en el formato de fecha. Use dd/MM/yyyy HH:mm", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+        }catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: todos los campos de código deben ser números.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar la sesion: " + e.getMessage());
         }
     }//GEN-LAST:event_jbGuardarSesionActionPerformed
 
@@ -323,6 +313,10 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
     private void jbCambiarEstadoSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoSesionActionPerformed
 
     }//GEN-LAST:event_jbCambiarEstadoSesionActionPerformed
+
+    private void jbBuscarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarSesionActionPerformed
+        
+    }//GEN-LAST:event_jbBuscarSesionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbActualizarSesion;
@@ -350,7 +344,13 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        jtfCodDiaSpa.setText("");
+        jtfCodInstalacion.setText("");
+        jtfCodMasajista.setText("");
+        jtfCodTratamiento.setText("");
+        jtfFechaFin.setText("");
+        jtfFechaInicio.setText("");
+        jcbEstadoInstalacion.setSelectedIndex(0);
     }
 
     private boolean validarCampos() {
