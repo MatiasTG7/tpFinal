@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2025 a las 18:27:09
+-- Tiempo de generación: 13-11-2025 a las 06:24:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -58,11 +58,19 @@ INSERT INTO `cliente` (`codCli`, `dni`, `nombreCliente`, `telefonoCliente`, `eda
 CREATE TABLE `diaspa` (
   `codPack` int(11) NOT NULL,
   `FechayHora` datetime NOT NULL,
-  `preferencias` varchar(20) NOT NULL,
+  `preferencias` varchar(100) NOT NULL,
   `codCli` int(11) NOT NULL,
   `monto` double NOT NULL,
   `estadoDia` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `diaspa`
+--
+
+INSERT INTO `diaspa` (`codPack`, `FechayHora`, `preferencias`, `codCli`, `monto`, `estadoDia`) VALUES
+(1, '2025-12-01 13:30:00', 'Spa completo corporal y facial', 7, 45600, 1),
+(2, '2025-11-14 13:30:00', 'Masajes faciales', 5, 52500, 0);
 
 -- --------------------------------------------------------
 
@@ -161,6 +169,15 @@ CREATE TABLE `sesion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `sesion`
+--
+
+INSERT INTO `sesion` (`codSesion`, `fechaInicio`, `fechaFin`, `codTratamiento`, `codMasajista`, `codPack`, `codInstal`, `estadoInstalacion`) VALUES
+(2, '2025-11-13 10:00:00', '2025-11-13 10:20:00', 3, 1, 1, 4, 1),
+(4, '2025-11-13 10:30:00', '2025-11-13 11:00:00', 5, 2, 1, 5, 1),
+(7, '2025-11-14 17:30:00', '2025-11-14 17:45:00', 10, 3, 2, 3, 0);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -202,10 +219,10 @@ ALTER TABLE `masajista`
 --
 ALTER TABLE `sesion`
   ADD PRIMARY KEY (`codSesion`),
-  ADD UNIQUE KEY `idDiaSpa` (`codPack`),
-  ADD UNIQUE KEY `idMasajista` (`codMasajista`),
-  ADD UNIQUE KEY `idTratamiento` (`codTratamiento`),
-  ADD UNIQUE KEY `codInstal` (`codInstal`);
+  ADD KEY `idDiaSpa` (`codPack`) USING BTREE,
+  ADD KEY `idMasajista` (`codMasajista`) USING BTREE,
+  ADD KEY `codInstal` (`codInstal`) USING BTREE,
+  ADD KEY `idTratamiento` (`codTratamiento`) USING BTREE;
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -221,7 +238,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `diaspa`
 --
 ALTER TABLE `diaspa`
-  MODIFY `codPack` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codPack` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `instalacion`
@@ -245,7 +262,7 @@ ALTER TABLE `masajista`
 -- AUTO_INCREMENT de la tabla `sesion`
 --
 ALTER TABLE `sesion`
-  MODIFY `codSesion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codSesion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas

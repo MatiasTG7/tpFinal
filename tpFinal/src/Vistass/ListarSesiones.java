@@ -1,13 +1,26 @@
 
 package Vistass;
 
+import Modeloo.Conexion;
+import Modeloo.Sesion;
+import Persistencia.SesionData;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.mariadb.jdbc.Connection;
+
 public class ListarSesiones extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ListarSesiones
-     */
+    private DefaultTableModel modeloTabla;
+    private SesionData sesionData;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    
     public ListarSesiones() {
         initComponents();
+        this.modeloTabla = new DefaultTableModel();
+        this.sesionData = new SesionData((Connection) Conexion.getConexion());
+        armarCabeceraTabla();
+        cargarDatosTabla();
     }
 
     /**
@@ -68,26 +81,27 @@ public class ListarSesiones extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jlListaMasajistasDispo)))
-                .addGap(180, 180, 180))
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(216, 216, 216)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(jlListaMasajistasDispo)))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addComponent(jlTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlListaMasajistasDispo)
-                .addGap(30, 30, 30)
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -102,4 +116,36 @@ public class ListarSesiones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JTable jtListaSesiones;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabeceraTabla() {
+
+        modeloTabla.addColumn("Codigo");
+        modeloTabla.addColumn("Inicio");
+        modeloTabla.addColumn("Fin");
+        modeloTabla.addColumn("Tratamiento");
+        modeloTabla.addColumn("Masajista");
+        modeloTabla.addColumn("Pack");
+        modeloTabla.addColumn("Instalacion");
+        modeloTabla.addColumn("Estado");
+        jtListaSesiones.setModel(modeloTabla);
+    }
+    
+    private void cargarDatosTabla() {
+
+        modeloTabla.setRowCount(0);
+        List<Sesion> sesiones = sesionData.listarSesiones();
+        for (Sesion s : sesiones) {
+            modeloTabla.addRow(new Object[]{
+                s.getCodSesion(),
+                s.getFechaInicio().format(formatter),
+                s.getFechaFin().format(formatter),
+                s.getCodTratamiento(),
+                s.getCodMasajista(),
+                s.getCodPack(),
+                s.getCodInstal(),
+                s.isEstadoInstalacion() ? "Activo" : "Inactivo"
+            });
+        }
+    }
 }
+

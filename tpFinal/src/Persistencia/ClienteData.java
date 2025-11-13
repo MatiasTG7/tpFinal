@@ -73,7 +73,7 @@ public class ClienteData {
     }
     public Cliente buscarCliente (int codCli){
         Cliente cliente= null;
-        String sql = "SELECT dni, nombreCliente, telefonoCliente, edad, afecciones, estadoCliente FROM cliente WHERE codCli = ?";
+        String sql = "SELECT * FROM cliente WHERE codCli = ?";
 
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -82,9 +82,10 @@ public class ClienteData {
 
             if (resultado.next()){
                 cliente = new Cliente();
-                cliente.setCodCli(resultado.getInt("codCli"));
+                cliente.setCodCli(resultado.getInt("codCli")); 
                 cliente.setDni(resultado.getString("dni"));
                 cliente.setNombreCliente(resultado.getString("nombreCliente"));
+                cliente.setTelefonoCliente(resultado.getString("telefonoCliente")); 
                 cliente.setEdad(resultado.getInt("edad"));
                 cliente.setAfecciones(resultado.getBoolean("afecciones"));
                 cliente.setEstadoCliente(resultado.getBoolean("estadoCliente"));
@@ -106,7 +107,6 @@ public class ClienteData {
             return filas>0;
             
         } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al eliminar el cliente. " + ex.getMessage());
             System.out.println("----ERROR DE SQL AL ELIMINAR----");
             ex.printStackTrace();
             System.err.println("----------------------------------");
@@ -142,7 +142,7 @@ public class ClienteData {
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setCodCli(rs.getInt("codCliente"));
+                c.setCodCli(rs.getInt("codCli"));
                 c.setDni(rs.getString("dni"));
                 c.setNombreCliente(rs.getString("nombreCliente"));
                 c.setTelefonoCliente(rs.getString("telefonoCliente"));
@@ -157,24 +157,6 @@ public class ClienteData {
         }
         return clientes;
     }
-//    public boolean cambiarEstadoCliente (int codCli, boolean nuevoEstado){
-//        String sql = "UPDATE cliente SET estadoCliente = ? WHERE codCli = ?";
-//        try (PreparedStatement ps = con.prepareStatement(sql)) {
-//            ps.setBoolean(1, nuevoEstado);
-//            ps.setInt(2, codCli);
-//            
-//            int filas = ps.executeUpdate();
-//            if (filas > 0) {
-//                String mensaje = nuevoEstado ? "Cliente dado de alta correctamente." : "Cliente dado de baja correctamente.";
-//                JOptionPane.showMessageDialog(null, mensaje);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No se encontro este cliente.");
-//            }
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al cambiar estado del cliente: " + ex.getMessage());
-//        }
-//        return false;
-//    }
         public boolean cambiarEstadoCliente(int codCli, boolean nuevoEstado) {
         String sql = "UPDATE cliente SET estadoCliente = ? WHERE codCli = ?";
     
@@ -191,4 +173,28 @@ public class ClienteData {
             return false;
     }
   }
+        public List<Cliente> listarClientesActivos() {
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM cliente WHERE estadoCliente = 1"; 
+
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Cliente c = new Cliente();
+                c.setCodCli(rs.getInt("codCli"));
+                c.setDni(rs.getString("dni"));
+                c.setNombreCliente(rs.getString("nombreCliente"));
+                c.setTelefonoCliente(rs.getString("telefonoCliente"));
+                c.setEdad(rs.getInt("edad"));
+                c.setAfecciones(rs.getBoolean("afecciones"));
+                c.setEstadoCliente(rs.getBoolean("estadoCliente"));
+                
+                clientes.add(c);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar clientes activos: " + ex.getMessage());
+        }
+        return clientes;
+    }
 }

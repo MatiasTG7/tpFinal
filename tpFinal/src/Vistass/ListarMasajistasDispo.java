@@ -1,13 +1,25 @@
 
 package Vistass;
 
+import Modeloo.Masajista;
+import Modeloo.Conexion;
+import Persistencia.MasajistaData;
+import java.sql.Connection;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 public class ListarMasajistasDispo extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ListarMasajistasDispo
-     */
+    private DefaultTableModel modeloTabla;
+    private Connection con;
+    private MasajistaData masajistaData;
+    
     public ListarMasajistasDispo() {
         initComponents();
+        con = (Connection) Conexion.getConexion();
+        masajistaData = new MasajistaData(con);
+        modeloTabla = (DefaultTableModel) jtListaMasajistasDispo.getModel();
+        cargarTabla();
     }
 
     /**
@@ -104,4 +116,25 @@ public class ListarMasajistasDispo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JTable jtListaMasajistasDispo;
     // End of variables declaration//GEN-END:variables
+    private void cargarTabla() {
+        limpiarTabla();
+        
+        List<Masajista> masajistas = masajistaData.listarMasajistasActivos();
+            
+            for (Masajista masajista : masajistas) {
+            String estado = masajista.isEstadoMasajista() ? "Activo" : "Inactivo";
+            
+            modeloTabla.addRow(new Object[]{
+                masajista.getCodMasajista(),
+                masajista.getMatricula(),
+                masajista.getNombreMasajista(),
+                masajista.getTelefonoMasajista(),
+                estado,
+                masajista.getEspecialidad().toString()
+            });
+        }
+    }
+    private void limpiarTabla() {
+        modeloTabla.setRowCount(0);
+    }
 }

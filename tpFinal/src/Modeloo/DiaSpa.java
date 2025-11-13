@@ -1,4 +1,3 @@
-
 package Modeloo;
 
 import java.time.LocalDateTime;
@@ -9,26 +8,26 @@ public class DiaSpa {
     private int codPack;
     private LocalDateTime FechaYHora;
     private String preferencias;
-    private Cliente codCliente;
+    private Cliente codCli;
     private double monto;
     private boolean estadoDia;
 
     public DiaSpa() {
     }
 
-    public DiaSpa(LocalDateTime FechaYHora, String preferencias, Cliente codCliente, double monto, boolean estadoDia) {
+    public DiaSpa(LocalDateTime FechaYHora, String preferencias, Cliente codCli, double monto, boolean estadoDia) {
         this.FechaYHora = FechaYHora;
         this.preferencias = preferencias;
-        this.codCliente = codCliente;
+        this.codCli = codCli;
         this.monto = monto;
         this.estadoDia = estadoDia;
     }
 
-    public DiaSpa(int codPack, LocalDateTime FechaYHora, String preferencias, Cliente codCliente, double monto, boolean estadoDia) {
+    public DiaSpa(int codPack, LocalDateTime FechaYHora, String preferencias, Cliente codCli, double monto, boolean estadoDia) {
         this.codPack = codPack;
         this.FechaYHora = FechaYHora;
         this.preferencias = preferencias;
-        this.codCliente = codCliente;
+        this.codCli = codCli;
         this.monto = monto;
         this.estadoDia = estadoDia;
     }
@@ -57,12 +56,12 @@ public class DiaSpa {
         this.preferencias = preferencias;
     }
 
-    public Cliente getCodCliente() {
-        return codCliente;
+    public Cliente getCodCli() {
+        return codCli;
     }
 
-    public void setCodCliente(Cliente codCliente) {
-        this.codCliente = codCliente;
+    public void setCodCli(Cliente codCli) {
+        this.codCli = codCli;
     }
 
     public double getMonto() {
@@ -83,7 +82,7 @@ public class DiaSpa {
 
     @Override
     public String toString() {
-        return "DiaSpa{" + "codPack=" + codPack + ", FechaYHora=" + FechaYHora + ", preferencias=" + preferencias + ", codCliente=" + codCliente + ", monto=" + monto + ", estadoDia=" + estadoDia + '}';
+        return "DiaSpa{" + "codPack=" + codPack + ", FechaYHora=" + FechaYHora + ", preferencias=" + preferencias + ", codCliente=" + codCli + ", monto=" + monto + ", estadoDia=" + estadoDia + '}';
     }
     
 }

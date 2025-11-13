@@ -2,6 +2,8 @@
 package Vistass;
 
 import Modeloo.Cliente;
+
+import Modeloo.Conexion;
 import Persistencia.ClienteData;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +19,11 @@ public class InfoCliente extends javax.swing.JInternalFrame {
        
         this.con = con;
         this.clienteData = new ClienteData(con);
+        initComponents();
+        con = (Connection) Conexion.getConexion();
+        clienteData = new ClienteData(con);
+        modeloTabla = (DefaultTableModel) jtCliente.getModel();
+        cargarComboBox();
     }
       
     
@@ -121,14 +128,45 @@ public class InfoCliente extends javax.swing.JInternalFrame {
 
     private void jcbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbClienteActionPerformed
         // TODO add your handling code here:
+        limpiarTabla();
+        Cliente clienteSeleccionado = (Cliente) jcbCliente.getSelectedItem();
+        
+        if (clienteSeleccionado == null) {
+            return;
+        }
+        String afecciones = clienteSeleccionado.isAfecciones() ? "Si" : "No";
+        String estado = clienteSeleccionado.isEstadoCliente() ? "Activo" : "Inactivo";
+        
+        modeloTabla.addRow(new Object[]{
+            clienteSeleccionado.getCodCli(),
+            clienteSeleccionado.getDni(),
+            clienteSeleccionado.getNombreCliente(),
+            clienteSeleccionado.getTelefonoCliente(),
+            clienteSeleccionado.getEdad(),
+            afecciones,
+            estado
+        });
+        
     }//GEN-LAST:event_jcbClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcbCliente;
+    private javax.swing.JComboBox<Cliente> jcbCliente;
     private javax.swing.JLabel jlInfoClientes;
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JTable jtCliente;
     // End of variables declaration//GEN-END:variables
+    private void cargarComboBox(){
+        List<Cliente> clientes = clienteData.listarClientes();
+        
+        jcbCliente.removeAllItems();
+        
+        for(Cliente cliente : clientes){
+            jcbCliente.addItem(cliente);
+        }
+    }
+    private void limpiarTabla() {
+        modeloTabla.setRowCount(0);
+    }
 }

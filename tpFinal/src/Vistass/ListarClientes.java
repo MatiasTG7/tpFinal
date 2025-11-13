@@ -1,13 +1,25 @@
 
 package Vistass;
 
+import Modeloo.Cliente;
+import Modeloo.Conexion;
+import Persistencia.ClienteData;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.mariadb.jdbc.Connection;
+
 public class ListarClientes extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ListarClientes
-     */
+    private DefaultTableModel modeloTabla;
+    private Connection con;
+    private ClienteData clienteData;
+    
     public ListarClientes() {
         initComponents();
+        con = (Connection) Conexion.getConexion();
+        clienteData = new ClienteData(con);
+        modeloTabla = (DefaultTableModel) jtListaClientes.getModel();
+        cargarTabla();
     }
 
     /**
@@ -106,4 +118,27 @@ public class ListarClientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JTable jtListaClientes;
     // End of variables declaration//GEN-END:variables
+    private void cargarTabla(){
+        limpiarTabla();
+        
+        List<Cliente> clientes = clienteData.listarClientes();
+        
+        for(Cliente cliente : clientes){
+            String afecciones = cliente.isAfecciones() ? "Si" : "No";
+            String estado = cliente.isEstadoCliente() ? "Activo" : "Inactivo";
+            
+            modeloTabla.addRow(new Object[]{
+                cliente.getCodCli(),
+                cliente.getDni(),
+                cliente.getNombreCliente(),
+                cliente.getTelefonoCliente(),
+                cliente.getEdad(),
+                afecciones,estado
+            });
+        }
+    }
+
+    private void limpiarTabla() {
+        modeloTabla.setRowCount(0);
+    }
 }

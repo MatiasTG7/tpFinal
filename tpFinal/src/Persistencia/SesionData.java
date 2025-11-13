@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import org.mariadb.jdbc.Connection;
 
 public class SesionData {
@@ -23,8 +25,11 @@ public class SesionData {
         this.masajistaData= new MasajistaData(con);
     }
 
-    public SesionData(){
-    }
+    public SesionData() {
+    this.con = (Connection) Conexion.getConexion();
+    this.masajistaData = new MasajistaData(con);
+}
+
     
     public void insertarSesion(Sesion sesion) {
         String sql = "INSERT INTO sesion (fechaInicio, fechaFin, codTratamiento, codMasajista, codPack, codInstal, estadoInstalacion) "
@@ -39,9 +44,8 @@ public class SesionData {
         ps.setInt(6, sesion.getCodInstal());
         ps.setBoolean(7, sesion.isEstadoInstalacion());
         
-        ps.executeUpdate(); // Solo ejecuta
+        ps.executeUpdate();
         
-        // Obten el ID de forma segura
         try (ResultSet rs = ps.getGeneratedKeys()) {
             if (rs.next()) {
                 sesion.setCodSesion(rs.getInt(1));
@@ -113,7 +117,7 @@ public class SesionData {
         
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar la sesion: " + ex.getMessage());
-            return false; // <-- Devuelve false en error
+            return false;
         }
     }
    
@@ -129,7 +133,7 @@ public class SesionData {
         
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al cambiar el estado: " + ex.getMessage());
-            return false; // <-- Devuelve false en error
+            return false;
         }
     }
    
@@ -159,5 +163,60 @@ public class SesionData {
             JOptionPane.showMessageDialog(null, "Error al actualizar el masajista: " + e.getMessage());
             return false;
         }
+    }
+   public List<Sesion> listarSesiones() {
+        List<Sesion> sesiones = new ArrayList<>();
+        String sql = "SELECT * FROM sesion"; 
+
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Sesion sesion = new Sesion();
+                sesion.setCodSesion(rs.getInt("codSesion"));
+                sesion.setFechaInicio(rs.getTimestamp("fechaInicio").toLocalDateTime());
+                sesion.setFechaFin(rs.getTimestamp("fechaFin").toLocalDateTime());
+                sesion.setCodTratamiento(rs.getInt("codTratamiento"));
+                sesion.setCodMasajista(rs.getInt("codMasajista"));
+                sesion.setCodPack(rs.getInt("codPack"));
+                sesion.setCodInstal(rs.getInt("codInstal"));
+                sesion.setEstadoInstalacion(rs.getBoolean("estadoInstalacion"));
+                
+                sesiones.add(sesion);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar las sesiones: " + ex.getMessage());
+        }
+        return sesiones;
+    }
+   
+   public List<Sesion> listarSesionesPorCliente(int codCli) {
+        List<Sesion> sesiones = new ArrayList<>();
+        
+        String sql = "SELECT s.* FROM sesion s " +
+                     "JOIN diaspa d ON s.codPack = d.codPack " +
+                     "WHERE d.codCli = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, codCli);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Sesion sesion = new Sesion();
+                sesion.setCodSesion(rs.getInt("codSesion"));
+                sesion.setFechaInicio(rs.getTimestamp("fechaInicio").toLocalDateTime());
+                sesion.setFechaFin(rs.getTimestamp("fechaFin").toLocalDateTime());
+                sesion.setCodTratamiento(rs.getInt("codTratamiento"));
+                sesion.setCodMasajista(rs.getInt("codMasajista"));
+                sesion.setCodPack(rs.getInt("codPack"));
+                sesion.setCodInstal(rs.getInt("codInstal"));
+                sesion.setEstadoInstalacion(rs.getBoolean("estadoInstalacion"));
+                
+                sesiones.add(sesion);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar sesiones por cliente: " + ex.getMessage());
+        }
+        return sesiones;
     }
 } 

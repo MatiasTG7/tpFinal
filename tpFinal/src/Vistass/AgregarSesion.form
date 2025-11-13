@@ -38,56 +38,69 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jlCodInstalacion" pref="182" max="32767" attributes="0"/>
-                                  <Component id="jtfCodMasajista" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jlCodMasajista" max="32767" attributes="0"/>
-                                  <Component id="jtfCodInstalacion" max="32767" attributes="0"/>
-                                  <Component id="jbGuardarSesion" max="32767" attributes="0"/>
-                                  <Component id="jbActualizarSesion" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jtfCodDiaSpa" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jlCodDiaSpa" pref="161" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="jbCambiarEstadoSesion" min="-2" pref="151" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jlEstadoInstalacion" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jcbEstadoInstalacion" alignment="0" pref="159" max="32767" attributes="0"/>
-                                          <Component id="jbEliminarSesion" alignment="1" min="-2" pref="151" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jlFechaFin" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jtfFechaFin" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtfFechaInicio" alignment="0" pref="182" max="32767" attributes="0"/>
-                                  <Component id="jlFechaInicio" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jlCodTratamiento" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jtfCodTratamiento" max="32767" attributes="0"/>
-                                  <Component id="jbBuscarSesion" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jlTitulo" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jlGestionClientes" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jlCodigoSesion" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
+                                  <Component id="jtfCodigoSesion" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="jbBuscarSesion" min="-2" pref="161" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jlCodInstalacion" max="32767" attributes="0"/>
+                                  <Component id="jtfCodInstalacion" min="-2" pref="182" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jtfCodDiaSpa" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jlCodDiaSpa" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jlEstadoInstalacion" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jcbEstadoInstalacion" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jtfFechaInicio" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlFechaInicio1" alignment="0" pref="182" max="32767" attributes="0"/>
+                                  <Component id="jtfCodTratamiento" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlCodTratamiento" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jlFechaFin" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfFechaFin" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlCodMasajista" max="32767" attributes="0"/>
+                                  <Component id="jtfCodMasajista" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jbGuardarSesion" max="32767" attributes="0"/>
+                                  <Component id="jbActualizarSesion" min="-2" pref="182" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jbCambiarEstadoSesion" min="-2" pref="151" max="-2" attributes="0"/>
+                                  <Component id="jbEliminarSesion" alignment="1" min="-2" pref="151" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -103,52 +116,61 @@
               <Component id="jlTitulo" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jlGestionClientes" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="jlFechaInicio" min="-2" pref="23" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jlCodigoSesion" min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                      <Component id="jtfFechaInicio" min="-2" pref="26" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jbBuscarSesion" min="-2" pref="28" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jlFechaFin" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlCodTratamiento" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jtfCodTratamiento" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jtfFechaFin" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="jtfCodigoSesion" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="jbBuscarSesion" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jlCodDiaSpa" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jlFechaInicio1" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Component id="jtfFechaInicio" min="-2" pref="26" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jlFechaFin" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jtfFechaFin" min="-2" pref="28" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jlCodTratamiento" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jtfCodTratamiento" min="-2" pref="28" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jlCodDiaSpa" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="jtfCodDiaSpa" min="-2" pref="28" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jlCodInstalacion" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jtfCodInstalacion" min="-2" pref="28" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jlCodMasajista" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jtfCodMasajista" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="jtfCodDiaSpa" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jtfCodMasajista" min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jlEstadoInstalacion" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                      <Component id="jlCodInstalacion" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jtfCodInstalacion" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="jcbEstadoInstalacion" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="jcbEstadoInstalacion" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbGuardarSesion" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="jbEliminarSesion" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -158,7 +180,7 @@
                   <Component id="jbActualizarSesion" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="jbCambiarEstadoSesion" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -234,7 +256,7 @@
         <Property name="text" type="java.lang.String" value="Spa Entre Dedos"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jlFechaInicio">
+    <Component class="javax.swing.JLabel" name="jlCodigoSesion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="12" style="2"/>
@@ -242,7 +264,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e" green="36" red="45" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Fecha de incio:"/>
+        <Property name="text" type="java.lang.String" value="Codigo sesion:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlFechaFin">
@@ -456,6 +478,31 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCambiarEstadoSesionActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlFechaInicio1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="2"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e" green="36" red="45" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Fecha de incio:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfCodigoSesion">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e" green="36" red="45" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+            <MatteColorBorder bottom="1" left="0" right="0" top="0">
+              <Color PropertyName="color" blue="28" green="ba" red="8a" type="rgb"/>
+            </MatteColorBorder>
+          </Border>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

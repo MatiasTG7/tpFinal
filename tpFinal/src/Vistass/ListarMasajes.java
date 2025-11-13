@@ -1,13 +1,25 @@
 
 package Vistass;
 
+import Modeloo.Conexion;
+import Modeloo.Masaje;
+import Persistencia.MasajeData;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.mariadb.jdbc.Connection;
+
 public class ListarMasajes extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ListarMasajes
-     */
+    private DefaultTableModel modeloTabla;
+    private Connection con;
+    private MasajeData masajeData;
+    
     public ListarMasajes() {
         initComponents();
+        con = (Connection) Conexion.getConexion();
+        masajeData = new MasajeData(con);
+        modeloTabla = (DefaultTableModel) jtListaMasaje.getModel();
+        cargarTabla();
     }
 
     /**
@@ -105,4 +117,25 @@ public class ListarMasajes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JTable jtListaMasaje;
     // End of variables declaration//GEN-END:variables
+    private void cargarTabla() {
+        limpiarTabla();
+        List<Masaje> masajes = masajeData.listarMasajes();
+        
+        for (Masaje masaje : masajes) {
+            String estado = masaje.isActivo() ? "Activo" : "Inactivo";
+            
+            modeloTabla.addRow(new Object[]{
+                masaje.getCodTratamiento(),
+                masaje.getNombreTratamiento(),
+                masaje.getDetalleTratamiento(),
+                masaje.getDuracionTratamiento(),
+                masaje.getCostoTratamiento(),
+                estado,
+                masaje.getTipo().toString()
+            });
+        }
+    }
+    private void limpiarTabla() {
+        modeloTabla.setRowCount(0);
+    }
 }

@@ -91,7 +91,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return this.nombreCliente + "(DNI: "+ this.dni + ")";
+        return this.nombreCliente + "  -  Dni: "+ this.dni;
     }
     
     @Override

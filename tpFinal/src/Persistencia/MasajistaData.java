@@ -62,8 +62,7 @@ public class MasajistaData {
                     masajista.setMatricula(rs.getString("matricula"));
                     masajista.setNombreMasajista(rs.getString("nombreMasajista"));
                     masajista.setTelefonoMasajista(rs.getString("telefonoMasajista"));
-                    
-                    // Conversión de String de BD a Enum
+
                     String especialidadStr = rs.getString("especialidad");
                     masajista.setEspecialidad(EspecialidadMasajista.valueOf(especialidadStr.toUpperCase())); 
                     
@@ -71,16 +70,41 @@ public class MasajistaData {
                 }
             }
         } catch (SQLException | IllegalArgumentException ex) {
-             // IllegalArgumentException se captura si el Enum no coincide.
              JOptionPane.showMessageDialog(null, "Error al buscar Masajista por Matrícula: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         return masajista;
     }
 
-
+    public List<Masajista> listarMasajistasActivos() {
+    List<Masajista> masajistas = new ArrayList<>();
+    String sql = "SELECT * FROM masajista WHERE estadoMasajista = 1"; 
+    
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            Masajista masajista = new Masajista();
+            
+            masajista.setCodMasajista(rs.getInt("codMasajista"));
+            masajista.setMatricula(rs.getString("matricula"));
+            masajista.setNombreMasajista(rs.getString("nombreMasajista"));
+            masajista.setTelefonoMasajista(rs.getString("telefonoMasajista"));
+            masajista.setEstadoMasajista(rs.getBoolean("estadoMasajista"));
+            
+            String especialidadDB = rs.getString("especialidad");
+            masajista.setEspecialidad(EspecialidadMasajista.valueOf(especialidadDB.toUpperCase()));
+            
+            masajistas.add(masajista);
+        }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar masajistas activos: " + ex.getMessage());
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "Error de ENUM en Masajistas: " + e.getMessage());
+        }
+        return masajistas;
+    }
    
     public void actualizarMasajista(Masajista masajista) {
-        // Se actualizan todos los campos excepto el ID (codMasajista) que se usa en el WHERE.
         String sql = "UPDATE masajista SET matricula = ?, nombreMasajista = ?, telefonoMasajista = ?, especialidad = ?, estadoMasajista = ? "
                    + "WHERE codMasajista = ?";
 
