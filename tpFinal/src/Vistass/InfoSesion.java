@@ -1,13 +1,37 @@
 
 package Vistass;
 
+import Modeloo.Cliente;
+import Modeloo.Conexion;
+import Modeloo.Sesion;
+import Persistencia.ClienteData;
+import Persistencia.SesionData;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.mariadb.jdbc.Connection;
+
 public class InfoSesion extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form InfoSesion
-     */
+    private DefaultTableModel modeloTabla;
+    private SesionData sesionData;
+    private ClienteData clienteData;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    
     public InfoSesion() {
         initComponents();
+        this.modeloTabla = new DefaultTableModel();
+        this.sesionData = new SesionData((Connection) Conexion.getConexion());
+        this.clienteData = new ClienteData((Connection) Conexion.getConexion());
+        
+        armarCabeceraTabla();
+        cargarClientesEnComboBox();
+        jcbSesiones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSesionesActionPerformed(evt);
+            }
+        });
+        limpiarTabla();
     }
 
     /**
@@ -40,6 +64,11 @@ public class InfoSesion extends javax.swing.JInternalFrame {
         jcbSesiones.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jcbSesiones.setForeground(new java.awt.Color(69, 54, 14));
         jcbSesiones.setBorder(null);
+        jcbSesiones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSesionesActionPerformed(evt);
+            }
+        });
 
         jtSesion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,8 +107,8 @@ public class InfoSesion extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,31 +117,89 @@ public class InfoSesion extends javax.swing.JInternalFrame {
                         .addGap(50, 50, 50)
                         .addComponent(jlGestionClientes))
                     .addComponent(jlTitulo))
-                .addGap(181, 181, 181))
+                .addGap(210, 210, 210))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(35, 35, 35)
                 .addComponent(jlTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlGestionClientes)
                 .addGap(18, 18, 18)
                 .addComponent(jcbSesiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbSesionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSesionesActionPerformed
+        
+        Object item = jcbSesiones.getSelectedItem();
+        
+        if (item == null) {
+            limpiarTabla();
+            return;
+        }
+        Cliente clienteSeleccionado = (Cliente) item;
+        cargarDatosTabla(clienteSeleccionado.getCodCli());
+    }//GEN-LAST:event_jcbSesionesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcbSesiones;
+    private javax.swing.JComboBox<Cliente> jcbSesiones;
     private javax.swing.JLabel jlGestionClientes;
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JTable jtSesion;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabeceraTabla() {
+        modeloTabla.addColumn("Sesion");
+        modeloTabla.addColumn("Inicio");
+        modeloTabla.addColumn("Fin");
+        modeloTabla.addColumn("Tratamiento");
+        modeloTabla.addColumn("Masajista");
+        modeloTabla.addColumn("Pack");
+        modeloTabla.addColumn("Instalacion");
+        modeloTabla.addColumn("Estado");
+        jtSesion.setModel(modeloTabla);
+    }
+    
+    private void cargarClientesEnComboBox() {
+        jcbSesiones.removeAllItems(); //
+
+        List<Cliente> clientesActivos = clienteData.listarClientesActivos();
+        for (Cliente cliente : clientesActivos) {
+            jcbSesiones.addItem(cliente); 
+        }
+        
+        if (!clientesActivos.isEmpty()) {
+            cargarDatosTabla(clientesActivos.get(0).getCodCli());
+        }
+    }
+    
+    private void limpiarTabla() {
+        modeloTabla.setRowCount(0);
+    }
+    
+    private void cargarDatosTabla(int codCli) {
+        limpiarTabla();
+        List<Sesion> sesiones = sesionData.listarSesionesPorCliente(codCli);
+        
+        for (Sesion s : sesiones) {
+            modeloTabla.addRow(new Object[]{
+                s.getCodSesion(),
+                s.getFechaInicio().format(formatter),
+                s.getFechaFin().format(formatter),
+                s.getCodTratamiento(),
+                s.getCodMasajista(),
+                s.getCodPack(),
+                s.getCodInstal(),
+                s.isEstadoInstalacion() ? "Activo" : "Inactivo"
+            });
+        }
+    }
 }

@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import org.mariadb.jdbc.Connection;
 
 public class SesionData {
@@ -161,5 +163,60 @@ public class SesionData {
             JOptionPane.showMessageDialog(null, "Error al actualizar el masajista: " + e.getMessage());
             return false;
         }
+    }
+   public List<Sesion> listarSesiones() {
+        List<Sesion> sesiones = new ArrayList<>();
+        String sql = "SELECT * FROM sesion"; 
+
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Sesion sesion = new Sesion();
+                sesion.setCodSesion(rs.getInt("codSesion"));
+                sesion.setFechaInicio(rs.getTimestamp("fechaInicio").toLocalDateTime());
+                sesion.setFechaFin(rs.getTimestamp("fechaFin").toLocalDateTime());
+                sesion.setCodTratamiento(rs.getInt("codTratamiento"));
+                sesion.setCodMasajista(rs.getInt("codMasajista"));
+                sesion.setCodPack(rs.getInt("codPack"));
+                sesion.setCodInstal(rs.getInt("codInstal"));
+                sesion.setEstadoInstalacion(rs.getBoolean("estadoInstalacion"));
+                
+                sesiones.add(sesion);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar las sesiones: " + ex.getMessage());
+        }
+        return sesiones;
+    }
+   
+   public List<Sesion> listarSesionesPorCliente(int codCli) {
+        List<Sesion> sesiones = new ArrayList<>();
+        
+        String sql = "SELECT s.* FROM sesion s " +
+                     "JOIN diaspa d ON s.codPack = d.codPack " +
+                     "WHERE d.codCli = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, codCli);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Sesion sesion = new Sesion();
+                sesion.setCodSesion(rs.getInt("codSesion"));
+                sesion.setFechaInicio(rs.getTimestamp("fechaInicio").toLocalDateTime());
+                sesion.setFechaFin(rs.getTimestamp("fechaFin").toLocalDateTime());
+                sesion.setCodTratamiento(rs.getInt("codTratamiento"));
+                sesion.setCodMasajista(rs.getInt("codMasajista"));
+                sesion.setCodPack(rs.getInt("codPack"));
+                sesion.setCodInstal(rs.getInt("codInstal"));
+                sesion.setEstadoInstalacion(rs.getBoolean("estadoInstalacion"));
+                
+                sesiones.add(sesion);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar sesiones por cliente: " + ex.getMessage());
+        }
+        return sesiones;
     }
 } 

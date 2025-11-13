@@ -15,10 +15,13 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
 
     private SesionData sd;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private int codSesionActual = -1;
+    private boolean estadoActual = false;
     
     public AgregarSesion() {
         initComponents();
         sd = new SesionData((Connection) Conexion.getConexion());
+        
     }
 
     /**
@@ -301,7 +304,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
     private void jbGuardarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarSesionActionPerformed
 
         if (!validarCampos()) {
-            return; // si falta algo, no continúa
+            return;
         }
 
         try {
@@ -318,7 +321,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
             s.setCodTratamiento(codTratamiento);
             s.setCodMasajista(codMasajista);
             s.setCodInstal(codInstalacion);
-            s.setCodPack(codPack); // tu código de día de spa
+            s.setCodPack(codPack);
             s.setFechaInicio(fechaInicio);
             s.setFechaFin(fechaFin);
             s.setEstadoInstalacion(estado);
@@ -336,19 +339,122 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarSesionActionPerformed
 
     private void jbActualizarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarSesionActionPerformed
+        if (this.codSesionActual <= 0) {
+            JOptionPane.showMessageDialog(this, "Debes buscar una sesion antes.");
+            return;
+        }
         
+        if (!validarCampos()) {
+            return;
+        }
+
+        try {
+            int codTratamiento = Integer.parseInt(jtfCodTratamiento.getText());
+            int codMasajista = Integer.parseInt(jtfCodMasajista.getText());
+            int codInstalacion = Integer.parseInt(jtfCodInstalacion.getText());
+            int codPack = Integer.parseInt(jtfCodDiaSpa.getText());
+            boolean estado = jcbEstadoInstalacion.getSelectedItem().toString().equalsIgnoreCase("Activo");
+
+            LocalDateTime fechaInicio = LocalDateTime.parse(jtfFechaInicio.getText(), formatter);
+            LocalDateTime fechaFin = LocalDateTime.parse(jtfFechaFin.getText(), formatter);
+
+            Sesion s = new Sesion(this.codSesionActual, fechaInicio, fechaFin, codTratamiento, codMasajista, codPack, codInstalacion, estado); //
+
+            if (sd.actualizarSesion(s)) { //
+                JOptionPane.showMessageDialog(this, "La sesion fue actualizada correctamente.");
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar la sesion.");
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El codigo debe ser numerico.");
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Error en el formato de la fecha (dd/MM/yyyy HH:mm).");
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar la sesion: " + e.getMessage());
+        }
     }//GEN-LAST:event_jbActualizarSesionActionPerformed
 
     private void jbEliminarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarSesionActionPerformed
+         if (this.codSesionActual <= 0) {
+            JOptionPane.showMessageDialog(this, "Debes buscar una sesion antes.");
+            return;
+        }
 
+        int opcion = JOptionPane.showConfirmDialog(this, 
+                "¿Estas seguro de eliminar esta sesion?", 
+                "Confirmar eliminacion", 
+                JOptionPane.YES_NO_OPTION);
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            try {
+                if (sd.eliminarSesion(this.codSesionActual)) { //
+                    JOptionPane.showMessageDialog(this, "La sesion fue eliminada correctamente.");
+                    limpiarCampos();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo eliminar la sesion.");
+                }
+            } catch (HeadlessException e) {
+                JOptionPane.showMessageDialog(this, "Error al eliminar la sesion: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_jbEliminarSesionActionPerformed
 
     private void jbCambiarEstadoSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoSesionActionPerformed
+        if (this.codSesionActual <= 0) {
+            JOptionPane.showMessageDialog(this, "Debes buscar una sesion antes.");
+            return;
+        }
 
+        try {
+            boolean nuevoEstado = !this.estadoActual;
+
+            if (sd.BajaAltaLogicaSesion(this.codSesionActual, nuevoEstado)) {
+                
+                String estadoStr = nuevoEstado ? "Activo" : "Inactivo";
+                JOptionPane.showMessageDialog(this, "El estado de la instalacion se actualizo a: " + estadoStr);
+
+                this.estadoActual = nuevoEstado;
+                
+                jcbEstadoInstalacion.setSelectedItem(nuevoEstado ? "Activo" : "Inactivo");           
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo cambiar el estado de la sesion.");
+            }
+            
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Error al cambiar el estado: " + e.getMessage());
+        }
     }//GEN-LAST:event_jbCambiarEstadoSesionActionPerformed
 
     private void jbBuscarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarSesionActionPerformed
-        
+        try {
+            int codSesion = Integer.parseInt(jtfCodigoSesion.getText());
+            Sesion sesion = sd.buscarSesion(codSesion);
+
+            if (sesion != null) {
+                this.codSesionActual = sesion.getCodSesion();
+                this.estadoActual = sesion.isEstadoInstalacion();
+
+                jtfFechaInicio.setText(sesion.getFechaInicio().format(formatter));
+                jtfFechaFin.setText(sesion.getFechaFin().format(formatter));
+                jtfCodTratamiento.setText(String.valueOf(sesion.getCodTratamiento()));
+                jtfCodMasajista.setText(String.valueOf(sesion.getCodMasajista()));
+                jtfCodDiaSpa.setText(String.valueOf(sesion.getCodPack()));
+                jtfCodInstalacion.setText(String.valueOf(sesion.getCodInstal()));
+                jcbEstadoInstalacion.setSelectedItem(sesion.isEstadoInstalacion() ? "Activo" : "Inactivo");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontro ninguna sesion con este codigo.");
+                limpiarCampos();
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El codigo debe ser numerico.");
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Error al buscar la sesion: " + e.getMessage());
+        }
     }//GEN-LAST:event_jbBuscarSesionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -387,6 +493,8 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
         jtfCodInstalacion.setText("");
         jtfCodDiaSpa.setText("");
         jcbEstadoInstalacion.setSelectedIndex(0);
+        this.codSesionActual = -1;
+        this.estadoActual = false;
     }
 
     private boolean validarCampos() {
