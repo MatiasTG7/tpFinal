@@ -15,7 +15,7 @@ public class DiaSpa {
     public DiaSpa() {
     }
 
-    public DiaSpa(LocalDateTime FechaYHora, String preferencias, Cliente codCliente, double monto, boolean estadoDia) {
+    public DiaSpa(LocalDateTime FechaYHora, String preferencias, Cliente codCli, double monto, boolean estadoDia) {
         this.FechaYHora = FechaYHora;
         this.preferencias = preferencias;
         this.codCli = codCli;
@@ -23,7 +23,7 @@ public class DiaSpa {
         this.estadoDia = estadoDia;
     }
 
-    public DiaSpa(int codPack, LocalDateTime FechaYHora, String preferencias, Cliente codCliente, double monto, boolean estadoDia) {
+    public DiaSpa(int codPack, LocalDateTime FechaYHora, String preferencias, Cliente codCli, double monto, boolean estadoDia) {
         this.codPack = codPack;
         this.FechaYHora = FechaYHora;
         this.preferencias = preferencias;

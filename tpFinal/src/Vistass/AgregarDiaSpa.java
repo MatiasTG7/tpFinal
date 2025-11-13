@@ -21,13 +21,16 @@ import org.mariadb.jdbc.Connection;
 public class AgregarDiaSpa extends javax.swing.JInternalFrame {
 
     private DiaSpaData dsData;
+    private ClienteData cData;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private int codPackActual = -1;
+    private boolean estadoActual = false;
     
     public AgregarDiaSpa() {
         initComponents();
         dsData = new DiaSpaData((Connection) Conexion.getConexion());
-        jcbEstadoDiaSpa.addItem("Activo");
-        jcbEstadoDiaSpa.addItem("Inactivo");
+        cData = new ClienteData((Connection) Conexion.getConexion());
+        
     }
 
     /**
@@ -203,8 +206,9 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
                             .addComponent(jtfFechaYHora)
                             .addComponent(jtfPreferencias)
                             .addComponent(jlPreferencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbGuardarDiaSpa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbActualizarDiaSpa, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jbGuardarDiaSpa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbActualizarDiaSpa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcbEstadoDiaSpa, 0, 145, Short.MAX_VALUE)
@@ -292,39 +296,53 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
 
     private void jbCambiarEstadoDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoDiaSpaActionPerformed
 
-        try {
-        int codCli = Integer.parseInt(jtfCodCli.getText());
-        boolean nuevoEstado = jcbEstadoDiaSpa.getSelectedItem().equals("Activo") ? false : true;
-        dsData.cambiarEstadoDia(codCli, nuevoEstado);
+        if (this.codPackActual <= 0) {
+            JOptionPane.showMessageDialog(this, "Debes buscar un dia de spa antes.");
+            return;
+        }
 
-        JOptionPane.showMessageDialog(this, "Estado cambiado correctamente.");
-        limpiarCampos();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al cambiar estado: " + e.getMessage());
-    }
+        try {
+            boolean nuevoEstado = !this.estadoActual; 
+            
+            dsData.cambiarEstadoDia(this.codPackActual, nuevoEstado);
+
+            String estadoStr = nuevoEstado ? "Activo" : "Inactivo";
+            JOptionPane.showMessageDialog(this, "El estado del dia de spa se actualizo a: " + estadoStr);
+
+            this.estadoActual = nuevoEstado;
+            
+            jcbEstadoDiaSpa.setSelectedItem(nuevoEstado ? "Activo" : "Inactivo");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cambiar estado: " + e.getMessage());
+        }
     }//GEN-LAST:event_jbCambiarEstadoDiaSpaActionPerformed
 
     private void jbBuscarDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarDiaSpaActionPerformed
 
         try {
-            int codCli = Integer.parseInt(jtfCodCli.getText());
-            DiaSpa dia = dsData.buscarDiaSpaPorCliente(codCli);
-            
-            if (dia != null) {
-                if (dia.getFechaYHora() != null) {
-                    jtfFechaYHora.setText(dia.getFechaYHora().format(formatter));
-                } else {
-                    jtfFechaYHora.setText("");
-                }
-                    jtfPreferencias.setText(dia.getPreferencias());
-                    jtfMonto.setText(String.valueOf(dia.getMonto()));
-                    jcbEstadoDiaSpa.setSelectedItem(dia.isEstadoDia() ? "Activo" : "Inactivo");
+        int codCli = Integer.parseInt(jtfCodCli.getText());
+        DiaSpa dia = dsData.buscarDiaSpaPorCliente(codCli);
+        
+        if (dia != null) {
+            this.codPackActual = dia.getCodPack();
+            this.estadoActual = dia.isEstadoDia();
+
+            if (dia.getFechaYHora() != null) {
+                jtfFechaYHora.setText(dia.getFechaYHora().format(formatter));
             } else {
-                JOptionPane.showMessageDialog(this, "No se encontro un dia de spa para este cliente.");
+                jtfFechaYHora.setText("");
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al buscar el dia de spa: " + e.getMessage());
+                jtfPreferencias.setText(dia.getPreferencias());
+                jtfMonto.setText(String.valueOf(dia.getMonto()));
+                jcbEstadoDiaSpa.setSelectedItem(dia.isEstadoDia() ? "Activo" : "Inactivo");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontro un dia de spa para este cliente.");
+            limpiarCampos();
         }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar el dia de spa: " + e.getMessage());
+    }
     }//GEN-LAST:event_jbBuscarDiaSpaActionPerformed
 
     private void jtfPreferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPreferenciasActionPerformed
@@ -357,11 +375,6 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
             return;
         }
 
-        if (cliente.isEstadoCliente() != estado) {
-            JOptionPane.showMessageDialog(this, "El estado del cliente no coincide con el del dia.");
-            return;
-        }
-
         DiaSpa dia = new DiaSpa(fechaHora, preferencias, cliente, monto, estado);
         dsData.insertarDia(dia);
 
@@ -376,6 +389,11 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
 
         if (!validarCampos()) {
         JOptionPane.showMessageDialog(this, "Debes completar todos los campos.");
+        return;
+    }
+    
+    if (this.codPackActual <= 0) {
+        JOptionPane.showMessageDialog(this, "Debes buscar un día de spa.");
         return;
     }
 
@@ -393,14 +411,10 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No se encontro un cliente con este codigo.");
             return;
         }
-        
-        if (cliente.isEstadoCliente() != estado) {
-            JOptionPane.showMessageDialog(this, "El estado del cliente no coincide con el del día de spa.");
-            return;
-        }
 
-        DiaSpa dia = new DiaSpa(0, fechaHora, preferencias, cliente, monto, estado);
-        if (dsData.actualizarDiaSpa(dia)) {
+        DiaSpa dia = new DiaSpa(this.codPackActual, fechaHora, preferencias, cliente, monto, estado); 
+        
+        if (dsData.actualizarDiaSpa(dia)) { //
             JOptionPane.showMessageDialog(this, "El dia de spa fue actualizado correctamente.");
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo actualizar el dia.");
@@ -440,6 +454,8 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
         jtfPreferencias.setText("");
         jtfMonto.setText("");
         jcbEstadoDiaSpa.setSelectedIndex(0);
+        this.codPackActual = -1;
+        this.estadoActual = false;
     }
 
     private boolean validarCampos() {

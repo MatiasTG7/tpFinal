@@ -52,7 +52,6 @@ public class DiaSpaData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 diaSpa.setCodPack(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "El dia de spa fue guardado correctamente.");
             }
 
             ps.close();
@@ -125,7 +124,7 @@ public class DiaSpaData {
 
             int filas = ps.executeUpdate();
             if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "El estado del dia de spa fue cambiado correctamente.");
+
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontro un dia de spa con este codigo.");
             }
@@ -154,12 +153,12 @@ public class DiaSpaData {
     }
     }
 
-    public DiaSpa buscarDiaSpaPorCliente(int codCliente) {
-    String sql = "SELECT * FROM diaspa WHERE codCliente = ?";
+    public DiaSpa buscarDiaSpaPorCliente(int codCli) {
+    String sql = "SELECT * FROM diaspa WHERE codCli = ?";
     DiaSpa diaSpa = null;
 
     try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setInt(1, codCliente);
+        ps.setInt(1, codCli);
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
@@ -170,7 +169,6 @@ public class DiaSpaData {
             diaSpa.setMonto(rs.getDouble("monto"));
             diaSpa.setEstadoDia(rs.getBoolean("estadoDia"));
             
-            // Si tu clase tiene un Cliente completo:
             Cliente cliente = new Cliente();
             cliente.setCodCli(rs.getInt("codCli"));
             diaSpa.setCodCli(cliente);
@@ -179,7 +177,7 @@ public class DiaSpaData {
         rs.close();
 
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al buscar el día de spa: " + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al buscar el dia de spa: " + ex.getMessage());
     }
     return diaSpa;
     }

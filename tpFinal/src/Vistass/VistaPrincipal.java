@@ -78,6 +78,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jmiAgregarInstalacion = new javax.swing.JMenuItem();
         jmiListarInstalaciones = new javax.swing.JMenuItem();
         jmReportes = new javax.swing.JMenu();
+        jmiAgregarDiaSpa = new javax.swing.JMenuItem();
         jmiReporteDiaSpa = new javax.swing.JMenuItem();
         jmiReporteSolicitados = new javax.swing.JMenuItem();
         jmMasajes = new javax.swing.JMenu();
@@ -233,6 +234,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jmReportes.setMaximumSize(new java.awt.Dimension(60, 60));
         jmReportes.setMinimumSize(new java.awt.Dimension(50, 50));
         jmReportes.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        jmiAgregarDiaSpa.setText("Gestion Dia de Spa");
+        jmiAgregarDiaSpa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgregarDiaSpaActionPerformed(evt);
+            }
+        });
+        jmReportes.add(jmiAgregarDiaSpa);
 
         jmiReporteDiaSpa.setText("Reporte Dia de Spa");
         jmiReporteDiaSpa.addActionListener(new java.awt.event.ActionListener() {
@@ -412,16 +421,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmiListarInstalacionesActionPerformed
 
-    private void jmiReporteDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReporteDiaSpaActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();
-        ReporteDiaSpa reportespa = new ReporteDiaSpa();
-        reportespa.setVisible(true);
-        reportespa.getContentPane().setBackground(new Color(242,242,242));
-        escritorio.add(reportespa);
-        
-    }//GEN-LAST:event_jmiReporteDiaSpaActionPerformed
-
     private void jmiReporteSolicitadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReporteSolicitadosActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
@@ -431,6 +430,25 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.add(reportesolicitados);
         
     }//GEN-LAST:event_jmiReporteSolicitadosActionPerformed
+
+    private void jmiReporteDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReporteDiaSpaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ReporteDiaSpa reportespa = new ReporteDiaSpa();
+        reportespa.setVisible(true);
+        reportespa.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(reportespa);
+
+    }//GEN-LAST:event_jmiReporteDiaSpaActionPerformed
+
+    private void jmiAgregarDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarDiaSpaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        AgregarDiaSpa agregarDia = new AgregarDiaSpa();
+        agregarDia.setVisible(true);
+        agregarDia.getContentPane().setBackground(new Color(242,242,242));
+        escritorio.add(agregarDia);
+    }//GEN-LAST:event_jmiAgregarDiaSpaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -483,6 +501,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jmReportes;
     private javax.swing.JMenu jmSesiones;
     private javax.swing.JMenuItem jmiAgregarCliente;
+    private javax.swing.JMenuItem jmiAgregarDiaSpa;
     private javax.swing.JMenuItem jmiAgregarInstalacion;
     private javax.swing.JMenuItem jmiAgregarMasaje;
     private javax.swing.JMenuItem jmiAgregarMasajista;

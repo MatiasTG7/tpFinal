@@ -73,7 +73,7 @@ public class ClienteData {
     }
     public Cliente buscarCliente (int codCli){
         Cliente cliente= null;
-        String sql = "SELECT dni, nombreCliente, telefonoCliente, edad, afecciones, estadoCliente FROM cliente WHERE codCli = ?";
+        String sql = "SELECT * FROM cliente WHERE codCli = ?";
 
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -82,9 +82,12 @@ public class ClienteData {
 
             if (resultado.next()){
                 cliente = new Cliente();
-                cliente.setCodCli(resultado.getInt("codCli"));
+                // Ahora "codCli" SÍ existe en el resultado
+                cliente.setCodCli(resultado.getInt("codCli")); 
                 cliente.setDni(resultado.getString("dni"));
                 cliente.setNombreCliente(resultado.getString("nombreCliente"));
+                // Agrego esta línea que también faltaba en tu SELECT original
+                cliente.setTelefonoCliente(resultado.getString("telefonoCliente")); 
                 cliente.setEdad(resultado.getInt("edad"));
                 cliente.setAfecciones(resultado.getBoolean("afecciones"));
                 cliente.setEstadoCliente(resultado.getBoolean("estadoCliente"));
