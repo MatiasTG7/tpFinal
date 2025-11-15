@@ -28,7 +28,7 @@ public class MasajistaData {
             ps.setString(1, masajista.getMatricula());
             ps.setString(2, masajista.getNombreMasajista());
             ps.setString(3, masajista.getTelefonoMasajista());
-            // Conversión de Enum a String (minúsculas, como en el ENUM de MySQL)
+           
             ps.setString(4, masajista.getEspecialidad().toString().toLowerCase()); 
             ps.setBoolean(5, masajista.isEstadoMasajista()); 
 
@@ -98,6 +98,7 @@ public class MasajistaData {
         }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al listar masajistas activos: " + ex.getMessage());
+            ex.printStackTrace();
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, "Error de ENUM en Masajistas: " + e.getMessage());
         }
