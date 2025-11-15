@@ -11,89 +11,109 @@ import Persistencia.SesionData;
 import java.sql.Connection;
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ReporteDiaSpa extends javax.swing.JInternalFrame {
-
-   private MasajistaData masajistaData;
-   private DefaultTableModel modeloTabla;
-   private SesionData sesionData;
-   private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-   private Connection con;
-  
+private MasajistaData masajistaData;
+    private DefaultTableModel modeloTabla;
+    private SesionData sesionData;
+    private MasajeData masajeData;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private Connection con;
    
    public ReporteDiaSpa() {
         initComponents();
+        modeloTabla = new DefaultTableModel();
         con = Conexion.getConexion();
         
        
         try {
             con = (Connection) Conexion.getConexion();
-            sesionData = new SesionData((org.mariadb.jdbc.Connection) con); 
+            sesionData = new SesionData((org.mariadb.jdbc.Connection) con);
+            
+            masajistaData = new MasajistaData((org.mariadb.jdbc.Connection) con);
+            masajeData = new MasajeData((org.mariadb.jdbc.Connection) con);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error de conexión/inicialización: " + e.getMessage());
             sesionData = null; 
         }
-        
+       
         armarCabeceraTabla();
-        cargarTabla();
+        cargarDatosTabla();
+        System.out.println("" );
+     
     }
    
-    private void armarCabeceraTabla(){
-        modeloTabla.setColumnCount(0);
-        
+ private void armarCabeceraTabla() {
         modeloTabla.addColumn("Fecha");
+        modeloTabla.addColumn("Tiempo de Masaje");
         modeloTabla.addColumn("Masajista");
-        modeloTabla.addColumn("Masaje (Tratamiento)");
-        
-       
-        jTreporte.setModel(modeloTabla); 
+        modeloTabla.addColumn("Masaje");
+        jTreporte.setModel(modeloTabla);
+       // limpiarTabla();
     }
-    
+
     private void limpiarTabla() {
-        if (modeloTabla != null && modeloTabla.getRowCount() > 0) {
-            modeloTabla.setRowCount(0);
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(i);
         }
     }
 
-   
-    private void cargarTabla() {
+    private Map<Integer, Masajista> obtenerMapaMasajistas() {
+        Map<Integer, Masajista> mapaMasajistas = new HashMap<>();
+        List<Masajista> lista = masajistaData.obtenerTodosLosMasajistas(); 
+        for (Masajista m : lista) {
+            mapaMasajistas.put(m.getCodMasajista(), m);
+        }
+        return mapaMasajistas;
+    }
+    
+    private Map<Integer, Masaje> obtenerMapaMasajes() {
+        Map<Integer, Masaje> mapaMasajes = new HashMap<>();
+        List<Masaje> lista = masajeData.listarMasajes();
+        for (Masaje m : lista) {
+            mapaMasajes.put(m.getCodTratamiento(), m);
+        }
+        return mapaMasajes;
+    }
+
+    private void cargarDatosTabla() {
         limpiarTabla();
         
-        if (sesionData == null) {
-            return; 
-        }
-        
-        try {
-          
-            List<Sesion> sesiones = sesionData.listarSesiones(); 
-            
-            if (sesiones != null) {
-                for (Sesion s : sesiones) {
-                    
-                   
-                    String fecha = s.getFechaInicio().format(formatter);
-                    
-                   
-                    Duration duration = Duration.between(s.getFechaInicio(), s.getFechaFin());
-                    long minutos = duration.toMinutes();
-                    String tiempoMasaje = minutos + " min";
-                    
-                   
-                    int codigoMasajista = s.getCodMasajista(); 
-                    
-                    
-                    modeloTabla.addRow(new Object[]{
-                        fecha,               
-                        tiempoMasaje,      
-                        codigoMasajista
-                    });
+        List<Sesion> sesiones = sesionData.listarSesiones();
+        Map<Integer, Masajista> mapaMasajistas = obtenerMapaMasajistas();
+        Map<Integer, Masaje> mapaMasajes = obtenerMapaMasajes();
+
+        for (Sesion s : sesiones) {
+            if (s.getCodPack() > 0) { 
+                
+                Masajista masajista = mapaMasajistas.get(s.getCodMasajista());
+                Masaje masaje = mapaMasajes.get(s.getCodTratamiento());
+                
+                String nombreMasajista = (masajista != null) ? masajista.getNombreMasajista() : "N/D";
+                String nombreMasaje = (masaje != null) ? masaje.getNombreTratamiento() : "N/D";
+                
+                String tiempoDeMasaje = "N/D";
+                if (s.getFechaInicio() != null && s.getFechaFin() != null) {
+                    Duration duracion = Duration.between(s.getFechaInicio(), s.getFechaFin());
+                    long minutos = duracion.toMinutes();
+                    tiempoDeMasaje = minutos + " min";
                 }
+                
+                String fecha = (s.getFechaInicio() != null) ? s.getFechaInicio().format(formatter) : "N/D";
+                
+                modeloTabla.addRow(new Object[]{
+                    fecha,
+                    tiempoDeMasaje,
+                    nombreMasajista,
+                    nombreMasaje
+                });
             }
-        } catch (Exception ex) {
-             JOptionPane.showMessageDialog(this, "Error al cargar las sesiones: " + ex.getMessage() + ". Revisa la implementación de listarSesiones() y la clase Sesion.", "Error de Carga", JOptionPane.ERROR_MESSAGE);
         }
     }
     @SuppressWarnings("unchecked")

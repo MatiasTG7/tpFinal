@@ -167,6 +167,7 @@ public class SesionData {
    public List<Sesion> listarSesiones() {
         List<Sesion> sesiones = new ArrayList<>();
         String sql = "SELECT * FROM sesion"; 
+       // System.out.println("sesiones encontradas" + sesiones.size());
 
         try (PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
