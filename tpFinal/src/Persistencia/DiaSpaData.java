@@ -11,15 +11,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DiaSpaData {
     
     private Connection con = null;
-    private ClienteData clienteData = new ClienteData();
+    private ClienteData clienteData;
 
     public DiaSpaData(Connection con) {
         this.con = con;
+        this.clienteData = new ClienteData(con);
     }
 
     
@@ -180,5 +183,35 @@ public class DiaSpaData {
         JOptionPane.showMessageDialog(null, "Error al buscar el dia de spa: " + ex.getMessage());
     }
     return diaSpa;
+    }
+    
+    public List<DiaSpa> listarDiasSpaActivos() {
+        List<DiaSpa> diasSpa = new ArrayList<>();
+        String sql = "SELECT * FROM diaspa WHERE estadoDia = 1 ORDER BY fechaYHora ASC"; 
+
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                DiaSpa dia = new DiaSpa();
+                dia.setCodPack(rs.getInt("codPack"));
+                dia.setFechaYHora(rs.getTimestamp("fechaYHora").toLocalDateTime());
+                dia.setPreferencias(rs.getString("preferencias"));
+                dia.setMonto(rs.getDouble("monto"));
+                dia.setEstadoDia(rs.getBoolean("estadoDia"));
+                
+                if (this.clienteData != null) { 
+                    Cliente cliente = clienteData.buscarCliente(rs.getInt("codCli"));
+                    dia.setCodCli(cliente);
+                } else {
+                    System.err.println("Error: ClienteData no está inicializado en DiaSpaData.");
+                }
+                
+                diasSpa.add(dia);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar dias de spa: " + ex.getMessage());
+        }
+        return diasSpa;
     }
 }

@@ -10,8 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 
@@ -141,30 +144,29 @@ public class MasajeData {
         
     }
     
-    public List<Masaje> obtenerMasajeMasPedido (Masaje masaje){
-        List<Masaje> masajeOrd = new LinkedList<>();
-        String sql = "SELECT masaje.*, COUNT(s.codTratamiento) AS frecuencia" + "FROM masaje masaje" + "JOIN Sesion s ON masaje.codTratamiento = s.codTratamiento +"
-                + "GROUP BY masaje.codTratamiento, masaje.nombreTratamiento, masaje.tipo, masaje.DetalleTratamiento, masaje.duracionTratamiento, masaje.costoTratamiento, masaje.activo"
-                + "ORDER BY frecuencia DESC";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+    public Map <String, Integer> reporteMasajes() {
+
+        Map<String, Integer> reporte = new LinkedHashMap<>();
         
-        while (rs.next()){
-            Masaje m = new Masaje();
-            m.setCodTratamiento(rs.getInt("codTratamiento"));
-            m.setNombreTratamiento(rs.getString("nombreTratamiento"));
-            String tipoString = rs.getString("wtipo").toLowerCase();
-            m.setTipo(TipoMasaje.valueOf(tipoString));
-            m.setDetalleTratamiento(rs.getString("detalleTratamiento"));
-            m.setCostoTratamiento(rs.getDouble("costoTratamiento"));
-            m.setActivo(rs.getBoolean("activo"));
-            masajeOrd.add(m);
+        String sql = "SELECT m.nombreTratamiento, COUNT(s.codTratamiento) AS frecuencia " +
+                     "FROM sesion s " +
+                     "JOIN masaje m ON s.codTratamiento = m.codTratamiento " +
+                     "GROUP BY m.nombreTratamiento " +
+                     "ORDER BY COUNT(s.codTratamiento) DESC";
+
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                String nombreMasaje = rs.getString("nombreTratamiento");
+                int frecuencia = rs.getInt("frecuencia");
+                
+                reporte.put(nombreMasaje, frecuencia);
             }
-        
-        } catch(SQLException ex){
-            System.out.println("Error al obtener masaje mas solicitado " + ex.getMessage());}
-            return masajeOrd;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al generar el reporte de masajes: " + ex.getMessage());
+        }
+        return reporte;
     }
     
     public Masaje buscarMasajePorNombre(String nombre) {

@@ -80,10 +80,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jmReportes = new javax.swing.JMenu();
         jmiAgregarDiaSpa = new javax.swing.JMenuItem();
         jmiReporteDiaSpa = new javax.swing.JMenuItem();
-        jmiReporteSolicitados = new javax.swing.JMenuItem();
         jmMasajes = new javax.swing.JMenu();
         jmiAgregarMasaje = new javax.swing.JMenuItem();
         jmiListarMasajes = new javax.swing.JMenuItem();
+        jmiReporteSolicitados = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -251,14 +251,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
         jmReportes.add(jmiReporteDiaSpa);
 
-        jmiReporteSolicitados.setText("Reporte Solicitados");
-        jmiReporteSolicitados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiReporteSolicitadosActionPerformed(evt);
-            }
-        });
-        jmReportes.add(jmiReporteSolicitados);
-
         jMenuBar1.add(jmReportes);
 
         jmMasajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/masajes.png"))); // NOI18N
@@ -283,6 +275,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
         jmMasajes.add(jmiListarMasajes);
+
+        jmiReporteSolicitados.setText("Reporte Solicitados");
+        jmiReporteSolicitados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiReporteSolicitadosActionPerformed(evt);
+            }
+        });
+        jmMasajes.add(jmiReporteSolicitados);
 
         jMenuBar1.add(jmMasajes);
 

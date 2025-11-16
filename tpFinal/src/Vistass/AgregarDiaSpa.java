@@ -60,6 +60,8 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
         jlTitulo = new javax.swing.JLabel();
         jbActualizarDiaSpa = new javax.swing.JButton();
 
+        setClosable(true);
+
         jlCodCli.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jlCodCli.setForeground(new java.awt.Color(69, 54, 14));
         jlCodCli.setText("Codigo cliente:");
@@ -206,9 +208,8 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
                             .addComponent(jtfFechaYHora)
                             .addComponent(jtfPreferencias)
                             .addComponent(jlPreferencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jbGuardarDiaSpa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbActualizarDiaSpa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jbGuardarDiaSpa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbActualizarDiaSpa, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcbEstadoDiaSpa, 0, 145, Short.MAX_VALUE)
