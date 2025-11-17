@@ -127,7 +127,6 @@ public class InfoCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbClienteActionPerformed
-        // TODO add your handling code here:
         limpiarTabla();
         Cliente clienteSeleccionado = (Cliente) jcbCliente.getSelectedItem();
         

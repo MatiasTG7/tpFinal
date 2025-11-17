@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package Vistass;
 
 import Modeloo.Cliente;
@@ -14,10 +11,6 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 
-/**
- *
- * @author alybe
- */
 public class AgregarDiaSpa extends javax.swing.JInternalFrame {
 
     private DiaSpaData dsData;
@@ -356,12 +349,11 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
 
     private void jbGuardarDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarDiaSpaActionPerformed
 
-        if (!validarCampos()) {
-        JOptionPane.showMessageDialog(this, "Debe completar todos los campos.");
-        return;
-    }
-
     try {
+        if (!validarCampos()) {
+            return;
+        }
+
         LocalDateTime fechaHora = LocalDateTime.parse(jtfFechaYHora.getText(), formatter);
         int codCliente = Integer.parseInt(jtfCodCli.getText());
         String preferencias = jtfPreferencias.getText();
@@ -369,7 +361,7 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
         boolean estado = jcbEstadoDiaSpa.getSelectedItem().equals("Activo");
 
         ClienteData cd = new ClienteData((Connection) Conexion.getConexion());
-        Cliente cliente = cd.buscarCliente(codCliente);
+        Cliente cliente = cd.buscarCliente(codCliente); 
 
         if (cliente == null) {
             JOptionPane.showMessageDialog(this, "No se encontro un cliente con este codigo.");
@@ -381,24 +373,22 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
 
         JOptionPane.showMessageDialog(this, "El dia de spa fue guardado correctamente.");
         limpiarCampos();
+        
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage());
-    }
+        }
     }//GEN-LAST:event_jbGuardarDiaSpaActionPerformed
 
     private void jbActualizarDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarDiaSpaActionPerformed
-
-        if (!validarCampos()) {
-        JOptionPane.showMessageDialog(this, "Debes completar todos los campos.");
+        if (this.codPackActual <= 0) {
+        JOptionPane.showMessageDialog(this, "Debes buscar un día de spa antes de actualizar.");
         return;
     }
     
-    if (this.codPackActual <= 0) {
-        JOptionPane.showMessageDialog(this, "Debes buscar un día de spa.");
-        return;
-    }
-
     try {
+        if (!validarCampos()) {
+            return;
+        }
         int codCli = Integer.parseInt(jtfCodCli.getText());
         LocalDateTime fechaHora = LocalDateTime.parse(jtfFechaYHora.getText(), formatter);
         String preferencias = jtfPreferencias.getText();
@@ -413,9 +403,9 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
             return;
         }
 
-        DiaSpa dia = new DiaSpa(this.codPackActual, fechaHora, preferencias, cliente, monto, estado); 
+        DiaSpa dia = new DiaSpa(this.codPackActual, fechaHora, preferencias, cliente, monto, estado);
         
-        if (dsData.actualizarDiaSpa(dia)) { //
+        if (dsData.actualizarDiaSpa(dia)) {
             JOptionPane.showMessageDialog(this, "El dia de spa fue actualizado correctamente.");
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo actualizar el dia.");
@@ -425,7 +415,7 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
         
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage());
-    }
+        }
     }//GEN-LAST:event_jbActualizarDiaSpaActionPerformed
 
 
@@ -460,9 +450,48 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
     }
 
     private boolean validarCampos() {
-       return !(jtfCodCli.getText().isEmpty() ||
-             jtfFechaYHora.getText().isEmpty() ||
-             jtfPreferencias.getText().isEmpty() ||
-             jtfMonto.getText().isEmpty()); 
+    StringBuilder errores = new StringBuilder();
+
+    String codCli = jtfCodCli.getText().trim();
+    String fechaHoraStr = jtfFechaYHora.getText().trim();
+    String prefStr = jtfPreferencias.getText().trim();
+    String montoStr = jtfMonto.getText().trim();
+
+    if (codCli.isEmpty()) {
+        errores.append("- El Codigo de Cliente no puede estar vacio.\n");
+    } else if (!codCli.matches("^[0-9]+$")) { // Regex: solo números
+        errores.append("- El Codigo de Cliente solo debe contener numeros.\n");
+    }
+
+    if (fechaHoraStr.isEmpty()) {
+        errores.append("- La Fecha y Hora no puede estar vacía.\n");
+    } else {
+        try {
+            LocalDateTime.parse(fechaHoraStr, formatter);
+        } catch (java.time.format.DateTimeParseException e) {
+            errores.append("- El formato de Fecha y Hora es incorrecto (use dd/MM/yyyy HH:mm).\n");
+        }
+    }
+
+    if (prefStr.isEmpty()) {
+        errores.append("- El campo Preferencias no puede estar vacio.\n");
+    } else if (!prefStr.equalsIgnoreCase("true") && !prefStr.equalsIgnoreCase("false")) {
+        errores.append("- El campo Preferencias solo admite 'true' o 'false'.\n");
+    }
+    
+    if (montoStr.isEmpty()) {
+        errores.append("- El campo Monto no puede estar vacio.\n");
+    } else if (!montoStr.matches("^[0-9]+(\\.[0-9]+)?$")) {
+        errores.append("- El Monto solo debe contener numeros (ej. 5000 o 5000.50).\n");
+    }
+
+    if (errores.length() > 0) {
+        JOptionPane.showMessageDialog(this,
+            "Por favor, corrija los siguientes errores:\n\n" + errores.toString(),
+            "Error de Validacion",
+            JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    return true; 
     }
 }

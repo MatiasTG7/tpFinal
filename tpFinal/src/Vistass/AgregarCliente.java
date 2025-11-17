@@ -290,10 +290,10 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     private void jbGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarClienteActionPerformed
 
         try{
-            if(jtfDniCliente.getText().isEmpty() || jtfNombreCliente.getText().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Los campos DNI y Nombre no pueden estar vacios");
+            if (!validarCampos()){
                 return;
             }
+            
             String dni = jtfDniCliente.getText();
             String nombre = jtfNombreCliente.getText();
             String telefono = jtfTelefonoCliente.getText();
@@ -310,8 +310,6 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
             }else{
                 JOptionPane.showMessageDialog(this, "No se pudo guardar cliente", "Error", JOptionPane.ERROR_MESSAGE);
             }
-                }catch(NumberFormatException e){
-                    JOptionPane.showMessageDialog(this, "El campo 'edad' debe ser un numero ");
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al guardar" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -355,6 +353,10 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         }
         
         try{
+            if(validarCampos()){
+                return;
+            }
+            
             String dni = jtfDniCliente.getText();
             String nombre = jtfNombreCliente.getText();
             String telefono = jtfTelefonoCliente.getText();
@@ -375,8 +377,6 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
             }else{
                 JOptionPane.showMessageDialog(this, "No se pudo actualizar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
             } 
-            }catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "El campo 'Edad' debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
             }catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al actualizar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -472,5 +472,40 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     jcbAfeccionesCliente.setSelectedIndex(0);
     jcbEstadoCliente.setSelectedIndex(0);
     clienteEncontrado = null;
+    }
+    private boolean validarCampos() {
+    StringBuilder errores = new StringBuilder();
+    
+    String dni = jtfDniCliente.getText();
+    String nombre = jtfNombreCliente.getText();
+    String telefono = jtfTelefonoCliente.getText();
+    String edad = jtfEdadCliente.getText();
+
+    if (dni.isEmpty()) {
+        errores.append("- El campo DNI no puede estar vacío.\n");
+    } else if (!dni.matches("^[0-9]+$")) {
+        errores.append("- El DNI solo debe contener números.\n");
+    }
+    if (nombre.isEmpty()) {
+        errores.append("- El campo Nombre no puede estar vacío.\n");
+    } else if (!nombre.matches("^[a-zA-Z ]+$")) {
+        errores.append("- El Nombre solo debe contener letras y espacios.\n");
+    }
+    if (!telefono.isEmpty() && !telefono.matches("^[0-9]+$")) {
+        errores.append("- El Teléfono solo debe contener números.\n");
+    }
+    if (edad.isEmpty()) {
+        errores.append("- El campo Edad no puede estar vacío.\n");
+    } else if (!edad.matches("^[0-9]+$")) {
+        errores.append("- La Edad solo debe contener números.\n");
+    }
+    if (errores.length() > 0) {
+        JOptionPane.showMessageDialog(this, 
+            "Por favor, corrija los siguientes errores:\n\n" + errores.toString(), 
+            "Error de Validación", 
+            JOptionPane.ERROR_MESSAGE);
+        return false;
+        }
+        return true;
     }
 }

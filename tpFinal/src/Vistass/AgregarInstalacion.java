@@ -265,11 +265,11 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
         }
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Error en el formato del precio.");
-    }
+        }
     }//GEN-LAST:event_jbGuardarInstalacionActionPerformed
 
     private void jcbEstadoInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoInstalacionActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jcbEstadoInstalacionActionPerformed
 
     private void jbEliminarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarInstalacionActionPerformed
@@ -320,8 +320,8 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
         ps.close();
         
         } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al cambiar estado: " + e.getMessage());
-    }
+            JOptionPane.showMessageDialog(this, "Error al cambiar estado: " + e.getMessage());
+        }
     }//GEN-LAST:event_jbCambiarEstadoInstalacionActionPerformed
 
     private void jbBuscarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarInstalacionActionPerformed
@@ -345,7 +345,7 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
         ps.close();
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error al buscar la instalacion: " + e.getMessage());
-    }
+        }
     }//GEN-LAST:event_jbBuscarInstalacionActionPerformed
 
     private void jbActualizarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarInstalacionActionPerformed

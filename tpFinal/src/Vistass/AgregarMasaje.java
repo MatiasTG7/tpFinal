@@ -273,7 +273,7 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
 
     private void jbCambiarEstadoMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoMasajeActionPerformed
 
-        String nombre = jtfNombreMasaje.getText().trim();
+    String nombre = jtfNombreMasaje.getText().trim();
 
     if (nombre.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Ingrese el nombre del masaje.");
@@ -296,33 +296,29 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
     if (confirmacion == JOptionPane.YES_OPTION) {
         masajeData.cambiarEstadoMasaje(nombre, nuevoEstado);
         jcbEstadoMasaje.setSelectedIndex(nuevoEstado ? 0 : 1);
-    }
+        }
     }//GEN-LAST:event_jbCambiarEstadoMasajeActionPerformed
 
     private void jbGuardarMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarMasajeActionPerformed
+    if (!validarCampos()) {
+        return;
+    }
 
+    try {
         String nombre = jtfNombreMasaje.getText().trim();
         String detalle = jtfDetalleMasaje.getText().trim();
-        String duracionStr = jtfDuracionMasaje.getText().trim();
-        String costoStr = jtfCostoMasaje.getText().trim();
+        int duracion = Integer.parseInt(jtfDuracionMasaje.getText().trim());
+        double costo = Double.parseDouble(jtfCostoMasaje.getText().trim());
         TipoMasaje tipo = (TipoMasaje) jcbTipoDeMasaje.getSelectedItem();
         boolean activo = jcbEstadoMasaje.getSelectedIndex() == 0;
 
-        if (nombre.isEmpty() || detalle.isEmpty() || duracionStr.isEmpty() || costoStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Complete todos los campos antes de guardar.");
-            return;
-        }
-
-    try {
-        int duracion = Integer.parseInt(duracionStr);
-        double costo = Double.parseDouble(costoStr);
         Masaje m = new Masaje(nombre, detalle, duracion, costo, activo, tipo);
         masajeData.insertarTratamiento(m);
         limpiarCampos();
         
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Ingrese valores numéricos válidos para duración y costo.");
-    }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error inesperado al guardar: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jbGuardarMasajeActionPerformed
 
     private void jbEliminarMasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarMasajeActionPerformed
@@ -373,41 +369,36 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarMasajeActionPerformed
 
     private void jbActualizarMasajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarMasajesActionPerformed
+        if (!validarCampos()) {
+            return;
+        }
 
         String nombre = jtfNombreMasaje.getText().trim();
-        String detalle = jtfDetalleMasaje.getText().trim();
-        String duracionStr = jtfDuracionMasaje.getText().trim();
-        String costoStr = jtfCostoMasaje.getText().trim();
-        TipoMasaje tipo = (TipoMasaje) jcbTipoDeMasaje.getSelectedItem();
-        boolean activo = jcbEstadoMasaje.getSelectedIndex() == 0;
+        Masaje existente = masajeData.buscarMasajePorNombre(nombre);
+        if (existente == null) {
+            JOptionPane.showMessageDialog(this, "No se encontro un masaje con ese nombre para actualizar.");
+            return;
+        }
 
-    if (nombre.isEmpty() || detalle.isEmpty() || duracionStr.isEmpty() || costoStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Complete todos los campos antes de modificar.");
-        return;
-    }
+        try {
+            String detalle = jtfDetalleMasaje.getText().trim();
+            int duracion = Integer.parseInt(jtfDuracionMasaje.getText().trim());
+            double costo = Double.parseDouble(jtfCostoMasaje.getText().trim());
+            TipoMasaje tipo = (TipoMasaje) jcbTipoDeMasaje.getSelectedItem();
+            boolean activo = jcbEstadoMasaje.getSelectedIndex() == 0;
 
-    Masaje existente = masajeData.buscarMasajePorNombre(nombre);
-    if (existente == null) {
-        JOptionPane.showMessageDialog(this, "No se encontro un masaje con ese nombre.");
-        return;
-    }
+            existente.setDetalleTratamiento(detalle);
+            existente.setDuracionTratamiento(duracion);
+            existente.setCostoTratamiento(costo);
+            existente.setTipo(tipo);
+            existente.setActivo(activo);
 
-    try {
-        int duracion = Integer.parseInt(duracionStr);
-        double costo = Double.parseDouble(costoStr);
-
-        existente.setDetalleTratamiento(detalle);
-        existente.setDuracionTratamiento(duracion);
-        existente.setCostoTratamiento(costo);
-        existente.setTipo(tipo);
-        existente.setActivo(activo);
-
-        masajeData.modificarMasaje(existente);
-        limpiarCampos();
+            masajeData.modificarMasaje(existente);
+            limpiarCampos();
         
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Ingrese valores validos.");
-    }
+            }catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error inesperado al actualizar: " + ex.getMessage());
+            }
     }//GEN-LAST:event_jbActualizarMasajesActionPerformed
 
 
@@ -449,5 +440,46 @@ public class AgregarMasaje extends javax.swing.JInternalFrame {
         jtfCostoMasaje.setText("");
         jcbEstadoMasaje.setSelectedIndex(0);
         jcbTipoDeMasaje.setSelectedIndex(0);
+    }
+    private boolean validarCampos() {
+    StringBuilder errores = new StringBuilder();
+    
+    String nombre = jtfNombreMasaje.getText().trim();
+    String detalle = jtfDetalleMasaje.getText().trim();
+    String duracionStr = jtfDuracionMasaje.getText().trim();
+    String costoStr = jtfCostoMasaje.getText().trim();
+
+    if (nombre.isEmpty()) {
+        errores.append("- El campo Nombre no puede estar vacío.\n");
+    } else if (!nombre.matches("^[a-zA-Z]+$")) {
+        errores.append("- El Nombre solo debe contener letras (sin espacios ni números).\n");
+    }
+
+    if (detalle.isEmpty()) {
+        errores.append("- El campo Detalle no puede estar vacío.\n");
+    } else if (!detalle.matches("^[a-zA-Z ]+$")) {
+        errores.append("- El Detalle solo debe contener letras y espacios.\n");
+    }
+
+    if (duracionStr.isEmpty()) {
+        errores.append("- El campo Duración no puede estar vacío.\n");
+    } else if (!duracionStr.matches("^[0-9]+$")) {
+        errores.append("- La Duración solo debe contener números enteros (ej. 60).\n");
+    }
+
+    if (costoStr.isEmpty()) {
+        errores.append("- El campo Costo no puede estar vacío.\n");
+    } else if (!costoStr.matches("^[0-9]+(\\.[0-9]+)?$")) {
+        errores.append("- El Costo solo debe contener números (ej. 2500 o 2500.50).\n");
+    }
+
+    if (errores.length() > 0) {
+        JOptionPane.showMessageDialog(this,
+            "Por favor, corrija los siguientes errores:\n\n" + errores.toString(),
+            "Error de Validación",
+            JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    return true;
     }
 }

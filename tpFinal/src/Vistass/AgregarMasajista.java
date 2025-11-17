@@ -24,7 +24,7 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
     private void llenarComboEspecialidades() {
         jcbEspecialidadMasajista.removeAllItems();
         for (EspecialidadMasajista esp : EspecialidadMasajista.values()) {
-            // Formatea el Enum a Capitalizado (Ej: FACIAL -> Facial) para la vista
+            
             String nombre = esp.name().toLowerCase();
             String nombreCapitalizado = nombre.substring(0, 1).toUpperCase() + nombre.substring(1);
             jcbEspecialidadMasajista.addItem(nombreCapitalizado);
@@ -260,9 +260,34 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
         String especialidadStr = (String) jcbEspecialidadMasajista.getSelectedItem();
         boolean estado = jcbEstadoMasajista.getSelectedItem().equals("Activo");
         
-        if (matricula.isEmpty() || nombre.isEmpty() || especialidadStr == null) {
-             JOptionPane.showMessageDialog(this, "Matrícula, Nombre y Especialidad son obligatorios.", "Validación", JOptionPane.WARNING_MESSAGE);
-             return null;
+        StringBuilder errores = new StringBuilder();
+
+        if (matricula.isEmpty()) {
+        errores.append("- El campo Matrícula no puede estar vacío.\n");
+            } else if (!matricula.matches("^[0-9]+$")) {
+        errores.append("- La Matrícula solo debe contener números.\n");
+        }
+
+        if (nombre.isEmpty()) {
+            errores.append("- El campo Nombre no puede estar vacío.\n");
+                } else if (!nombre.matches("^[a-zA-Z ]+$")) {
+            errores.append("- El Nombre solo debe contener letras y espacios.\n");
+        }   
+
+        if (!telefono.isEmpty() && !telefono.matches("^[0-9]+$")) {
+            errores.append("- El Teléfono solo debe contener números.\n");
+        }
+
+        if (especialidadStr == null) {
+        errores.append("- Debe seleccionar una Especialidad.\n");
+        }
+
+        if (errores.length() > 0) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, corrija los siguientes errores:\n\n" + errores.toString(), 
+                "Error de Validación", 
+            JOptionPane.ERROR_MESSAGE);
+        return null; // Detiene la ejecución
         }
 
         try {
@@ -292,11 +317,11 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
  
    
     private void jtfTelefonoMasajistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTelefonoMasajistaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jtfTelefonoMasajistaActionPerformed
 
     private void jbGuardarMasajistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarMasajistaActionPerformed
-   if (this.codMasajistaActual != -1) {
+    if (this.codMasajistaActual != -1) {
             JOptionPane.showMessageDialog(this, "El Masajista ya existe (ID: " + this.codMasajistaActual + "). Use 'Actualizar'.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -360,13 +385,11 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
              return;
         }
         
-        // Obtiene el estado actual de la interfaz y lo invierte
         boolean estadoActual = jcbEstadoMasajista.getSelectedItem().equals("Activo");
         boolean nuevoEstado = !estadoActual; 
 
         masajistaData.cambiarEstadoLogico(this.codMasajistaActual, nuevoEstado);
         
-        // Actualiza el formulario para reflejar el cambio
         jcbEstadoMasajista.setSelectedItem(nuevoEstado ? "Activo" : "Inactivo");
     }//GEN-LAST:event_jbCambiarEstadoMasajistaActionPerformed
 

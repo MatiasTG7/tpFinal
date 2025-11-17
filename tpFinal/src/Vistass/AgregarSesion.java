@@ -360,7 +360,7 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
 
             Sesion s = new Sesion(this.codSesionActual, fechaInicio, fechaFin, codTratamiento, codMasajista, codPack, codInstalacion, estado); //
 
-            if (sd.actualizarSesion(s)) { //
+            if (sd.actualizarSesion(s)) { 
                 JOptionPane.showMessageDialog(this, "La sesion fue actualizada correctamente.");
                 limpiarCampos();
             } else {
@@ -499,36 +499,59 @@ public class AgregarSesion extends javax.swing.JInternalFrame {
 
     private boolean validarCampos() {
         
-        if (jtfFechaInicio.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa la fecha de inicio (dd/MM/yyyy HH:mm).");
-            jtfFechaInicio.requestFocus();
-            return false;
-        }
-        if (jtfFechaFin.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa la fecha de finalizacion (dd/MM/yyyy HH:mm).");
-            jtfFechaFin.requestFocus();
-            return false;
-        }
-        if (jtfCodTratamiento.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa el codigo del tratamiento.");
-            jtfCodTratamiento.requestFocus();
-            return false;
-        }
-        if (jtfCodMasajista.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa el codigo del masajista.");
-            jtfCodMasajista.requestFocus();
-            return false;
-        }
-        if (jtfCodInstalacion.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa el codigo de la instalacion");
-            jtfCodInstalacion.requestFocus();
-            return false;
-        }
-        if (jtfCodDiaSpa.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa el codigo dia de spa.");
-            jtfCodDiaSpa.requestFocus();
-            return false;
-        }
-        return true;
+    StringBuilder errores = new StringBuilder();
+    
+    String fechaInicioStr = jtfFechaInicio.getText().trim();
+    String fechaFinStr = jtfFechaFin.getText().trim();
+    String codTrat = jtfCodTratamiento.getText().trim();
+    String codMas = jtfCodMasajista.getText().trim();
+    String codInst = jtfCodInstalacion.getText().trim();
+    String codDia = jtfCodDiaSpa.getText().trim(); 
+
+    try {
+        LocalDateTime.parse(fechaInicioStr, formatter);
+    } catch (DateTimeParseException e) {
+        errores.append("- El formato de Fecha de Inicio es incorrecto (use dd/MM/yyyy HH:mm).\n");
+    }
+    
+    try {
+        LocalDateTime.parse(fechaFinStr, formatter);
+    } catch (DateTimeParseException e) {
+        errores.append("- El formato de Fecha de Finalización es incorrecto (use dd/MM/yyyy HH:mm).\n");
+    }
+
+    if (codTrat.isEmpty()) {
+        errores.append("- El Código de Tratamiento no puede estar vacío.\n");
+    } else if (!codTrat.matches("^[0-9]+$")) { 
+        errores.append("- El Código de Tratamiento solo debe contener números.\n");
+    }
+
+    if (codMas.isEmpty()) {
+        errores.append("- El Código de Masajista no puede estar vacío.\n");
+    } else if (!codMas.matches("^[0-9]+$")) {
+        errores.append("- El Código de Masajista solo debe contener números.\n");
+    }
+
+    if (codInst.isEmpty()) {
+        errores.append("- El Código de Instalación no puede estar vacío.\n");
+    } else if (!codInst.matches("^[0-9]+$")) {
+        errores.append("- El Código de Instalación solo debe contener números.\n");
+    }
+
+    if (codDia.isEmpty()) {
+        errores.append("- El Código de Día de Spa no puede estar vacío.\n");
+    } else if (!codDia.matches("^[0-9]+$")) {
+        errores.append("- El Código de Día de Spa solo debe contener números.\n");
+    }
+
+    if (errores.length() > 0) {
+        JOptionPane.showMessageDialog(this, 
+            "Por favor, corrija los siguientes errores:\n\n" + errores.toString(), 
+            "Error de Validación", 
+            JOptionPane.ERROR_MESSAGE);
+        return false; 
+    }
+
+    return true;
     }
 }
