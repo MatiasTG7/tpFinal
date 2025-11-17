@@ -285,7 +285,7 @@ public class AgregarDiaSpa extends javax.swing.JInternalFrame {
 
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Ingrese un codigo de cliente valido.");
-    }
+        }
     }//GEN-LAST:event_jbEliminarDiaSpaActionPerformed
 
     private void jbCambiarEstadoDiaSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoDiaSpaActionPerformed

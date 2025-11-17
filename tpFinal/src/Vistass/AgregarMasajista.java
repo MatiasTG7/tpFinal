@@ -287,7 +287,7 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
                 "Por favor, corrija los siguientes errores:\n\n" + errores.toString(), 
                 "Error de Validación", 
             JOptionPane.ERROR_MESSAGE);
-        return null; // Detiene la ejecución
+        return null; 
         }
 
         try {
@@ -312,7 +312,7 @@ public class AgregarMasajista extends javax.swing.JInternalFrame {
         jtfNombreMasajista.setText("");
         jtfTelefonoMasajista.setText("");
         jcbEstadoMasajista.setSelectedIndex(0);
-        this.codMasajistaActual = -1; // Resetear el ID
+        this.codMasajistaActual = -1;
     }
  
    

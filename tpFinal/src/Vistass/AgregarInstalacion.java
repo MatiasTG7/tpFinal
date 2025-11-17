@@ -10,10 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class AgregarInstalacion extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form AgregarInstalacion
-     */
+    
     public AgregarInstalacion() {
         initComponents();
     }
@@ -243,28 +240,28 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfPrecioInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPrecioInstalacionActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jtfPrecioInstalacionActionPerformed
 
     private void jbGuardarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarInstalacionActionPerformed
         try {
-        String nombre = jtfNombreInstalacion.getText();
-        String detalle = jtfDetalleInstalacion.getText();
-        double precio = Double.parseDouble(jtfPrecioInstalacion.getText());
-        boolean estado = jcbEstadoInstalacion.getSelectedItem().toString().equals("Activo");
+            String nombre = jtfNombreInstalacion.getText();
+            String detalle = jtfDetalleInstalacion.getText();
+            double precio = Double.parseDouble(jtfPrecioInstalacion.getText());
+            boolean estado = jcbEstadoInstalacion.getSelectedItem().toString().equals("Activo");
 
-        Instalacion inst = new Instalacion(nombre, detalle, precio, estado);
-        InstalacionData id = new InstalacionData((Connection) Conexion.getConexion());
+            Instalacion inst = new Instalacion(nombre, detalle, precio, estado);
+            InstalacionData id = new InstalacionData((Connection) Conexion.getConexion());
 
-        int idGenerado = id.guardarInstalacion(inst);
-        if (idGenerado > 0) {
+            int idGenerado = id.guardarInstalacion(inst);
+            if (idGenerado > 0) {
             JOptionPane.showMessageDialog(this, "Instalacion id:" + idGenerado + " guardada con exito.");
             limpiarCampos();
-        } else {
-            JOptionPane.showMessageDialog(this, "No se pudo guardar la instalacion.");
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Error en el formato del precio.");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo guardar la instalacion.");
+            }
+        }catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error en el formato del precio.");
         }
     }//GEN-LAST:event_jbGuardarInstalacionActionPerformed
 
