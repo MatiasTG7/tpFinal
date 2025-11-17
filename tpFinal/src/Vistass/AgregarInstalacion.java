@@ -304,47 +304,47 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarInstalacionActionPerformed
 
     private void jbCambiarEstadoInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarEstadoInstalacionActionPerformed
-        String nombre = jtfNombreInstalacion.getText();
         try {
-            String sql = "UPDATE instalacion SET estadoInstalacion = NOT estadoInstalacion WHERE nombreInstalacion = ?";
-            PreparedStatement ps = Conexion.getConexion().prepareStatement(sql);
-            ps.setString(1, nombre);
-            int filas = ps.executeUpdate();
-
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(this, "Estado cambiado correctamente.");
-                limpiarCampos();
-            } else {
-                JOptionPane.showMessageDialog(this, "No se encontro esta instalación.");
+            String nombre = jtfNombreInstalacion.getText();
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar el nombre de una instalacion.");
+                return;
             }
-        ps.close();
-        
+            
+            InstalacionData id = new InstalacionData((Connection) Conexion.getConexion());
+
+            if (id.cambiarEstadoInstalacion(nombre)) {
+                JOptionPane.showMessageDialog(this, "Estado cambiado correctamente.");
+                
+                Instalacion inst = id.buscarInstalacionPorNombre(nombre);
+                if (inst != null) {
+                    jcbEstadoInstalacion.setSelectedItem(inst.isEstadoInstalacion() ? "Activo" : "Inactivo");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontro esta instalacion.");
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cambiar estado: " + e.getMessage());
+                JOptionPane.showMessageDialog(this, "Error al cambiar estado: " + e.getMessage());
         }
     }//GEN-LAST:event_jbCambiarEstadoInstalacionActionPerformed
 
     private void jbBuscarInstalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarInstalacionActionPerformed
-        String nombre = jtfNombreInstalacion.getText();
-        InstalacionData id = new InstalacionData((Connection) Conexion.getConexion());
-    
-    try {
-        String sql = "SELECT * FROM instalacion WHERE nombreInstalacion = ?";
-        PreparedStatement ps = Conexion.getConexion().prepareStatement(sql);
-        ps.setString(1, nombre);
-        ResultSet rs = ps.executeQuery();
+        try {
+            String nombre = jtfNombreInstalacion.getText();
+            InstalacionData id = new InstalacionData((Connection) Conexion.getConexion());
+            Instalacion inst = id.buscarInstalacionPorNombre(nombre);
 
-        if (rs.next()) {
-            jtfDetalleInstalacion.setText(rs.getString("detalleDeUso"));
-            jtfPrecioInstalacion.setText(String.valueOf(rs.getDouble("precio30m")));
-            jcbEstadoInstalacion.setSelectedItem(rs.getBoolean("estadoInstalacion") ? "Activo" : "Inactivo");
-        } else {
-            JOptionPane.showMessageDialog(this, "No se encontro esta instalacion.");
-        }
+            if (inst != null) {
 
-        ps.close();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al buscar la instalacion: " + e.getMessage());
+                jtfDetalleInstalacion.setText(inst.getDetalleDeUso());
+                jtfPrecioInstalacion.setText(String.valueOf(inst.getPrecio30m()));
+                jcbEstadoInstalacion.setSelectedItem(inst.isEstadoInstalacion() ? "Activo" : "Inactivo");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontro esta instalacion.");
+                limpiarCampos();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al buscar la instalacion: " + e.getMessage());
         }
     }//GEN-LAST:event_jbBuscarInstalacionActionPerformed
 
@@ -359,7 +359,7 @@ public class AgregarInstalacion extends javax.swing.JInternalFrame {
             InstalacionData id = new InstalacionData((Connection) Conexion.getConexion());
         
             if (id.modificarInstalacionPorNombre(inst)) {
-                JOptionPane.showMessageDialog(this, "la instalacion fue actualizada correctamente.");
+                JOptionPane.showMessageDialog(this, "La instalacion fue actualizada correctamente.");
                 limpiarCampos();
             } else {
                 JOptionPane.showMessageDialog(this, "No se encontro una instalacion con ese nombre.");

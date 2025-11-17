@@ -2,7 +2,7 @@
 package Persistencia;
 
 import Modeloo.Instalacion;
-import Modeloo.TipoMasaje; // Importado en tu captura original
+import Modeloo.TipoMasaje;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -77,6 +77,44 @@ public class InstalacionData {
             return false;
         }
 }
+    public Instalacion buscarInstalacionPorNombre(String nombre) {
+        Instalacion inst = null;
+        String sql = "SELECT * FROM instalacion WHERE nombreInstalacion = ?";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                inst = new Instalacion();
+
+                inst.setCodInstal(rs.getInt("codInstal"));
+                inst.setNombreInstalacion(rs.getString("nombreInstalacion"));
+                inst.setDetalleDeUso(rs.getString("detalleDeUso"));
+                inst.setPrecio30m(rs.getDouble("precio30m"));
+                inst.setEstadoInstalacion(rs.getBoolean("estadoInstalacion"));
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar la instalacion: " + ex.getMessage());
+        }
+        return inst;
+    }
+    
+    public boolean cambiarEstadoInstalacion(String nombre) {
+        String sql = "UPDATE instalacion SET estadoInstalacion = NOT estadoInstalacion WHERE nombreInstalacion = ?";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            int filas = ps.executeUpdate();
+            
+            return filas > 0; 
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cambiar estado: " + ex.getMessage());
+            return false;
+        }
+    }
     
     public List<Instalacion> listarPorTipo(TipoMasaje tipo) {
         List<Instalacion> instalaciones = new ArrayList<>();
